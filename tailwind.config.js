@@ -7,9 +7,10 @@ module.exports = {
   ],
   theme: {
     colors: {
-      main: '#91D3C8',
+      main: '#98C1D9',
       red: '#DF6B5A',
       blue: '#364BB3',
+      lightBlue: '#1EA1F7',
       grey: '#EAEAEA',
       tab: '#FAFAFA',
       sell: '#F3F8FE',
@@ -19,23 +20,24 @@ module.exports = {
       'main-light': '#E1EEE8',
       white: '#ffffff',
       'grey-middle': '#8E949F',
+      lightGrey: '#F2F5F7',
     },
     textColor: {
-      main: '#91D3C8',
+      main: '#98C1D9',
       white: '#FFFFFF',
       black: '#000000',
+      grey: '#C5CBCF',
       red: '#DF6B5A',
       blue: '#364BB3',
+      lightBlue: '#1EA1F7',
       'dark-grey': '#606060',
-      'grey-middle': '#8E949F',
     },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
   },
   plugins: [],
-}
+};
