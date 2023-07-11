@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import Button from '@/app/components/button';
+import Button from '@/app/components/common/button';
 import { useState } from 'react';
 
 export default function LoginPage() {
