@@ -16,7 +16,7 @@ module.exports = {
       sell: '#F3F8FE',
       buy: '#FDF3F4',
       black: '#000000',
-      'dark-grey': '#606060',
+      darkGrey: '#606060',
       'main-light': '#E1EEE8',
       white: '#ffffff',
       'grey-middle': '#8E949F',
@@ -30,7 +30,7 @@ module.exports = {
       red: '#DF6B5A',
       blue: '#364BB3',
       lightBlue: '#1EA1F7',
-      'dark-grey': '#606060',
+      darkGrey: '#606060',
     },
     extend: {
       backgroundImage: {
