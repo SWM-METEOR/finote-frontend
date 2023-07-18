@@ -9,7 +9,7 @@ export default function SidePanel() {
 
   return (
     // TODO: 사이드패널, 토글 버튼은 PC사이즈 에서만  보임
-    <div className=" ">
+    <div className="">
       {/* TODO: 아래 영역이 hidden일 때 보이는 문제 해결 필요 */}
       <div className={`md:block hidden flex flex-row h-full relative`}>
         {/* TODO: 헤더에도 shrink-0 적용 필요 */}
