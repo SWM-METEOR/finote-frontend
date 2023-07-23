@@ -1,22 +1,28 @@
 'use client';
-import { useState } from 'react';
+import { useRef, useEffect } from 'react';
+import Editor from '@toast-ui/editor';
 
-export default function Editor() {
-  const [value, setValue] = useState('');
-  console.log(value);
+export default function EditorComponent() {
+  const editElement = useRef(null);
+  const editInstance = useRef<Editor | null>(null);
 
-  return (
-    <div className="w-full">
-      <textarea
-        className={`input border-[2px] border-main rounded aappearance-none w-full px-3 py-3 focus focus:outline-none active:outline-none`}
-        name=""
-        id=""
-        cols={30}
-        rows={10}
-        placeholder="내용을 입력하세요."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      ></textarea>
-    </div>
-  );
+  useEffect(() => {
+    if (editElement.current == null) {
+      return;
+    }
+
+    editInstance.current = new Editor({
+      el: editElement.current,
+      height: '700px',
+      initialEditType: 'markdown',
+      previewStyle: 'vertical',
+      hooks: {
+        addImageBlobHook(blob, callback) {
+          // console.log(blob);
+        },
+      },
+    });
+  });
+
+  return <div ref={editElement}></div>;
 }
