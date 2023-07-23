@@ -14,6 +14,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link
+          rel="stylesheet"
+          href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"
+        />
       </head>
       <body>
         <Header />

@@ -1,22 +1,40 @@
 'use client';
-import { useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
-export default function Editor() {
-  const [value, setValue] = useState('');
-  console.log(value);
+export default function EditorComponent() {
+  const editElement = useRef(null);
+  const [editor, setEditor] = useState<any>(null);
 
-  return (
-    <div className="w-full">
-      <textarea
-        className={`input border-[2px] border-main rounded aappearance-none w-full px-3 py-3 focus focus:outline-none active:outline-none`}
-        name=""
-        id=""
-        cols={30}
-        rows={10}
-        placeholder="내용을 입력하세요."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      ></textarea>
-    </div>
-  );
+  useEffect(() => {
+    /**
+     * 동적 import
+     * 서버측 렌더링이 끝나고
+     * 클라이언트 측에서 컴포넌트가 렌더링될 때 @toast-ui/editor를 동적으로 불러옴
+     */
+    if (typeof window !== 'undefined') {
+      import('@toast-ui/editor').then((editorModule) => {
+        const Editor = editorModule.Editor;
+
+        if (!editElement.current) {
+          return;
+        }
+
+        const newEditor = new Editor({
+          el: editElement.current,
+          height: '700px',
+          initialEditType: 'markdown',
+          previewStyle: 'vertical',
+          hooks: {
+            addImageBlobHook(blob, callback) {
+              // console.log(blob);
+            },
+          },
+        });
+
+        setEditor(newEditor);
+      });
+    }
+  }, []);
+
+  return <div ref={editElement}></div>;
 }

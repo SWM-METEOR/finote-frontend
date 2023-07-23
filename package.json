@@ -11,6 +11,7 @@
     "format:fix": "prettier --write ."
   },
   "dependencies": {
+    "@toast-ui/editor": "^3.2.2",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
