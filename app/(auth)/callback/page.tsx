@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useSearchParams, redirect } from 'next/navigation';
+import SyncLoader from 'react-spinners/SyncLoader';
 
 // 구글에서 code를 받아온 뒤 리다이렉트되는 페이지
 // 서버로 code를 보내는 작업을 수행
@@ -41,5 +42,10 @@ export default function AuthCallbackPage() {
     }
   };
 
-  return <div className="h-full flex justify-center items-center">로그인 중 - 스피너 필요</div>;
+  return (
+    <div className="h-full flex flex-col gap-8 justify-center items-center">
+      <SyncLoader color="#00A1FF" />
+      <p>로그인 중입니다.</p>
+    </div>
+  );
 }
