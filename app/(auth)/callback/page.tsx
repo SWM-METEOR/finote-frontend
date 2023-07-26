@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useSearchParams, redirect } from 'next/navigation';
+import { useSearchParams, redirect, useRouter } from 'next/navigation';
 import SyncLoader from 'react-spinners/SyncLoader';
 
 // 구글에서 code를 받아온 뒤 리다이렉트되는 페이지
 // 서버로 code를 보내는 작업을 수행
 export default function AuthCallbackPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const code = searchParams.get('code');
 
   useEffect(() => {
@@ -21,7 +22,6 @@ export default function AuthCallbackPage() {
       const response = await fetch(`api/users/auth/google?code=${code}`, {
         headers: {
           'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': '69420', // TODO: 서버 배포 후 삭제
         },
       });
 
