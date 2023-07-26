@@ -47,17 +47,17 @@ export default function Article({ contents }: PropsType) {
 
   return (
     <div className="relative">
-      {/* 툴팁 크기: 260px */}
+      {/* 툴팁 크기: 258px */}
       <div
         ref={toolTip}
         className={
-          `z-999 w-[260px] absolute flex gap-2 divide-x divide-grey justify-between items-center bg-white border-1 border-grey rounded-lg py-1 px-2 drop-shadow-xl` +
+          `z-999 w-[258px] absolute flex justify-stretch divide-x divide-grey items-center bg-white border-2 rounded-lg border-grey drop-shadow-xl` +
           (showTooltip ? ' block' : ' hidden')
         }
       >
-        <button className="pl-1">배우기</button>
-        <button className="pl-2">관련 아티클</button>
-        <button className="pl-2 pr-1">질문 생성</button>
+        <button className="py-1 pl-3 pr-2 hover:bg-grey rounded-l-md">배우기</button>
+        <button className="py-1 pl-2 pr-2 hover:bg-grey">관련 아티클</button>
+        <button className="py-1 pl-2 pr-3 hover:bg-grey rounded-r-md">질문 생성</button>
       </div>
       <div
         className="w-full"
