@@ -77,7 +77,7 @@ export default function LoginPage() {
         </Button>
         <p className="flex gap-4 justify-center">
           <span>FiNote가 처음이세요?</span>
-          <Link href="/signup" className="text-lightBlue underline underline-offset-1">
+          <Link href="/" className="text-lightBlue underline underline-offset-1">
             회원가입하기
           </Link>
         </p>
