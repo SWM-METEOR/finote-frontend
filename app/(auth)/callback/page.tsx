@@ -34,7 +34,7 @@ export default function AuthCallbackPage() {
       console.log(responseData);
 
       // 메인 페이지로 리다이렉트
-      redirect('/');
+      router.push('/');
 
       // TODO: 필요한 작업 수행
     } catch (error) {
