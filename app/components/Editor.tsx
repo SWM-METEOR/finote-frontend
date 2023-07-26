@@ -1,8 +1,11 @@
 'use client';
 import { useRef, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Button from '@/app/components/common/button';
 
+// TODO: 데모 이후 리팩토링, 관심사 분리 필요
 export default function EditorComponent() {
+  const router = useRouter();
   const editElement = useRef(null);
   const inputTitleRef = useRef<HTMLInputElement>(null);
   const [editor, setEditor] = useState<any>(null);
@@ -33,6 +36,7 @@ export default function EditorComponent() {
 
       // 필요한 작업 수행
       // TODO: 글 페이지로 리다이렉트
+      router.push(`/articles/${responseData.data.articleId}`);
     } catch (error) {
       console.error('Error sending code to backend', error);
     }
