@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useSearchParams, redirect, useRouter } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import SyncLoader from 'react-spinners/SyncLoader';
 
 // 구글에서 code를 받아온 뒤 리다이렉트되는 페이지
