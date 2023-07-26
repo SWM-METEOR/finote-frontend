@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/app/components/common/button';
+import GoogleLoginButton from '@/app/components/GoogleLoginButton';
 import { useState } from 'react';
 
 export default function LoginPage() {
@@ -89,19 +90,7 @@ export default function LoginPage() {
         <h2>간편 로그인</h2>
         {/* justify-center: 수평 중앙정렬 */}
         {/* items-center: 수직 중앙정렬 */}
-        <Button>
-          <span>
-            <Image
-              className="w-6 h-6"
-              src="https://www.svgrepo.com/show/475656/google-color.svg"
-              loading="lazy"
-              alt="google logo"
-              width={24}
-              height={24}
-            />
-          </span>
-          <span>Google로 로그인</span>
-        </Button>
+        <GoogleLoginButton />
       </div>
     </div>
   );
