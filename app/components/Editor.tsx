@@ -81,8 +81,10 @@ export default function EditorComponent() {
       />
       <div ref={editElement}></div>
       <div className="ml-auto">
-        <Button color="main" textColor="white" width="small">
-          <span onClick={() => handleClick()}>등록하기</span>
+        <Button color="main" width="small">
+          <span className="text-white" onClick={() => handleClick()}>
+            등록하기
+          </span>
         </Button>
       </div>
     </>
