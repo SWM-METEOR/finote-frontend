@@ -12,7 +12,6 @@ export default function Button({
   textColor = 'black',
   width = 'large',
 }: PropsType) {
-  console.log(color);
   return (
     <button
       className={

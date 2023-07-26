@@ -12,7 +12,6 @@ export default function WriteButton({
   textColor = 'main',
   width = 'large',
 }: PropsType) {
-  console.log(color);
   return (
     <button
       className={
