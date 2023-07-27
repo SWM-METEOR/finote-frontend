@@ -19,7 +19,7 @@ module.exports = {
       darkGrey: '#606060',
       'main-light': '#E1EEE8',
       white: '#ffffff',
-      'grey-middle': '#8E949F',
+      middleGrey: '#75ccff',
       lightGrey: '#F2F5F7',
     },
     textColor: {
