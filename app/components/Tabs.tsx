@@ -27,7 +27,6 @@ export default function Tabs() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Success:', data);
         setAIResult(data.data.content);
         setIsLoadingAISearchResult(false);
       })
@@ -58,23 +57,25 @@ export default function Tabs() {
 
   return (
     <>
-      <div className="tabs h-10 mr-1 color-main shadow-lg mb-4 mt-1 rounded-md">
+      <div className="tabs h-10 mr-1 shadow-lg mb-4 mt-1 rounded-md">
         {SIDEPANEL_OPTION_LIST.map((tab, index) => (
           <button
             key={index}
             onClick={() => clickTab(index)}
-            className={`h-full tab tab-lifted w-1/3 rounded ${
-              selectedMode === SIDEPANEL_OPTION_LIST[index] ? 'tab-active bg-middleGrey' : ''
+            className={`h-full tab w-1/3 rounded text-darkGrey ${
+              selectedMode === SIDEPANEL_OPTION_LIST[index]
+                ? 'transition duration-300 ease-in [--tab-bg:main] tab-active text-white bg-main rounded'
+                : ''
             } ${selectedMode !== SIDEPANEL_OPTION_LIST[index] ? 'hover:bg-grey' : ''}`} // 활성 탭에 'tab-active' 클래스 적용
           >
-            <span className="mb-4">{tab}</span>
+            <span className="mb-4 font-semibold pt-1">{tab}</span>
           </button>
         ))}
 
         {selectedMode === 'default' && (
           <div className="w-full py-4 flex flex-col gap-4">
             <div className="chat chat-end">
-              <div className="chat-bubble whitespace-pre-line text-white">
+              <div className="chat-bubble bg-[#313a47] whitespace-pre-line text-white">
                 <p>글을 읽다 모르는 내용이 있나요?</p>
                 <p>
                   궁금한 내용을 <span className="font-bold text-yellow">드래그</span>해보세요!
@@ -103,7 +104,7 @@ export default function Tabs() {
           <div className="w-full py-4 flex flex-col gap-4">
             {/* 선택한 텍스트 */}
             <div className="chat chat-end">
-              <div className="chat-bubble whitespace-pre-line text-white">
+              <div className="chat-bubble bg-[#313a47] whitespace-pre-line text-white">
                 {selectedText === ''
                   ? `궁금한 내용을 드래그해보세요!\nGPT-4의 답변을 받을 수 있습니다.`
                   : `${selectedText}`}
@@ -143,8 +144,8 @@ export default function Tabs() {
             </div>
           </div>
         )}
-        {selectedMode === SIDEPANEL_OPTION_LIST[1] && <div>탭 2의 내용</div>}
-        {selectedMode === SIDEPANEL_OPTION_LIST[2] && <div>탭 3의 내용</div>}
+        {selectedMode === SIDEPANEL_OPTION_LIST[1] && <div>관련 아티클 모아보기</div>}
+        {selectedMode === SIDEPANEL_OPTION_LIST[2] && <div>질문 생성 및 관련 질문 모아보기</div>}
       </div>
     </>
   );

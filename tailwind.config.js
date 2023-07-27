@@ -19,7 +19,7 @@ module.exports = {
       darkGrey: '#606060',
       'main-light': '#E1EEE8',
       white: '#ffffff',
-      middleGrey: '#75ccff',
+      middleGrey: '#BABABA',
       lightGrey: '#F2F5F7',
     },
     textColor: {
@@ -42,6 +42,6 @@ module.exports = {
   },
   plugins: [require('daisyui'), require('@tailwindcss/typography')],
   daisyui: {
-    themes: ['light'],
+    themes: ['cmyk'],
   },
 };
