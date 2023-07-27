@@ -1,5 +1,14 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import {
+  useTooltipStore,
+  useSidePanelStore,
+  useSelectedTextStore,
+  useAISearchStore,
+} from '@/store/sidePanel';
+import { SIDEPANEL_OPTION_LIST } from '@/constants/sidePanel';
 
 interface PropsType {
   contents: string;
@@ -7,16 +16,16 @@ interface PropsType {
 
 // TODO: data 를 props로 받아와야 함
 export default function Article({ contents }: PropsType) {
-  const [selectedText, setSelectedText] = useState('');
+  const { setSelectedMode } = useTooltipStore();
+  const { setIsOpenSidePanel } = useSidePanelStore();
+  const { setSelectedText } = useSelectedTextStore();
+  const { setIsLoadingAISearchResult } = useAISearchStore();
   const [showTooltip, setShowTooltip] = useState(false);
 
   const dragStartX = useRef<number>(0);
   const dragStartY = useRef<number>(0);
   const toolTip = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    console.log(selectedText);
-  }, [selectedText]);
+  const tempSelectedTextRef = useRef<string>('');
 
   const handleDragStart = (e: React.MouseEvent<Element, MouseEvent>) => {
     dragStartX.current = e.clientX;
@@ -31,8 +40,9 @@ export default function Article({ contents }: PropsType) {
       return;
     }
 
-    // 드래그된 문장
-    setSelectedText(window.getSelection()!.toString());
+    // 드래그된 텍스트 저장
+    tempSelectedTextRef.current = window.getSelection()!.toString();
+    console.log('tempSelectedText', tempSelectedTextRef.current);
 
     const eventTarget = e.currentTarget as HTMLDivElement;
     const rect = eventTarget.getBoundingClientRect();
@@ -45,26 +55,57 @@ export default function Article({ contents }: PropsType) {
     setShowTooltip(true);
   };
 
+  // 툴팁에서 모드 선택
+  const handleClick = (selectedText: string) => {
+    setSelectedMode(selectedText); // 선택된 모드 변경
+    setIsOpenSidePanel(true); // 사이드 패널 열기
+    setShowTooltip(false); // 툴팁 닫기
+
+    setSelectedText(tempSelectedTextRef.current); // 사이드패널에 드래그 텍스트 업데이트
+    // TODO: 로딩 스피너 띄우고, 결과 받아오기
+    if (selectedText === SIDEPANEL_OPTION_LIST[0] && tempSelectedTextRef.current !== '') {
+      setIsLoadingAISearchResult(true);
+    }
+  };
+
   return (
     <div className="relative">
-      {/* 툴팁 크기: 260px */}
+      {/* 툴팁 크기: 258px */}
       <div
         ref={toolTip}
         className={
-          `z-999 w-[260px] absolute flex gap-2 divide-x divide-grey justify-between items-center bg-white border-1 border-grey rounded-lg py-1 px-2 drop-shadow-xl` +
+          `z-999 w-[250px] absolute flex justify-stretch divide-x divide-grey items-center bg-white border-2 rounded-lg border-grey drop-shadow-xl` +
           (showTooltip ? ' block' : ' hidden')
         }
       >
-        <button className="pl-1">배우기</button>
-        <button className="pl-2">관련 아티클</button>
-        <button className="pl-2 pr-1">질문 생성</button>
+        {/* TODO: 이벤트 위임 방식으로 변경 */}
+        <button
+          onClick={() => handleClick(SIDEPANEL_OPTION_LIST[0])}
+          className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey rounded-l-md"
+        >
+          {SIDEPANEL_OPTION_LIST[0]}
+        </button>
+        <button
+          onClick={() => handleClick(SIDEPANEL_OPTION_LIST[1])}
+          className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey"
+        >
+          {SIDEPANEL_OPTION_LIST[1]}
+        </button>
+        <button
+          onClick={() => handleClick(SIDEPANEL_OPTION_LIST[2])}
+          className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey rounded-r-md"
+        >
+          {SIDEPANEL_OPTION_LIST[2]}
+        </button>
       </div>
       <div
         className="w-full"
         onMouseUp={(e) => handleDragEnd(e)}
         onMouseDown={(e) => handleDragStart(e)}
       >
-        {contents}
+        <ReactMarkdown className="prose prose-slate" remarkPlugins={[remarkGfm]}>
+          {contents}
+        </ReactMarkdown>
       </div>
     </div>
   );
