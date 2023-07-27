@@ -1,5 +1,7 @@
 'use client';
 import { useState, useRef } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import {
   useTooltipStore,
   useSidePanelStore,
@@ -101,7 +103,9 @@ export default function Article({ contents }: PropsType) {
         onMouseUp={(e) => handleDragEnd(e)}
         onMouseDown={(e) => handleDragStart(e)}
       >
-        {contents}
+        <ReactMarkdown className="prose prose-slate" remarkPlugins={[remarkGfm]}>
+          {contents}
+        </ReactMarkdown>
       </div>
     </div>
   );
