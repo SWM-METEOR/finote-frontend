@@ -1,18 +1,31 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import {
+  useTooltipStore,
+  useSidePanelStore,
+  useSelectedTextStore,
+  useAISearchStore,
+} from '@/store/sidePanel';
+import { SIDEPANEL_OPTION_LIST } from '@/constants/sidePanel';
+
+interface PropsType {
+  contents: string;
+}
 
 // TODO: data 를 props로 받아와야 함
-export default function Article() {
-  const [selectedText, setSelectedText] = useState('');
+export default function Article({ contents }: PropsType) {
+  const { setSelectedMode } = useTooltipStore();
+  const { setIsOpenSidePanel } = useSidePanelStore();
+  const { setSelectedText } = useSelectedTextStore();
+  const { setIsLoadingAISearchResult } = useAISearchStore();
   const [showTooltip, setShowTooltip] = useState(false);
 
   const dragStartX = useRef<number>(0);
   const dragStartY = useRef<number>(0);
   const toolTip = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    console.log(selectedText);
-  }, [selectedText]);
+  const tempSelectedTextRef = useRef<string>('');
 
   const handleDragStart = (e: React.MouseEvent<Element, MouseEvent>) => {
     dragStartX.current = e.clientX;
@@ -27,8 +40,9 @@ export default function Article() {
       return;
     }
 
-    // 드래그된 문장
-    setSelectedText(window.getSelection()!.toString());
+    // 드래그된 텍스트 저장
+    tempSelectedTextRef.current = window.getSelection()!.toString();
+    console.log('tempSelectedText', tempSelectedTextRef.current);
 
     const eventTarget = e.currentTarget as HTMLDivElement;
     const rect = eventTarget.getBoundingClientRect();
@@ -41,79 +55,57 @@ export default function Article() {
     setShowTooltip(true);
   };
 
+  // 툴팁에서 모드 선택
+  const handleClick = (selectedText: string) => {
+    setSelectedMode(selectedText); // 선택된 모드 변경
+    setIsOpenSidePanel(true); // 사이드 패널 열기
+    setShowTooltip(false); // 툴팁 닫기
+
+    setSelectedText(tempSelectedTextRef.current); // 사이드패널에 드래그 텍스트 업데이트
+    // TODO: 로딩 스피너 띄우고, 결과 받아오기
+    if (selectedText === SIDEPANEL_OPTION_LIST[0] && tempSelectedTextRef.current !== '') {
+      setIsLoadingAISearchResult(true);
+    }
+  };
+
   return (
     <div className="relative">
-      {/* 툴팁 크기: 260px */}
+      {/* 툴팁 크기: 258px */}
       <div
         ref={toolTip}
         className={
-          `z-999 w-[260px] absolute flex gap-2 divide-x divide-grey justify-between items-center bg-white border-1 border-grey rounded-lg py-1 px-2 drop-shadow-xl` +
+          `z-999 w-[250px] absolute flex justify-stretch divide-x divide-grey items-center bg-white border-2 rounded-lg border-grey drop-shadow-xl` +
           (showTooltip ? ' block' : ' hidden')
         }
       >
-        <button className="pl-1">배우기</button>
-        <button className="pl-2">관련 아티클</button>
-        <button className="pl-2 pr-1">질문 생성</button>
+        {/* TODO: 이벤트 위임 방식으로 변경 */}
+        <button
+          onClick={() => handleClick(SIDEPANEL_OPTION_LIST[0])}
+          className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey rounded-l-md"
+        >
+          {SIDEPANEL_OPTION_LIST[0]}
+        </button>
+        <button
+          onClick={() => handleClick(SIDEPANEL_OPTION_LIST[1])}
+          className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey"
+        >
+          {SIDEPANEL_OPTION_LIST[1]}
+        </button>
+        <button
+          onClick={() => handleClick(SIDEPANEL_OPTION_LIST[2])}
+          className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey rounded-r-md"
+        >
+          {SIDEPANEL_OPTION_LIST[2]}
+        </button>
       </div>
       <div
         className="w-full"
         onMouseUp={(e) => handleDragEnd(e)}
         onMouseDown={(e) => handleDragStart(e)}
       >
-        데이터 분석은 현대 사회에서 많은 분야에서 중요한 역할을 담당하고 있습니다. 데이터를 분석하고
-        해석하는 과정에서 중요한 개념 중 하나는 누적합(cumulative sum)입니다. 누적합은 데이터의
-        변화를 추적하고 추이를 파악하는 데에 유용하며, 이를 파이썬을 통해 계산하는 방법을
-        알아보겠습니다. 누적합의 개념 누적합은 각 항목의 값을 이전 항목들과 더한 결과를 순차적으로
-        계산한 값입니다. 예를 들어, [1, 2, 3, 4, 5]라는 리스트가 있다면 누적합은 [1, 3, 6, 10, 15]로
-        계산됩니다. 누적합을 계산하면 데이터의 증가 또는 감소 추이를 파악할 수 있습니다.
-        파이썬에서의 누적합 계산 파이썬에서는 다양한 방법으로 누적합을 계산할 수 있습니다. 가장
-        간단한 방법은 for 루프를 사용하여 이전 항목과 현재 항목을 더해가는 방식입니다. 또한, NumPy와
-        Pandas 라이브러리를 활용하면 효율적으로 누적합을 계산할 수 있습니다. for 루프를 사용한
-        누적합 계산 아래의 예시 코드를 통해 for 루프를 사용한 누적합 계산 방법을 살펴봅시다.
-        누적합은 데이터 분석에서 중요한 개념으로, 데이터의 추이와 변화를 파악하는 데에 유용합니다.
-        파이썬에서는 for 루프를 사용하거나 NumPy와 Pandas 라이브러리를 활용하여 효율적으로 누적합을
-        계산할 수 있습니다. 데이터 분석 작업에서 누적합을 적절히 활용하면 데이터의 동향을 더 잘
-        이해하고 의사 결정에 도움을 줄 수 있습니다. 데이터 분석은 현대 사회에서 많은 분야에서 중요한
-        역할을 담당하고 있습니다. 데이터를 분석하고 해석하는 과정에서 중요한 개념 중 하나는
-        누적합(cumulative sum)입니다. 누적합은 데이터의 변화를 추적하고 추이를 파악하는 데에
-        유용하며, 이를 파이썬을 통해 계산하는 방법을 알아보겠습니다. 누적합의 개념 누적합은 각
-        항목의 값을 이전 항목들과 더한 결과를 순차적으로 계산한 값입니다. 예를 들어, [1, 2, 3, 4,
-        5]라는 리스트가 있다면 누적합은 [1, 3, 6, 10, 15]로 계산됩니다. 누적합을 계산하면 데이터의
-        증가 또는 감소 추이를 파악할 수 있습니다. 파이썬에서의 누적합 계산 파이썬에서는 다양한
-        방법으로 누적합을 계산할 수 있습니다. 가장 간단한 방법은 for 루프를 사용하여 이전 항목과
-        현재 항목을 더해가는 방식입니다. 또한, NumPy와 Pandas 라이브러리를 활용하면 효율적으로
-        누적합을 계산할 수 있습니다. for 루프를 사용한 누적합 계산 아래의 예시 코드를 통해 for
-        루프를 사용한 누적합 계산 방법을 살펴봅시다. 누적합은 데이터 분석에서 중요한 개념으로,
-        데이터의 추이와 변화를 파악하는 데에 유용합니다. 파이썬에서는 for 루프를 사용하거나 NumPy와
-        Pandas 라이브러리를 활용하여 효율적으로 누적합을 계산할 수 있습니다. 데이터 분석 작업에서
-        누적합을 적절히 활용하면 데이터의 동향을 더 잘 이해하고 의사 결정에 도움을 줄 수 있습니다.
-        데이터 분석은 현대 사회에서 많은 분야에서 중요한 역할을 담당하고 있습니다. 데이터를 분석하고
-        해석하는 과정에서 중요한 개념 중 하나는 누적합(cumulative sum)입니다. 누적합은 데이터의
-        변화를 추적하고 추이를 파악하는 데에 유용하며, 이를 파이썬을 통해 계산하는 방법을
-        알아보겠습니다. 누적합의 개념 누적합은 각 항목의 값을 이전 항목들과 더한 결과를 순차적으로
-        계산한 값입니다. 예를 들어, [1, 2, 3, 4, 5]라는 리스트가 있다면 누적합은 [1, 3, 6, 10, 15]로
-        계산됩니다. 누적합을 계산하면 데이터의 증가 또는 감소 추이를 파악할 수 있습니다.
-        파이썬에서의 누적합 계산 파이썬에서는 다양한 방법으로 누적합을 계산할 수 있습니다. 가장
-        간단한 방법은 for 루프를 사용하여 이전 항목과 현재 항목을 더해가는 방식입니다. 또한, NumPy와
-        Pandas 라이브러리를 활용하면 효율적으로 누적합을 계산할 수 있습니다. for 루프를 사용한
-        누적합 계산 아래의 예시 코드를 통해 for 루프를 사용한 누적합 계산 방법을 살펴봅시다.
-        누적합은 데이터 분석에서 중요한 개념으로, 데이터의 추이와 변화를 파악하는 데에 유용합니다.
-        파이썬에서는 for 루프를 사용하거나 NumPy와 Pandas 라이브러리를 활용하여 효율적으로 누적합을
-        계산할 수 있습니다. 데이터 분석 작업에서 누적합을 적절히 활용하면 데이터의 동향을 더 잘
-        이해하고 의사 결정에 도움을 줄 수 있습니다. 데이터 분석은 현대 사회에서 많은 분야에서 중요한
-        역할을 담당하고 있습니다. 데이터를 분석하고 해석하는 과정에서 중요한 개념 중 하나는
-        누적합(cumulative sum)입니다. 누적합은 데이터의 변화를 추적하고 추이를 파악하는 데에
-        유용하며, 이를 파이썬을 통해 계산하는 방법을 알아보겠습니다. 누적합의 개념 누적합은 각
-        항목의 값을 이전 항목들과 더한 결과를 순차적으로 계산한 값입니다. 예를 들어, [1, 2, 3, 4,
-        5]라는 리스트가 있다면 누적합은 [1, 3, 6, 10, 15]로 계산됩니다. 누적합을 계산하면 데이터의
-        증가 또는 감소 추이를 파악할 수 있습니다. 파이썬에서의 누적합 계산 파이썬에서는 다양한
-        방법으로 누적합을 계산할 수 있습니다. 가장 간단한 방법은 for 루프를 사용하여 이전 항목과
-        현재 항목을 더해가는 방식입니다. 또한, NumPy와 Pandas 라이브러리를 활용하면 효율적으로
-        누적합을 계산할 수 있습니다. for 루프를 사용한 누적합 계산 아래의 예시 코드를 통해 for
-        루프를 사용한 누적합 계산 방법을 살펴봅시다. 누적합은 데이터 분석에서 중요한 개념으로,
-        데이터의 추이와 변화를 파악하는 데에 유용합니다. 파이썬에서는 for 루프를 사용하거나 NumPy와
-        Pandas 라이브러리를 활용하여 효율적으로 누적합을 계산할 수 있습니다. 데이터 분석 작업에서
-        누적합을 적절히 활용하면 데이터의 동향을 더 잘 이해하고 의사 결정에 도움을 줄 수 있습니다.
+        <ReactMarkdown className="prose prose-slate" remarkPlugins={[remarkGfm]}>
+          {contents}
+        </ReactMarkdown>
       </div>
     </div>
   );

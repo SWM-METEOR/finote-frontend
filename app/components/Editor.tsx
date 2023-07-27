@@ -1,9 +1,46 @@
 'use client';
 import { useRef, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Button from '@/app/components/common/button';
 
+// TODO: 데모 이후 리팩토링, 관심사 분리 필요
 export default function EditorComponent() {
+  const router = useRouter();
   const editElement = useRef(null);
+  const inputTitleRef = useRef<HTMLInputElement>(null);
   const [editor, setEditor] = useState<any>(null);
+
+  const handleClick = async () => {
+    const contents = editor.getMarkdown();
+    console.log(contents);
+    if (!inputTitleRef.current) return;
+
+    try {
+      const response = await fetch('api/articles', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: inputTitleRef.current.value,
+          body: contents,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      // 받아온 응답을 처리
+      const responseData = await response.json();
+      console.log(responseData);
+
+      // 필요한 작업 수행
+      // TODO: 글 페이지로 리다이렉트
+      router.push(`/articles/${responseData.data.articleId}`);
+    } catch (error) {
+      console.error('Error sending code to backend', error);
+    }
+  };
 
   useEffect(() => {
     /**
@@ -36,5 +73,24 @@ export default function EditorComponent() {
     }
   }, []);
 
-  return <div ref={editElement}></div>;
+  return (
+    <>
+      <input
+        className={`input border-b-[2px] text-2xl border-main appearance-none w-3/3 px-3 py-3 focus focus:outline-none active:outline-none`}
+        type="text"
+        name="title"
+        id=""
+        placeholder="제목 입력"
+        ref={inputTitleRef}
+      />
+      <div ref={editElement}></div>
+      <div className="ml-auto">
+        <Button color="main" width="small">
+          <span className="text-white" onClick={() => handleClick()}>
+            등록하기
+          </span>
+        </Button>
+      </div>
+    </>
+  );
 }

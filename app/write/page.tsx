@@ -1,22 +1,10 @@
 import Editor from '@/app/components/Editor';
-import Button from '@/app/components/common/button';
 
 export default function WritePage() {
   return (
     <div className="flex flex-col my-24 mx-48 gap-8">
-      <input
-        className={`input border-b-[2px] text-2xl border-main appearance-none w-3/3 px-3 py-3 focus focus:outline-none active:outline-none`}
-        type="text"
-        name="title"
-        id=""
-        placeholder="제목 입력"
-      />
       <Editor />
-      <div className="ml-auto">
-        <Button color="main" textColor="white" width="small">
-          <span>등록하기</span>
-        </Button>
-      </div>
+      {/* TODO: 일단 글 작성 버튼 + 로직을 에디터 컴포넌트 안에 포함시킴. 추후 전역상태 관리 도구 도입 후 계층 분리 필요 */}
     </div>
   );
 }
