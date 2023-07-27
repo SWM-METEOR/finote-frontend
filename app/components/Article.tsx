@@ -1,5 +1,8 @@
 'use client';
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
+import { useTooltipStore } from '@/store/sidePanel';
+import { useSidePanelStore } from '@/store/sidePanel';
+import { SIDEPANEL_OPTION_LIST } from '@/constants/sidePanel';
 
 interface PropsType {
   contents: string;
@@ -7,16 +10,15 @@ interface PropsType {
 
 // TODO: data 를 props로 받아와야 함
 export default function Article({ contents }: PropsType) {
+  const { setSelectedMode } = useTooltipStore();
+  const { setIsOpenSidePanel } = useSidePanelStore();
+
   const [selectedText, setSelectedText] = useState('');
   const [showTooltip, setShowTooltip] = useState(false);
 
   const dragStartX = useRef<number>(0);
   const dragStartY = useRef<number>(0);
   const toolTip = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    console.log(selectedText);
-  }, [selectedText]);
 
   const handleDragStart = (e: React.MouseEvent<Element, MouseEvent>) => {
     dragStartX.current = e.clientX;
@@ -45,19 +47,43 @@ export default function Article({ contents }: PropsType) {
     setShowTooltip(true);
   };
 
+  const handleClick = (selectedText: string) => {
+    setSelectedMode(selectedText); // 선택된 모드 변경
+    setIsOpenSidePanel(true); // 사이드 패널 열기
+    setShowTooltip(false); // 툴팁 닫기
+
+    // TODO: 로딩 스피너 띄우고, 결과 받아오기
+  };
+
   return (
     <div className="relative">
       {/* 툴팁 크기: 258px */}
       <div
         ref={toolTip}
         className={
-          `z-999 w-[258px] absolute flex justify-stretch divide-x divide-grey items-center bg-white border-2 rounded-lg border-grey drop-shadow-xl` +
+          `z-999 w-[250px] absolute flex justify-stretch divide-x divide-grey items-center bg-white border-2 rounded-lg border-grey drop-shadow-xl` +
           (showTooltip ? ' block' : ' hidden')
         }
       >
-        <button className="py-1 pl-3 pr-2 hover:bg-grey rounded-l-md">배우기</button>
-        <button className="py-1 pl-2 pr-2 hover:bg-grey">관련 아티클</button>
-        <button className="py-1 pl-2 pr-3 hover:bg-grey rounded-r-md">질문 생성</button>
+        {/* TODO: 이벤트 위임 방식으로 변경 */}
+        <button
+          onClick={() => handleClick(SIDEPANEL_OPTION_LIST[0])}
+          className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey rounded-l-md"
+        >
+          {SIDEPANEL_OPTION_LIST[0]}
+        </button>
+        <button
+          onClick={() => handleClick(SIDEPANEL_OPTION_LIST[1])}
+          className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey"
+        >
+          {SIDEPANEL_OPTION_LIST[1]}
+        </button>
+        <button
+          onClick={() => handleClick(SIDEPANEL_OPTION_LIST[2])}
+          className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey rounded-r-md"
+        >
+          {SIDEPANEL_OPTION_LIST[2]}
+        </button>
       </div>
       <div
         className="w-full"
