@@ -20,6 +20,16 @@ export const useTooltipStore = create<TooltipTypes>((set) => ({
   setSelectedMode: (value: string) => set((state) => ({ selectedMode: value })),
 }));
 
+interface DragaTextTypes {
+  dragText: string;
+  setDragText: (value: string) => void;
+}
+
+export const useDragTextStore = create<DragaTextTypes>((set) => ({
+  dragText: '',
+  setDragText: (value: string) => set((state) => ({ dragText: value })),
+}));
+
 interface SelectedTextTypes {
   selectedText: string;
   setSelectedText: (value: string) => void;
