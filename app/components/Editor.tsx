@@ -76,7 +76,7 @@ export default function EditorComponent() {
   return (
     <>
       <input
-        className={`input border-b-[2px] text-2xl border-main appearance-none w-3/3 px-3 py-3 focus focus:outline-none active:outline-none`}
+        className={`input shadow-md text-2xl border-main appearance-none w-3/3 px-3 py-3 focus focus:outline-none active:outline-none`}
         type="text"
         name="title"
         id=""
@@ -84,7 +84,7 @@ export default function EditorComponent() {
         ref={inputTitleRef}
       />
       <div ref={editElement}></div>
-      <div className="ml-auto">
+      <div className="ml-auto mb-36">
         <Button color="main" width="small">
           <span className="text-white" onClick={() => handleClick()}>
             등록하기
