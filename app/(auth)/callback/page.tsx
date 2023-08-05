@@ -19,7 +19,7 @@ export default function AuthCallbackPage() {
 
   const sendCodeToServer = async (code: string) => {
     try {
-      const response = await fetch(`api/users/auth/google?code=${code}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/auth/google?code=${code}`, {
         headers: {
           'Content-Type': 'application/json',
         },
