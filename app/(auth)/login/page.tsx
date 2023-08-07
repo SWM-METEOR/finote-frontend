@@ -20,11 +20,11 @@ export default function LoginPage() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    // 여기에 폼 제출 로직을 처리하세요
+    // 여기에 폼 제출 로직을 처리
   };
 
-  const isEmailFilled = email !== '';
-  const isPasswordFilled = password !== '';
+  // const isEmailFilled = email !== '';
+  // const isPasswordFilled = password !== '';
 
   // TODO: 이메일 로그인 관련 유효성 처리
   // TODO: input, button 컴포넌트화

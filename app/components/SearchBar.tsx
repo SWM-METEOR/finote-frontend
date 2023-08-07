@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import logoImg from '../public/logo.png';
 
 // TODO: 리소스 경로 관리
 export default function SearchBar() {
