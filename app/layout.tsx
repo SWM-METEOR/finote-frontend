@@ -1,6 +1,6 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
-import Header from './components/header';
+import HeaderContainer from '@/app/components/Header/HeaderContainer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <Header />
+        <HeaderContainer />
         <div className="w-full h-[calc(100vh-76px)]">{children}</div>
       </body>
     </html>

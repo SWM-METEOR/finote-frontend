@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import SyncLoader from 'react-spinners/SyncLoader';
+import { isLoginStore } from '@/store/auth';
 
 // 구글에서 code를 받아온 뒤 리다이렉트되는 페이지
 // 서버로 code를 보내는 작업을 수행
@@ -10,6 +11,7 @@ export default function AuthCallbackPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const code = searchParams.get('code');
+  const { setIsLogin } = isLoginStore();
 
   useEffect(() => {
     if (code) {
@@ -19,11 +21,14 @@ export default function AuthCallbackPage() {
 
   const sendCodeToServer = async (code: string) => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/auth/google?code=${code}`, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/users/auth/google?code=${code}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -32,6 +37,13 @@ export default function AuthCallbackPage() {
       // 받아온 응답을 처리
       const responseData = await response.json();
       console.log(responseData);
+
+      // TODO: JWT 토큰 방식으로 변경 시 토큰 저장 로직 필요
+      setIsLogin(true);
+
+      if (responseData.data.newUser) {
+        router.push('/addtional-info');
+      }
 
       // 메인 페이지로 리다이렉트
       router.push('/');
