@@ -1,8 +1,5 @@
 import './globals.css';
-import { Inter } from 'next/font/google';
-import Header from './components/header';
-
-const inter = Inter({ subsets: ['latin'] });
+import HeaderContainer from '@/app/components/Header/HeaderContainer';
 
 export const metadata = {
   title: 'FiNote',
@@ -20,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <Header />
+        <HeaderContainer />
         <div className="w-full h-[calc(100vh-76px)]">{children}</div>
       </body>
     </html>

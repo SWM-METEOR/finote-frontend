@@ -16,7 +16,7 @@ export default function EditorComponent() {
     if (!inputTitleRef.current) return;
 
     try {
-      const response = await fetch('api/articles', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/articles`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

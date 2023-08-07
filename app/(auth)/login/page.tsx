@@ -20,11 +20,11 @@ export default function LoginPage() {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    // 여기에 폼 제출 로직을 처리하세요
+    // 여기에 폼 제출 로직을 처리
   };
 
-  const isEmailFilled = email !== '';
-  const isPasswordFilled = password !== '';
+  // const isEmailFilled = email !== '';
+  // const isPasswordFilled = password !== '';
 
   // TODO: 이메일 로그인 관련 유효성 처리
   // TODO: input, button 컴포넌트화
@@ -38,7 +38,7 @@ export default function LoginPage() {
         {/* 좌우 패딩 40씩 */}
         <div className="mx-auto py-12">
           <Link href="/">
-            <Image className="pb-2" src="/logo.svg" alt="logo" width="160" height="76" />
+            <Image className="pb-2" src="/logo.png" alt="logo" width="160" height="76" />
           </Link>
         </div>
         <h2>이메일 로그인</h2>
