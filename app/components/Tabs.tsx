@@ -9,7 +9,7 @@ import { useAISearchStore } from '@/store/sidePanel';
 
 export default function Tabs() {
   const { selectedMode, setSelectedMode } = useTooltipStore();
-  const { selectedText, setSelectedText } = useSelectedTextStore();
+  const { selectedText } = useSelectedTextStore();
   const { isLoadingAISearchResult, setIsLoadingAISearchResult } = useAISearchStore();
   const [AIResult, setAIResult] = useState<string>('');
 
