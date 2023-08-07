@@ -38,7 +38,7 @@ export default function LoginPage() {
         {/* 좌우 패딩 40씩 */}
         <div className="mx-auto py-12">
           <Link href="/">
-            <Image className="pb-2" src="/logo.svg" alt="logo" width="160" height="76" />
+            <Image className="pb-2" src="/logo.png" alt="logo" width="160" height="76" />
           </Link>
         </div>
         <h2>이메일 로그인</h2>

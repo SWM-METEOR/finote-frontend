@@ -21,7 +21,7 @@ export default function HeaderView({ pathname, isLogin }: PropTypes) {
         // header height: 76px
         <header className="h-[76px] flex justify-between bg-white shadow-lg px-8 py-2 items-center">
           <Link href="/">
-            <Image className="pb-2" src="/logo.svg" alt="logo" width="160" height="76" />
+            <Image className="pb-2" src="/logo.png" alt="logo" width="160" height="76" />
           </Link>
           <div className="grow">{/* spacer - 빈 공간을 채우기 위한 역할 */}</div>
           {/* 검색창 */}
