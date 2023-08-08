@@ -1,5 +1,8 @@
 import DragRelatedArticlesView from '@/app/components/SmartDrag/DragRelatedArticles/DragRelatedArticlesView';
+import { useSelectedTextStore } from '@/store/sidePanel';
 
 export default function DragRelatedArticlesContainer() {
-  return <DragRelatedArticlesView />;
+  const { selectedText } = useSelectedTextStore();
+
+  return <DragRelatedArticlesView selectedText={selectedText} />;
 }
