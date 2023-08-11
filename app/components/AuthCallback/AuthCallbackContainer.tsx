@@ -38,6 +38,7 @@ export default function AuthCallbackContainer() {
 
       // JWT 토큰 저장
       setCookie('accessToken', responseData.data.accessToken);
+      setCookie('refreshToken', responseData.data.refreshToken);
 
       if (responseData.data.newUser) {
         router.push('/addtional-info');
