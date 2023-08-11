@@ -13,12 +13,7 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "@toast-ui/editor": "^3.2.2",
-    "@types/node": "20.3.2",
-    "@types/react": "18.2.14",
-    "@types/react-dom": "18.2.6",
-    "autoprefixer": "10.4.14",
     "cookies-next": "^2.1.2",
-    "eslint-config-next": "13.4.12",
     "next": "13.4.7",
     "postcss": "8.4.24",
     "react": "18.2.0",
@@ -31,10 +26,15 @@
     "zustand": "^4.3.9"
   },
   "devDependencies": {
+    "autoprefixer": "10.4.14",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
+    "@types/node": "20.3.2",
+    "@types/react": "18.2.14",
+    "@types/react-dom": "18.2.6",
     "daisyui": "^3.5.0",
     "eslint": "^8.45.0",
+    "eslint-config-next": "13.4.12",
     "prettier": "^2.8.8"
   }
 }
