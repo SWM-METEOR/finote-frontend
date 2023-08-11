@@ -1,18 +1,19 @@
 'use client';
-
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-
+import { getCookie } from 'cookies-next';
 import SearchBar from '@/app/components/SearchBar';
 import WriteButton from '@/app/components/WriteButton';
 
-interface PropsType {
-  accessToken: string;
-}
-
-export default function HeaderView({ accessToken }: PropsType) {
+export default function HeaderView() {
   const pathname = usePathname();
+  const [accessToken, setAccessToken] = useState<string>('');
+
+  useEffect(() => {
+    setAccessToken(getCookie('accessToken') as string);
+  }, [pathname]);
 
   return (
     <>
@@ -33,7 +34,7 @@ export default function HeaderView({ accessToken }: PropsType) {
               <span>글 작성</span>
             </WriteButton>
           </Link>
-          {accessToken === '' ? (
+          {!accessToken ? (
             <Link href="/login">
               <span className="md:px-12 px-8">로그인</span>
             </Link>
