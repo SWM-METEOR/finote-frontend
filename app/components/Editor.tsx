@@ -2,6 +2,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from '@/app/components/common/button';
+import axiosInstance from '@/utils/axios';
 
 // TODO: 데모 이후 리팩토링, 관심사 분리 필요
 export default function EditorComponent() {
@@ -15,31 +16,18 @@ export default function EditorComponent() {
     console.log(contents);
     if (!inputTitleRef.current) return;
 
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/articles`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title: inputTitleRef.current.value,
-          body: contents,
-        }),
+    axiosInstance
+      .post('/articles', {
+        title: inputTitleRef.current.value,
+        body: contents,
+      })
+      .then((res) => {
+        // 글 등록 완료 시, 글 페이지로 리다이렉트
+        router.push(`/articles/${res.data.data.articleId}`);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      // 받아온 응답을 처리
-      const responseData = await response.json();
-      console.log(responseData);
-
-      // 필요한 작업 수행
-      // TODO: 글 페이지로 리다이렉트
-      router.push(`/articles/${responseData.data.articleId}`);
-    } catch (error) {
-      console.error('Error sending code to backend', error);
-    }
   };
 
   useEffect(() => {

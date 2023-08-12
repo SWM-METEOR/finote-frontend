@@ -9,6 +9,7 @@ import {
   useAISearchStore,
 } from '@/store/sidePanel';
 import ArticleView from '@/app/components/Article/ArticleView';
+import axiosInstance from '@/utils/axios';
 
 interface PropsType {
   pageId: string;
@@ -16,11 +17,12 @@ interface PropsType {
 
 // 프로미스 객체를 반환하는 함수
 async function getArticle(id: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/articles/${id}`);
-  if (!res.ok) {
+  try {
+    const res = await axiosInstance.get(`/articles/${id}`);
+    return res.data;
+  } catch (error) {
     throw new Error('Failed to fetch article data');
   }
-  return res.json();
 }
 
 export default function ArticleContainer({ pageId }: PropsType) {

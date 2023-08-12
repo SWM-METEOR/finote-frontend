@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import axiosInstance from '@/utils/axios';
+
 import AISearchView from '@/app/components/SmartDrag/AISearch/AISearchView';
 import { useAISearchStore, useSelectedTextStore } from '@/store/sidePanel';
 
@@ -11,16 +13,10 @@ export default function AISearchContainer() {
 
   const searchAI = () => {
     // AI 요청
-    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/articles/ai-search`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ prompt: selectedText }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setAIResult(data.data.content);
+    axiosInstance
+      .post('/articles/ai-search', { prompt: selectedText })
+      .then((response) => {
+        setAIResult(response.data.data.content);
         setIsLoadingAISearchResult(false);
       })
       .catch((error) => {
