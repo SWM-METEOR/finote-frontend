@@ -1,14 +1,6 @@
 import axios from 'axios';
-import { getCookie, setCookie } from 'cookies-next';
-
-interface ReIssueResponse {
-  data: {
-    accessToken: string;
-    refreshToken: string;
-  };
-  message: string;
-  status: number;
-}
+import { getCookie, deleteCookie } from 'cookies-next';
+import reIssueTokenAndRequestAgain from '@/utils/token';
 
 const axiosInstance = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_SERVER_URL}`,
@@ -34,34 +26,25 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
     const errorMsg = error.response.data.code;
     const errorStatus = error.response.status;
-    console.log(errorMsg, errorStatus);
 
     // 액세스 토큰 만료시
-    if (errorStatus == 401 && errorMsg.includes('INVALID_ACCESS_TOKEN')) {
-      console.log('액세스 토큰 만료');
-      try {
-        const res = await axiosInstance.post<ReIssueResponse>('/users/jwt/re-issue', {
-          accessToken: getCookie('accessToken'),
-          refreshToken: getCookie('refreshToken'),
-        });
+    if (
+      !originalRequest._retry &&
+      errorStatus == 401 &&
+      errorMsg.includes('INVALID_ACCESS_TOKEN')
+    ) {
+      originalRequest._retry = true;
+      // 토큰 갱신 및 API 재요청
+      return reIssueTokenAndRequestAgain(originalRequest);
+    } else if (errorStatus == 401 && errorMsg.includes('INVALID_REFRESH_TOKEN')) {
+      // 리프레시 토큰 만료시
+      deleteCookie('accessToken');
+      deleteCookie('refreshToken');
 
-        const newAccessToken = res.data.data.accessToken;
-        const newRefreshToken = res.data.data.refreshToken;
-
-        setCookie('accessToken', newAccessToken);
-        setCookie('refreshToken', newRefreshToken);
-
-        // 헤더에 새 토큰 설정
-        originalRequest.headers['Authorization'] = 'Bearer ' + newAccessToken;
-
-        // 원래의 요청을 다시 보냄
-        return axiosInstance(originalRequest);
-      } catch (err) {
-        console.log(err);
-        return Promise.reject(err);
-      }
+      // 로그인 페이지로 이동
+      window.location.href = '/login';
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
   }
 );
 
