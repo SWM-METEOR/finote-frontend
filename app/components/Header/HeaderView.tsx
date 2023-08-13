@@ -1,17 +1,20 @@
 'use client';
-
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-
+import { getCookie } from 'cookies-next';
 import SearchBar from '@/app/components/SearchBar';
 import WriteButton from '@/app/components/WriteButton';
 
-interface PropTypes {
-  pathname: string;
-  isLogin: boolean;
-}
+export default function HeaderView() {
+  const pathname = usePathname();
+  const [accessToken, setAccessToken] = useState<string>('');
 
-export default function HeaderView({ pathname, isLogin }: PropTypes) {
+  useEffect(() => {
+    setAccessToken(getCookie('accessToken') as string);
+  }, [pathname]);
+
   return (
     <>
       {/* 로그인 페이지에는 헤더 X */}
@@ -31,13 +34,13 @@ export default function HeaderView({ pathname, isLogin }: PropTypes) {
               <span>글 작성</span>
             </WriteButton>
           </Link>
-          {isLogin ? (
-            <Link href="/logout">
-              <span className="md:px-12 px-8">로그아웃</span>
-            </Link>
-          ) : (
+          {!accessToken ? (
             <Link href="/login">
               <span className="md:px-12 px-8">로그인</span>
+            </Link>
+          ) : (
+            <Link href="/logout">
+              <span className="md:px-12 px-8">로그아웃</span>
             </Link>
           )}
         </header>
