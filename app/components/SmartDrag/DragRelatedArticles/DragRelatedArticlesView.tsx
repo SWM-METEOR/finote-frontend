@@ -1,5 +1,5 @@
 import IntroView from '@/app/components/SmartDrag/Intro/IntroView';
-
+import ArticleBoxContainer from '@/app/components/ArticleBox/ArticleBoxContainer';
 interface PropsType {
   selectedText: string;
 }
@@ -16,7 +16,14 @@ export default function DragRelatedArticlesView({ selectedText }: PropsType) {
         </div>
       </div>
       <div>
-        {selectedText === '' ? <div></div> : <div className="bg-main">관련 아티클 리스트</div>}
+        {selectedText !== '' ? (
+          <div></div>
+        ) : (
+          <div className="">
+            <ArticleBoxContainer />
+            <ArticleBoxContainer />
+          </div>
+        )}
       </div>
     </div>
   );
