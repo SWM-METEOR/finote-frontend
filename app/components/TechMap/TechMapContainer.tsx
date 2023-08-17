@@ -12,15 +12,15 @@ export default function TechMapContainer() {
   const mapOptions = {
     chart: {
       aspectRatio: 1,
-      width: 720,
+      width: 960,
       height: 400,
       zoomType: 'x',
     },
-    title: {
-      text: '유리 님의 TechMap',
+    credits: {
+      enabled: false,
     },
-    subtitle: {
-      text: '작성글을 기반으로 분석되었습니다.',
+    title: {
+      text: '',
     },
     xAxis: {
       visible: false,
@@ -154,8 +154,14 @@ export default function TechMapContainer() {
   };
 
   return (
-    <div>
-      <HighchartsReact highcharts={Highcharts} options={mapOptions} />
+    <div className="flex flex-col w-[1000px] h-[480px] bg-white m-20 rounded-[20px]">
+      <p className="flex gap-[10px] items-center border-b-[1px] border-[#DDDDDD] py-[25px] px-[30px]">
+        <span className="text-[20px] font-bold">춘식이님의 Tech Map</span>
+        <span className="text-[15px] text-[#666666]">*작성글을 기반으로 분석되었습니다.</span>
+      </p>
+      <div className="self-center">
+        <HighchartsReact highcharts={Highcharts} options={mapOptions} />
+      </div>
     </div>
   );
 }
