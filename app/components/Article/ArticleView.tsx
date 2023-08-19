@@ -1,34 +1,79 @@
+'use client';
 import React from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { SIDEPANEL_OPTION_LIST } from '@/constants/sidePanel';
 import GreaterThanIcon from '@/app/components/Icons/GreaterThanIcon';
+import { SIDEPANEL_OPTION_LIST } from '@/constants/sidePanel';
+import {
+  useTooltipStore,
+  useSidePanelStore,
+  useDragTextStore,
+  useSelectedTextStore,
+  useAISearchStore,
+} from '@/store/sidePanel';
 
 interface PropsType {
   title: string;
   authorNickname: string;
   createDate: string;
   contents: string;
-  handleDragStart: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  handleDragEnd: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  handleTooltipClick: (selectedText: string) => void;
-  showTooltip: boolean;
 }
 
-export default React.forwardRef<HTMLDivElement, PropsType>(function ArticleView(
-  {
-    title,
-    authorNickname,
-    createDate,
-    contents,
-    handleDragStart,
-    handleDragEnd,
-    handleTooltipClick,
-    showTooltip,
-  }: PropsType,
-  tooltipRef
-) {
+export default function ArticleView({ title, authorNickname, createDate, contents }: PropsType) {
+  const tooltipRef = useRef<HTMLDivElement>(null);
+
+  const dragStartX = useRef<number>(0);
+  const dragStartY = useRef<number>(0);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const { setSelectedMode } = useTooltipStore();
+  const { setIsOpenSidePanel } = useSidePanelStore();
+  const { dragText } = useDragTextStore();
+  const { setSelectedText } = useSelectedTextStore();
+  const { setIsLoadingAISearchResult } = useAISearchStore();
+  const { setDragText } = useDragTextStore();
+
+  // 툴팁에서 모드 선택
+  const handleTooltipClick = (selectedText: string) => {
+    setSelectedText(dragText); // 사이드 패널에 드래그 텍스트 업데이트
+    setSelectedMode(selectedText); // 선택된 모드 변경
+    setIsOpenSidePanel(true); // 사이드 패널 열기
+    setShowTooltip(false); // 툴팁 닫기
+
+    // 로딩 스피너 띄우고, 결과 받아오기
+    if (selectedText === SIDEPANEL_OPTION_LIST[0] && dragText !== '') {
+      setIsLoadingAISearchResult(true);
+    }
+  };
+
+  const handleDragStart = (e: React.MouseEvent<Element, MouseEvent>) => {
+    dragStartX.current = e.clientX;
+    dragStartY.current = e.clientY;
+  };
+
+  const handleDragEnd = (e: React.MouseEvent<Element, MouseEvent>) => {
+    // 클릭 or 드래그 구간이 4px 이하인 경우, 유의미한 드래그가 아니므로 툴팁 X
+    // TODO: 이걸 본문 뿐만 아니라, 바깥 영역 전체에 대해 감지해야됨, 전역 상태 코드로 변경 필요
+    if (dragStartX.current == e.clientX || dragStartX.current >= e.clientX - 4) {
+      setShowTooltip(false);
+      return;
+    }
+
+    // 드래그된 텍스트 저장
+    setDragText(window.getSelection()!.toString());
+
+    const eventTarget = e.currentTarget as HTMLDivElement;
+    const rect = eventTarget.getBoundingClientRect();
+    const offsetY = dragStartY.current - rect.top - 55;
+    const offsetX = dragStartX.current - rect.left - 5;
+
+    // 툴팁에 상대적 위치 설정
+    if (!tooltipRef.current) return;
+    tooltipRef.current.setAttribute('style', `top: ${offsetY}px; left: ${offsetX}px`);
+    setShowTooltip(true);
+  };
+
   return (
     <div className="w-[1080px] bg-white border border-[#EEEEEE] rounded-[20px] shadow-[0_4px_10px_0_rgba(0,0,0,0.05)] p-[40px]">
       {/* 본문 영역은 반응형 breakpoint -> md 아니고 lg임 */}
@@ -107,4 +152,4 @@ export default React.forwardRef<HTMLDivElement, PropsType>(function ArticleView(
       </div>
     </div>
   );
-});
+}
