@@ -1,5 +1,6 @@
 // TODO: 추후 API와 연동 시 작가ID/글 제목으로 라우팅 변경
 
+import RelatedArticlesContainer from '@/app/components/RelatedArticles/RelatedArticlesContainer';
 import SidePanelContainer from '@/app/components/SmartDrag/SidePanel/SidePanelContainer';
 import ArticleContainer from '@/app/components/Article/ArticleContainer';
 import HeartIcon from '@/app/components/Icons/HeartIcon';
@@ -21,7 +22,12 @@ export default function ArticlePage({ params }: PropsType) {
         </div>
       </div>
       {/* 본문 영역 */}
-      <ArticleContainer pageParams={params} />
+      <div className="w-[1078px] bg-white border border-[#EEEEEE] rounded-[20px] shadow-[0_4px_10px_0_rgba(0,0,0,0.05)] p-[40px]">
+        <ArticleContainer pageParams={params} />
+        <hr className="w-full text-[#DDDDDD] mt-[10px]" />
+        <RelatedArticlesContainer />
+      </div>
+
       <SidePanelContainer />
     </div>
   );
