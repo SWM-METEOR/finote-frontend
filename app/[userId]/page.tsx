@@ -1,13 +1,38 @@
-// TODO: 추후 API와 연동 시 작가ID/글 제목으로 라우팅 변경
-
+import Image from 'next/image';
 import TechMapContainer from '@/app/components/TechMap/TechMapContainer';
+import ProfileBoxContainer from '@/app/components/ProfileBox/ProfileBoxContainer';
+import MyArticleListContainer from '@/app/components/MyArticleList/MyArticleListContainer';
 
 export default function UserHomePage({ params }: { params: { userId: string } }) {
   console.log(params.userId);
+
   return (
-    <div className=" h-full">
-      {/* {params.userId} */}
-      <TechMapContainer />
+    <div>
+      <div className="flex gap-[40px]">
+        {/* {params.userId} */}
+        <ProfileBoxContainer />
+        <TechMapContainer />
+      </div>
+      <div className="flex">
+        <div className="flex flex-col w-[200px] mr-[81px]">
+          {/* 좋아요한 글 필터링 버튼 */}
+          <button className="flex gap-[8px] items-center justify-center h-[62px] bg-white rounded-[8px] shadow-[0_0_10px_0_rgba(0,0,0,0.05)] mb-[40px] text-[16px] font-bold">
+            <Image className="" src="/filled-heart.svg" alt="heart" width="16" height="14" />
+            <span>좋아요한 글</span>
+            <span className="text-[#00A1FF]">6</span>
+          </button>
+          {/* 카테고리 목록 */}
+          <div>
+            <span className="text-[#666666] text-[14px] mb-[5px]">카테고리</span>
+            <div className="flex flex-col items-start">
+              <button className="h-[40px] my-[10px] text-[#333333] text-[16px] font-bold">
+                전체(26)
+              </button>
+            </div>
+          </div>
+        </div>
+        <MyArticleListContainer />
+      </div>
     </div>
   );
 }
