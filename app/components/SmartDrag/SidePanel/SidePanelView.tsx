@@ -20,9 +20,9 @@ export default function SidePanelView({
   selectedMode,
 }: PropsType) {
   return (
-    // TODO: 사이드패널, 토글 버튼은 PC사이즈 에서만  보임
-    <div className="  fixed right-[0px] bg-white ">
-      <div className={`md:block hidden flex flex-row h-full`}>
+    // 사이드패널, 토글 버튼은 PC사이즈 에서만  보임
+    <div className={`fixed right-[0px] bg-white `}>
+      <div className={`largeDesktop:block desktop:block hidden flex flex-row h-full`}>
         {/* TODO: 헤더에도 shrink-0 적용 필요 */}
         <div
           className={
