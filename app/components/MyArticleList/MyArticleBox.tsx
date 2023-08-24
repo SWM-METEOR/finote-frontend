@@ -28,7 +28,13 @@ export default function MyArticleBox({
     <div className="w-[488px] h-[178px] bg-white rounded-[20px] p-[20px] border border-[#EEEEEE] shadow-[0_0_10px_0_rgba(0,0,0,0.05)]">
       <div className="flex gap-[20px]">
         <div className="relative w-[140px] h-[140px] rounded-[20px] overflow-hidden flex-shrink-0">
-          <Image fill className="object-cover" src={thumbnail} alt="logo" sizes="100%" />
+          <Image
+            fill
+            className="object-cover"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2qL4TnNIt-zmP-lncsFEHdAbP3Hwn1z29vQ&usqp=CAU"
+            alt="logo"
+            sizes="100%"
+          />
         </div>
         <div className="flex flex-col gap-[10px]">
           <p className="flex text-[13px] gap-1 items-center">
