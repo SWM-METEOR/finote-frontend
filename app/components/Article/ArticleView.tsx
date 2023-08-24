@@ -61,6 +61,7 @@ export default function ArticleView({ title, authorNickname, createDate, content
     }
 
     // 드래그된 텍스트 저장
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     setDragText(window.getSelection()!.toString());
 
     const eventTarget = e.currentTarget as HTMLDivElement;

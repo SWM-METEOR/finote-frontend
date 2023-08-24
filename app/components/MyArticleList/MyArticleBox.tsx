@@ -16,14 +16,7 @@ interface PropsType {
   thumbnail: string;
 }
 
-export default function MyArticleBox({
-  title,
-  body,
-  totalLike,
-  reply,
-  date,
-  thumbnail,
-}: PropsType) {
+export default function MyArticleBox({ title, body, totalLike, reply, date }: PropsType) {
   return (
     <div className="w-[488px] h-[178px] bg-white rounded-[20px] p-[20px] border border-[#EEEEEE] shadow-[0_0_10px_0_rgba(0,0,0,0.05)]">
       <div className="flex gap-[20px]">

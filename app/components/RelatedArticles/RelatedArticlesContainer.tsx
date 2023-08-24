@@ -2,9 +2,9 @@ import RelatedArticlesView from '@/app/components/RelatedArticles/RelatedArticle
 // import axiosInstance from '@/utils/axios';
 import { relatedArticlesData } from '@/constants/mockdata';
 
-interface PropsType {
-  pageParams: { id: string };
-}
+// interface PropsType {
+//   pageParams: { id: string };
+// }
 
 // async function getRelatedArticles(id: string) {
 //   try {
@@ -15,11 +15,11 @@ interface PropsType {
 //   }
 // }
 
-export default async function RelatedArticlesContainer({ pageParams }: PropsType) {
+// parameter에 { pageParams }: PropsType 추가
+export default async function RelatedArticlesContainer() {
   // 데이터 패칭
   // const relatedArticlesRes = await getRelatedArticles(pageParams.id);
   // const relatedArticlesData = relatedArticlesRes.data;
-
 
   return <RelatedArticlesView relatedArticlesData={relatedArticlesData} />;
 }

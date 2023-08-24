@@ -27,7 +27,8 @@ export default function ArticlePage({ params }: PropsType) {
       <div className="2xl:ml-1/5 xl:ml-1/5 lg:ml-1/7 largeDesktop:w-[1078px] desktop:w-1/2 tablet:w-full mobile:w-full bg-white border border-[#EEEEEE] rounded-[20px] shadow-[0_4px_10px_0_rgba(0,0,0,0.05)] p-[40px]">
         <ArticleContainer pageParams={params} />
         <hr className="w-full text-[#DDDDDD] mt-[10px]" />
-        <RelatedArticlesContainer pageParams={params} />
+        <RelatedArticlesContainer />
+        {/* <RelatedArticlesContainer pageParams={params} /> */}
       </div>
       <SidePanelContainer />
     </div>
