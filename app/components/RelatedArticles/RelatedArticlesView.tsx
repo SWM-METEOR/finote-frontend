@@ -11,7 +11,7 @@ export default function RelatedArticlesView() {
             <Image src="/article.svg" alt="keyword" width="20" height="20" />
             <span>Kakao 로그인 구현하기</span>
           </p>
-          <div className="flex gap-[20px] overflow-scroll">
+          <div className="flex gap-[20px] overflow-x-auto">
             <RelatedArticleBox />
             <RelatedArticleBox />
             <RelatedArticleBox />
@@ -25,7 +25,7 @@ export default function RelatedArticlesView() {
             <Image src="/article.svg" alt="keyword" width="20" height="20" />
             <span>Kakao 로그인 구현하기</span>
           </p>
-          <div className="flex gap-[20px] overflow-scroll">
+          <div className="flex gap-[20px] overflow-x-auto">
             <RelatedArticleBox />
             <RelatedArticleBox />
             <RelatedArticleBox />
