@@ -9,6 +9,7 @@ module.exports = {
     screens: {
       mobile: { max: '639px' },
       tablet: { min: '640px', max: '1023px' },
+      md: { min: '768px' },
       desktop: { min: '1024px', max: '1809px' },
       lg: { min: '1024px', max: '1279px' },
       xl: { min: '1280px', max: '1536px' },
