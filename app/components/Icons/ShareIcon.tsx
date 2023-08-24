@@ -7,7 +7,7 @@ export default function ShareIcon() {
         r="3.25"
         transform="rotate(90 18 4)"
         stroke="#999999"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <circle
         cx="18"
@@ -15,7 +15,7 @@ export default function ShareIcon() {
         r="3.25"
         transform="rotate(90 18 20)"
         stroke="#999999"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <circle
         cx="4"
@@ -23,10 +23,10 @@ export default function ShareIcon() {
         r="3.25"
         transform="rotate(90 4 12)"
         stroke="#999999"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
-      <path d="M15 5.5L7 10.5" stroke="#999999" stroke-width="1.5" />
-      <path d="M15 19L7 14" stroke="#999999" stroke-width="1.5" />
+      <path d="M15 5.5L7 10.5" stroke="#999999" strokeWidth="1.5" />
+      <path d="M15 19L7 14" stroke="#999999" strokeWidth="1.5" />
     </svg>
   );
 }

@@ -1,6 +1,6 @@
 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M16.5 18.25H3.5C2.5335 18.25 1.75 17.4665 1.75 16.5V3.5C1.75 2.5335 2.5335 1.75 3.5 1.75H13.265C13.7136 1.75 14.145 1.92228 14.4703 2.23125L17.7053 5.30453C18.0531 5.63492 18.25 6.09358 18.25 6.57328V10V16.5C18.25 17.4665 17.4665 18.25 16.5 18.25Z" stroke="#333333" stroke-width="1.5"/>
-<line x1="5.75" y1="14.25" x2="14.25" y2="14.25" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
-<line x1="5.75" y1="10.25" x2="14.25" y2="10.25" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
-<line x1="5.75" y1="6.25" x2="9.25" y2="6.25" stroke="#333333" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M16.5 18.25H3.5C2.5335 18.25 1.75 17.4665 1.75 16.5V3.5C1.75 2.5335 2.5335 1.75 3.5 1.75H13.265C13.7136 1.75 14.145 1.92228 14.4703 2.23125L17.7053 5.30453C18.0531 5.63492 18.25 6.09358 18.25 6.57328V10V16.5C18.25 17.4665 17.4665 18.25 16.5 18.25Z" stroke="#333333" strokeWidth="1.5"/>
+<line x1="5.75" y1="14.25" x2="14.25" y2="14.25" stroke="#333333" strokeWidth="1.5" strokeLinecap="round"/>
+<line x1="5.75" y1="10.25" x2="14.25" y2="10.25" stroke="#333333" strokeWidth="1.5" strokeLinecap="round"/>
+<line x1="5.75" y1="6.25" x2="9.25" y2="6.25" stroke="#333333" strokeWidth="1.5" strokeLinecap="round"/>
 </svg>

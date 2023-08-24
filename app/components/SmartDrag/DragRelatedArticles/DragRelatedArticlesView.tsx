@@ -1,10 +1,21 @@
 import IntroContainer from '@/app/components/SmartDrag/Intro/IntroView';
-import ArticleBoxContainer from '@/app/components/ArticleBox/ArticleBoxContainer';
+import DragRelatedArticleBox from '@/app/components/SmartDrag/DragRelatedArticles/DragRelatedArticleBox';
+
 interface PropsType {
   selectedText: string;
+  articleList: {
+    id: number;
+    title: string;
+    body: string;
+    totalLike: number;
+    reply: number;
+    authorNickname: string;
+    date: string;
+    thumbnail: string;
+  }[];
 }
 
-export default function DragRelatedArticlesView({ selectedText }: PropsType) {
+export default function DragRelatedArticlesView({ selectedText, articleList }: PropsType) {
   return (
     <div className="w-full flex flex-col gap-4">
       <div>
@@ -17,9 +28,10 @@ export default function DragRelatedArticlesView({ selectedText }: PropsType) {
                 {selectedText}
               </div>
             </div>
-            <div className="flex flex-col gap-[15px]">
-              <ArticleBoxContainer />
-              <ArticleBoxContainer />
+            <div className="h-[690px] flex flex-col gap-[15px] pr-[100px] overflow-y-auto ">
+              {articleList.map((article) => (
+                <DragRelatedArticleBox key={article.id} {...article} />
+              ))}
             </div>
           </>
         )}

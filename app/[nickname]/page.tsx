@@ -3,13 +3,13 @@ import TechMapContainer from '@/app/components/TechMap/TechMapContainer';
 import ProfileBoxContainer from '@/app/components/ProfileBox/ProfileBoxContainer';
 import MyArticleListContainer from '@/app/components/MyArticleList/MyArticleListContainer';
 
-export default function UserHomePage({ params }: { params: { userId: string } }) {
-  console.log(params.userId);
+export default function UserHomePage({ params }: { params: { nickname: string } }) {
+  // console.log(params.nickname);
+  const nickname = decodeURIComponent(params.nickname);
 
   return (
     <div>
       <div className="flex gap-[40px]">
-        {/* {params.userId} */}
         <ProfileBoxContainer />
         <TechMapContainer />
       </div>
@@ -31,7 +31,7 @@ export default function UserHomePage({ params }: { params: { userId: string } })
             </div>
           </div>
         </div>
-        <MyArticleListContainer />
+        <MyArticleListContainer nickname={nickname} />
       </div>
     </div>
   );
