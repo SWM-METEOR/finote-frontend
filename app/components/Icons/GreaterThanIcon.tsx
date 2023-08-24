@@ -6,8 +6,8 @@ export default function GreaterThanIcon() {
       <path
         d="M5.46447 10.5355L9 7L5.46447 3.46447"
         stroke="#666666"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
