@@ -29,11 +29,15 @@ export default function HeaderView() {
           <div className="grow">{/* spacer - 빈 공간을 채우기 위한 역할 */}</div>
           {/* 검색창 */}
           <SearchBar />
-          <Link href="/write" className="md:pl-12 pl-12">
-            <WriteButton color="white" textColor="main" width="small">
-              <span>글 작성</span>
-            </WriteButton>
-          </Link>
+          {!accessToken ? (
+            <></>
+          ) : (
+            <Link href="/write" className="md:pl-12 pl-12">
+              <WriteButton color="white" textColor="main" width="small">
+                <span>글 작성</span>
+              </WriteButton>
+            </Link>
+          )}
           {!accessToken ? (
             <Link href="/login">
               <span className="md:px-12 px-8">로그인</span>
