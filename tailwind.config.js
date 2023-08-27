@@ -9,9 +9,13 @@ module.exports = {
     screens: {
       mobile: { max: '639px' },
       tablet: { min: '640px', max: '1023px' },
+      md: { min: '768px' },
       desktop: { min: '1024px', max: '1809px' },
       lg: { min: '1024px', max: '1279px' },
       xl: { min: '1280px', max: '1536px' },
+      'main-lg': { min: '1300px' },
+      'main-md': { min: '860px', max: '1300px' },
+      'main-sm': { max: '859px' },
       '2xl': { min: '1536px', max: '1809px' },
       largeDesktop: { min: '1810px' },
     },
