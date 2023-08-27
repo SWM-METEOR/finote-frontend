@@ -3,13 +3,14 @@ import { useState } from 'react';
 import TrendsIcon from '@/app/components/Icons/TrendsIcon';
 import FeedIcon from '@/app/components/Icons/FeedIcon';
 import TrendsArticleListContainer from '@/app/components/TrendsArticleList/TrendsArticleListContainer';
+
 export default function Home() {
   const [selectedMode, setSelectedMode] = useState<'trends' | 'feed'>('trends');
 
   return (
     // mx-[320px]
-    <div className="flex flex-col w-[1280px] main-md:w-[840px] main-sm:w-[400px]  mx-auto mt-[50px] pb-[162px]">
-      <div className="w-full flex gap-[30px] items-end border-b border-[#DDDDDD]">
+    <div className="flex flex-col w-[1280px] h-full main-md:w-[840px] main-sm:w-[400px] mx-auto">
+      <div className="w-full flex gap-[30px] items-end border-b border-[#DDDDDD] pt-[50px]">
         <button
           onClick={() => setSelectedMode('trends')}
           className={`flex items-center gap-[6px] w-[135px] h-[24px] text-[20px] pb-[14px] ${
@@ -45,8 +46,9 @@ export default function Home() {
           <span className="">피드</span>
         </button>
       </div>
-
-      {selectedMode === 'trends' ? <TrendsArticleListContainer /> : <>피드</>}
+      <div className="mb-[126px] w-full h-full">
+        {selectedMode === 'trends' ? <TrendsArticleListContainer /> : <>피드</>}
+      </div>
     </div>
   );
 }

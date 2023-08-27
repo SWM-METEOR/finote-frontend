@@ -25,22 +25,46 @@ interface ArticleDataType {
 
 export default function TrendsArticleListContainer() {
   const [trendsArticleData, setTrendsArticleData] = useState<ArticleDataType | null>(null);
+  const [page, setPage] = useState(1);
+  const [hasMoreItems, setHasMoreItems] = useState(true);
 
-  useEffect(() => {
-    async function getTrendsArticles() {
-      try {
-        const res = await axiosInstance.get(`/trend-articles?page=${1}`);
-        const articleRes = res.data.data;
-        setTrendsArticleData(articleRes);
-      } catch (error) {
-        throw new Error('Failed to fetch article data');
+  async function loadMoreTrendsArticles() {
+    if (!hasMoreItems) return;
+
+    try {
+      const res = await axiosInstance.get(`/trend-articles?page=${page}&size=${10}`);
+      const articleRes = res.data.data;
+
+      if (articleRes.articleList.length === 0) {
+        setHasMoreItems(false);
+        return;
       }
-    }
 
-    getTrendsArticles();
+      if (trendsArticleData) {
+        setTrendsArticleData((prevData) => ({
+          ...articleRes,
+          articleList: [...(prevData?.articleList || []), ...articleRes.articleList],
+        }));
+      } else {
+        setTrendsArticleData(articleRes);
+      }
+      setPage((prevPage) => prevPage + 1);
+    } catch (error) {
+      throw new Error('Failed to fetch article data');
+    }
+  }
+
+  // initial fetch
+  useEffect(() => {
+    loadMoreTrendsArticles();
   }, []);
 
   if (!trendsArticleData) return null;
 
-  return <TrendsArticleListView articleList={trendsArticleData.articleList} />;
+  return (
+    <TrendsArticleListView
+      articleList={trendsArticleData.articleList}
+      loadMoreItems={loadMoreTrendsArticles}
+    />
+  );
 }
