@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
 import GreaterThanIcon from '@/app/components/Icons/GreaterThanIcon';
 import HeartIcon from '@/app/components/Icons/HeartIcon';
@@ -49,12 +50,12 @@ export default function TrendsArticleBox({
           </div>
         </div>
         <div className="flex flex-col gap-[13px] items-end">
-          <button className="flex items-center">
+          <Link href={`/articles/${id}`} className="flex items-center">
             <span className="text-[12px] text-[#666666]">더 보러가기</span>
             <span>
               <GreaterThanIcon width={12} height={12} color="#666666" />
             </span>
-          </button>
+          </Link>
           <div className="relative w-[90px] h-[90px] rounded-[15px] overflow-hidden flex-shrink-0">
             <Image
               fill
