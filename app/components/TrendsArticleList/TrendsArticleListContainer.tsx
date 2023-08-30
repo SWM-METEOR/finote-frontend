@@ -4,10 +4,7 @@ import TrendsArticleListView from '@/app/components/TrendsArticleList/TrendsArti
 import axiosInstance from '@/utils/axios';
 import { useEffect, useState } from 'react';
 
-interface PropsType {
-  nickname: string;
-}
-
+// TODO: 인피니티 스크롤 관련 로직 모듈화 필요
 interface ArticleDataType {
   page: number;
   size: number;
@@ -27,12 +24,13 @@ export default function TrendsArticleListContainer() {
   const [trendsArticleData, setTrendsArticleData] = useState<ArticleDataType | null>(null);
   const [page, setPage] = useState(1);
   const [hasMoreItems, setHasMoreItems] = useState(true);
+  const maxReqSize = 30;
 
   async function loadMoreTrendsArticles() {
     if (!hasMoreItems) return;
 
     try {
-      const res = await axiosInstance.get(`/trend-articles?page=${page}&size=${10}`);
+      const res = await axiosInstance.get(`/trend-articles?page=${page}&size=${maxReqSize}`);
       const articleRes = res.data.data;
 
       if (articleRes.articleList.length === 0) {
@@ -48,7 +46,6 @@ export default function TrendsArticleListContainer() {
       } else {
         setTrendsArticleData(articleRes);
       }
-      setPage((prevPage) => prevPage + 1);
     } catch (error) {
       throw new Error('Failed to fetch article data');
     }
@@ -65,6 +62,8 @@ export default function TrendsArticleListContainer() {
     <TrendsArticleListView
       articleList={trendsArticleData.articleList}
       loadMoreItems={loadMoreTrendsArticles}
+      page={page}
+      setPage={setPage}
     />
   );
 }
