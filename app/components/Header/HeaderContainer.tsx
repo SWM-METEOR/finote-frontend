@@ -13,7 +13,10 @@ export default function HeaderContainer() {
   const [accessToken, setAccessToken] = useState<string>('');
 
   async function getUserBlogInfo() {
-    if (!accessToken) return;
+    if (!accessToken) {
+      setBlogName('');
+      return;
+    }
 
     try {
       const res = await axiosInstance.get('/users/blog-info');
