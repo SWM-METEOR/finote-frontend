@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     // mx-[320px]
-    <div className="flex flex-col w-[1280px] h-full main-md:w-[840px] main-sm:w-[400px] mx-auto">
+    <div className="flex flex-col h-full w-[1280px] main-md:w-[840px] main-sm:w-[400px] mx-auto">
       <div className="w-full flex gap-[30px] items-end border-b border-[#DDDDDD] pt-[50px]">
         <button
           onClick={() => setSelectedMode('trends')}
