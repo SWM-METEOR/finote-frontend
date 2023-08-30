@@ -1,5 +1,3 @@
-// TODO: 추후 API와 연동 시 작가ID/글 제목으로 라우팅 변경
-
 import RelatedArticlesContainer from '@/app/components/RelatedArticles/RelatedArticlesContainer';
 import SidePanelContainer from '@/app/components/SmartDrag/SidePanel/SidePanelContainer';
 import ArticleContainer from '@/app/components/Article/ArticleContainer';
@@ -7,9 +5,11 @@ import HeartIcon from '@/app/components/Icons/HeartIcon';
 import ShareIcon from '@/app/components/Icons/ShareIcon';
 
 interface PropsType {
-  params: { id: string };
+  params: { nickname: string; articleTitle: string };
 }
+
 export default function ArticlePage({ params }: PropsType) {
+  console.log(params);
   return (
     <div className="relative flex flex-nowrap flex-row largeDesktop:justify-center h-full">
       {/* 좌측 좋아요 이동 바 */}
@@ -27,7 +27,7 @@ export default function ArticlePage({ params }: PropsType) {
       <div className="2xl:ml-1/5 xl:ml-1/5 lg:ml-1/7 largeDesktop:w-[1078px] desktop:w-1/2 tablet:w-full mobile:w-full bg-white border border-[#EEEEEE] rounded-[20px] shadow-[0_4px_10px_0_rgba(0,0,0,0.05)] p-[40px]">
         <ArticleContainer pageParams={params} />
         <hr className="w-full text-[#DDDDDD] mt-[10px]" />
-        <RelatedArticlesContainer />
+        {/* TODO: API spec 변경 후 추가 예정 */}
         {/* <RelatedArticlesContainer pageParams={params} /> */}
       </div>
       <SidePanelContainer />
