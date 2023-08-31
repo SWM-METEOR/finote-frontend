@@ -25,11 +25,19 @@ export default function DragRelatedArticleBox({
 }: PropsType) {
   return (
     <div
-      className={`flex flex-col justify-between w-[320px] h-[115px] border border-[#DDDDDD] rounded-[15px] p-[10px]`}
+      className={`flex flex-col justify-between w-[318px] h-[115px] border border-[#DDDDDD] rounded-[15px] p-[10px]`}
     >
       <div className="flex gap-[10px]">
         <div className="relative w-[60px] h-[60px] rounded-[10px] overflow-hidden flex-shrink-0">
-          <Image fill className="object-cover" src={thumbnail} alt="logo" sizes="100%" />
+          {/* TODO: 백엔드에서 thumbnail값 문자열 처리 후 코드 수정 예정 */}
+          {/* <Image fill className="object-cover" src={thumbnail} alt="logo" sizes="100%" /> */}
+          <Image
+            fill
+            className="object-cover"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2qL4TnNIt-zmP-lncsFEHdAbP3Hwn1z29vQ&usqp=CAU"
+            alt="logo"
+            sizes="100%"
+          />
         </div>
         <div className="flex flex-col gap-[3px]">
           <p className={`text-[14px] font-bold line-clamp-1`}>{title}</p>
