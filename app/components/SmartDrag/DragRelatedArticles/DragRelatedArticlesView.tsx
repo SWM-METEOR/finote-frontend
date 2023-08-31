@@ -30,7 +30,6 @@ export default function DragRelatedArticlesView({
   const [loading, setLoading] = useState(false);
   const observerRef = useRef(null);
 
-
   useEffect(() => {
     if (page === 1) return;
 
