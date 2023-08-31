@@ -50,7 +50,7 @@ export default function TrendsArticleBox({
           </div>
         </div>
         <div className="flex flex-col gap-[13px] items-end">
-          <Link href={`/articles/${id}`} className="flex items-center">
+          <Link href={`/articles/${authorNickname}/${title}`} className="flex items-center">
             <span className="text-[12px] text-[#666666]">더 보러가기</span>
             <span>
               <GreaterThanIcon width={12} height={12} color="#666666" />
