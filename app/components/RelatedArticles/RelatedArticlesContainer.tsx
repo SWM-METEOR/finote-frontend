@@ -18,8 +18,10 @@ async function getRelatedArticles(id: string) {
 export default async function RelatedArticlesContainer({ pageParams }: PropsType) {
   // 데이터 패칭
   // TODO: API 스펙 변경 후 코드 수정 필요
-  const relatedArticlesRes = await getRelatedArticles(pageParams.id);
-  const relatedArticlesData = relatedArticlesRes.data;
+  // const relatedArticlesRes = await getRelatedArticles(pageParams.id);
+  // const relatedArticlesData = relatedArticlesRes.data;
 
-  return <RelatedArticlesView relatedArticlesData={relatedArticlesData} />;
+  return null;
+
+  // return <RelatedArticlesView relatedArticlesData={relatedArticlesData} />;
 }
