@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import IntroContainer from '@/app/components/SmartDrag/Intro/IntroView';
-import DragRelatedArticleBox from '@/app/components/SmartDrag/DragRelatedArticles/DragRelatedArticleBox';
+import MyArticleBox from '@/app/components/MyArticleList/MyArticleBox';
+// import ClipLoader from 'react-spinners/ClipLoader';
 
 interface PropsType {
-  selectedText: string;
   articleList: {
     id: number;
     title: string;
@@ -20,8 +19,7 @@ interface PropsType {
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function DragRelatedArticlesView({
-  selectedText,
+export default function MyArticleListView({
   articleList,
   loadMoreItems,
   page,
@@ -64,23 +62,21 @@ export default function DragRelatedArticlesView({
   }, []);
 
   return (
-    <div className="w-full h-full gap-4">
-      {selectedText === '' ? (
-        <IntroContainer />
-      ) : (
-        <div className="flex flex-col w-full h-full">
-          <div className="flex-none w-full chat chat-end mb-[12px]">
-            <div className="chat-bubble bg-[#313a47] whitespace-pre-line text-white">
-              {selectedText}
-            </div>
-          </div>
-          <div className="w-full h-[calc(100vh-356px)] flex-grow flex flex-col gap-[15px] overflow-auto">
-            {articleList.map((article) => (
-              <DragRelatedArticleBox key={article.id} {...article} />
-            ))}
-          </div>
+    <div className="w-[1000px] mt-[40px]">
+      <p className="text-[20px] font-bold">전체보기</p>
+      <hr className="mt-[15px] w-full text-black mb-[30px]" />
+      <div className="grid grid-cols-2 gap-[20px]">
+        {articleList.map((article) => (
+          <MyArticleBox key={article.id} {...article} />
+        ))}
+      </div>
+      <div ref={observerRef}></div>
+      {/* TODO: 로딩 시 스켈레톤 UI 띄울지 여부 확정 */}
+      {/* {loading && (
+        <div className="h-20 flex justify-center items-center">
+          <ClipLoader color="#00A1FF" />
         </div>
-      )}
+      )} */}
     </div>
   );
 }

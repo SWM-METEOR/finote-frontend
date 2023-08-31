@@ -6,6 +6,19 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      mobile: { max: '639px' },
+      tablet: { min: '640px', max: '1023px' },
+      md: { min: '768px' },
+      desktop: { min: '1024px', max: '1809px' },
+      lg: { min: '1024px', max: '1279px' },
+      xl: { min: '1280px', max: '1536px' },
+      'main-lg': { min: '1300px' },
+      'main-md': { min: '860px', max: '1300px' },
+      'main-sm': { max: '859px' },
+      '2xl': { min: '1536px', max: '1809px' },
+      largeDesktop: { min: '1810px' },
+    },
     colors: {
       main: '#00A1FF',
       red: '#DF6B5A',
@@ -37,6 +50,15 @@ module.exports = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      margin: {
+        '1/20': '5%',
+        '1/7': '14%',
+        '1/6': '16%',
+        '1/5': '20%',
+        '1/4': '25%',
+        '1/2': '50%',
+        '3/4': '75%',
       },
     },
   },

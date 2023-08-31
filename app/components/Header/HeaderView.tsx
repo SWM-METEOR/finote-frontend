@@ -1,39 +1,43 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getCookie } from 'cookies-next';
-import SearchBar from '@/app/components/SearchBar';
+
+import SearchBarContainer from '@/app/components/SearchBar/SearchBarContainer';
 import WriteButton from '@/app/components/WriteButton';
 
-export default function HeaderView() {
-  const pathname = usePathname();
-  const [accessToken, setAccessToken] = useState<string>('');
+interface PropsType {
+  blogName: string;
+  accessToken: string;
+  pathname: string;
+}
 
-  useEffect(() => {
-    setAccessToken(getCookie('accessToken') as string);
-  }, [pathname]);
-
+export default function HeaderView({ blogName, accessToken, pathname }: PropsType) {
   return (
-    <>
+    <div className="w-full flex justify-center shadow-[0_2px_10px_0_rgba(0,0,0,0.05)]">
       {/* 로그인 페이지에는 헤더 X */}
       {pathname !== '/login' && pathname !== '/write' && (
-        // items-center: 수직 방향 중앙 정렬
-        // justify-between: 양 끝 배치
         // header height: 76px
-        <header className="h-[76px] flex justify-between bg-white shadow-lg px-8 py-2 items-center">
+        <header className="h-[76px] flex justify-between bg-white w-[1280px] main-md:w-[840px] main-sm:w-[400px] py-[20px] items-center">
           <Link href="/">
-            <Image className="pb-2" src="/logo.png" alt="logo" width="160" height="76" />
+            <Image className="pb-1" src="/logo.png" alt="logo" width="160" height="76" />
+          </Link>
+          <Link href={`/${blogName}`} className="text-[20px] font-bold ml-[40px]">
+            {blogName}
           </Link>
           <div className="grow">{/* spacer - 빈 공간을 채우기 위한 역할 */}</div>
           {/* 검색창 */}
-          <SearchBar />
-          <Link href="/write" className="md:pl-12 pl-12">
-            <WriteButton color="white" textColor="main" width="small">
-              <span>글 작성</span>
-            </WriteButton>
-          </Link>
+          <div className="">
+            <SearchBarContainer />
+          </div>
+          {!accessToken ? (
+            <></>
+          ) : (
+            <Link href="/write" className="md:pl-12 pl-12">
+              <WriteButton color="white" textColor="main" width="small">
+                <span>글 작성</span>
+              </WriteButton>
+            </Link>
+          )}
           {!accessToken ? (
             <Link href="/login">
               <span className="md:px-12 px-8">로그인</span>
@@ -45,6 +49,6 @@ export default function HeaderView() {
           )}
         </header>
       )}
-    </>
+    </div>
   );
 }
