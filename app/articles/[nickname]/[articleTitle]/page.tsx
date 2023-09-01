@@ -1,8 +1,8 @@
-import RelatedArticlesContainer from '@/app/components/RelatedArticles/RelatedArticlesContainer';
-import SidePanelContainer from '@/app/components/SmartDrag/SidePanel/SidePanelContainer';
-import ArticleContainer from '@/app/components/Article/ArticleContainer';
-import HeartIcon from '@/app/components/Icons/HeartIcon';
-import ShareIcon from '@/app/components/Icons/ShareIcon';
+import RelatedArticlesContainer from '@/components/RelatedArticles/RelatedArticlesContainer';
+import SidePanelContainer from '@/components/SmartDrag/SidePanel/SidePanelContainer';
+import ArticleContainer from '@/components/Article/ArticleContainer';
+import HeartIcon from '@/components/Icons/HeartIcon';
+import ShareIcon from '@/components/Icons/ShareIcon';
 
 interface PropsType {
   params: { nickname: string; articleTitle: string };
