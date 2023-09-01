@@ -13,11 +13,10 @@ export default function EditorComponent() {
 
   const handleClick = async () => {
     const contents = editor.getMarkdown();
-    console.log(contents);
     if (!inputTitleRef.current) return;
 
     axiosInstance
-      .post('/articles', {
+      .post('/articles/write', {
         title: inputTitleRef.current.value,
         body: contents,
       })
