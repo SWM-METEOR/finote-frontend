@@ -13,17 +13,16 @@ export default function EditorComponent() {
 
   const handleClick = async () => {
     const contents = editor.getMarkdown();
-    console.log(contents);
     if (!inputTitleRef.current) return;
 
     axiosInstance
-      .post('/articles', {
+      .post('/articles/write', {
         title: inputTitleRef.current.value,
         body: contents,
       })
       .then((res) => {
         // 글 등록 완료 시, 글 페이지로 리다이렉트
-        router.push(`/articles/${res.data.data.articleId}`);
+        router.push(`/articles/${res.data.data.nickname}/${res.data.data.title}`);
       })
       .catch((err) => {
         console.log(err);

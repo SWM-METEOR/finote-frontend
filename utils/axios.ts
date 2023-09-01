@@ -9,7 +9,11 @@ const axiosInstance = axios.create({
 // 요청 인터셉터
 axiosInstance.interceptors.request.use(
   (config) => {
-    config.headers.Authorization = `Bearer ${getCookie('accessToken')}`;
+    const accessToken = getCookie('accessToken');
+    if (accessToken === undefined) {
+      return config;
+    }
+    config.headers.Authorization = `Bearer ${accessToken}`;
     return config;
   },
   (error) => {
@@ -27,6 +31,7 @@ axiosInstance.interceptors.response.use(
     const errorMsg = error.response.data.code;
     const errorStatus = error.response.status;
 
+    // NO_ACCESS_TOKEN -> reissue X
     // 액세스 토큰 만료시
     if (
       !originalRequest._retry &&
