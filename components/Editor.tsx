@@ -1,34 +1,25 @@
 'use client';
-import { useRef, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Button from '@/components/common/button';
-import axiosInstance from '@/utils/axios';
 
-// TODO: 데모 이후 리팩토링, 관심사 분리 필요
-export default function EditorComponent() {
-  const router = useRouter();
+import { useRef, useEffect } from 'react';
+
+interface PropsType {
+  inputTitleRef: React.RefObject<HTMLInputElement>;
+  editor: any;
+  setEditor: React.Dispatch<React.SetStateAction<any>>;
+  initialTitle?: string;
+  initialBody?: string;
+}
+
+export default function EditorComponent({
+  inputTitleRef,
+  editor,
+  setEditor,
+  initialTitle = '',
+  initialBody = '',
+}: PropsType) {
   const editElement = useRef(null);
-  const inputTitleRef = useRef<HTMLInputElement>(null);
-  const [editor, setEditor] = useState<any>(null);
 
-  const handleClick = async () => {
-    const contents = editor.getMarkdown();
-    if (!inputTitleRef.current) return;
-
-    axiosInstance
-      .post('/articles/write', {
-        title: inputTitleRef.current.value,
-        body: contents,
-      })
-      .then((res) => {
-        // 글 등록 완료 시, 글 페이지로 리다이렉트
-        router.push(`/articles/${res.data.data.nickname}/${res.data.data.title}`);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
+  console.log(initialBody);
   useEffect(() => {
     /**
      * 동적 import
@@ -47,6 +38,7 @@ export default function EditorComponent() {
           el: editElement.current,
           height: '700px',
           initialEditType: 'markdown',
+          initialValue: initialBody,
           previewStyle: 'vertical',
           hooks: {
             addImageBlobHook(blob, callback) {
@@ -61,23 +53,17 @@ export default function EditorComponent() {
   }, []);
 
   return (
-    <>
+    <div className="w-[1280px] mx-auto shadow-[0_0_10px_0_rgba(0,0,0,0.05)]">
       <input
-        className={`input shadow-md text-2xl border-main appearance-none w-3/3 px-3 py-3 focus focus:outline-none active:outline-none`}
+        className={`w-full h-[80px] text-[28px] input rounded-none px-[40px] border-[#EEEEEE] border-t-2 border-x-2 rounded-t-[20px] focus focus:outline-none active:outline-none`}
         type="text"
         name="title"
         id=""
         placeholder="제목 입력"
         ref={inputTitleRef}
+        defaultValue={initialTitle}
       />
       <div ref={editElement}></div>
-      <div className="ml-auto mb-36">
-        <Button color="main" width="small">
-          <span className="text-white" onClick={() => handleClick()}>
-            등록하기
-          </span>
-        </Button>
-      </div>
-    </>
+    </div>
   );
 }
