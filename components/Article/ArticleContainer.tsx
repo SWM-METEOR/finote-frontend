@@ -21,6 +21,7 @@ export default async function ArticleContainer({ pageParams }: PropsType) {
 
   return (
     <ArticleView
+      id={articleData.id}
       title={articleData.title}
       authorNickname={articleData.authorNickname}
       createDate={articleData.createDate}

@@ -13,15 +13,24 @@ import {
   useSelectedTextStore,
   useAISearchStore,
 } from '@/store/sidePanel';
+import EditButtonContainer from '@/components/EditButton/EditButtonContainer';
+// import DeleteButtonContainer from '@/components/DeleteButton/DeleteButtonContainer';
 
 interface PropsType {
+  id: number;
   title: string;
   authorNickname: string;
   createDate: string;
   contents: string;
 }
 
-export default function ArticleView({ title, authorNickname, createDate, contents }: PropsType) {
+export default function ArticleView({
+  id,
+  title,
+  authorNickname,
+  createDate,
+  contents,
+}: PropsType) {
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   const dragStartX = useRef<number>(0);
@@ -81,6 +90,10 @@ export default function ArticleView({ title, authorNickname, createDate, content
         <span>프론트엔드</span>
         <GreaterThanIcon />
         <span className="text-[#00A1FF] font-bold">자바스크립트</span>
+        <span className="ml-auto mr-[20px] flex gap-[16px]">
+          <EditButtonContainer articleId={id} authorNickname={authorNickname} />
+          {/* <DeleteButtonContainer articleId={id} authorNickname={authorNickname} /> */}
+        </span>
       </p>
       <h1 className="text-[32px] font-bold">{title}</h1>
       <div className="flex items-center gap-[8px]">
