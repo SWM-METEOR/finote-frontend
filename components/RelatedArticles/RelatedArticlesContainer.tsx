@@ -5,9 +5,9 @@ interface PropsType {
   pageParams: { nickname: string; articleTitle: string };
 }
 
-async function getRelatedArticles(id: string) {
+async function getRelatedArticles(nickname: string, articleTitle: string) {
   try {
-    const res = await axiosInstance.get(`/articles/related/${id}`);
+    const res = await axiosInstance.get(`/articles/related/${nickname}/${articleTitle}`);
     return res.data;
   } catch (error) {
     throw new Error('Failed to fetch article data');
@@ -17,11 +17,8 @@ async function getRelatedArticles(id: string) {
 // parameter에 { pageParams }: PropsType 추가
 export default async function RelatedArticlesContainer({ pageParams }: PropsType) {
   // 데이터 패칭
-  // TODO: API 스펙 변경 후 코드 수정 필요
-  // const relatedArticlesRes = await getRelatedArticles(pageParams.id);
-  // const relatedArticlesData = relatedArticlesRes.data;
+  const relatedArticlesRes = await getRelatedArticles(pageParams.nickname, pageParams.articleTitle);
+  const relatedArticlesData = relatedArticlesRes.data;
 
-  return null;
-
-  // return <RelatedArticlesView relatedArticlesData={relatedArticlesData} />;
+  return <RelatedArticlesView relatedArticlesData={relatedArticlesData} />;
 }
