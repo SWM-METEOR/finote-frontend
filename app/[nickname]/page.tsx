@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import TechMapContainer from '@/app/components/TechMap/TechMapContainer';
-import ProfileBoxContainer from '@/app/components/ProfileBox/ProfileBoxContainer';
-import MyArticleListContainer from '@/app/components/MyArticleList/MyArticleListContainer';
+import TechMapContainer from '@/components/TechMap/TechMapContainer';
+import ProfileBoxContainer from '@/components/ProfileBox/ProfileBoxContainer';
+import MyArticleListContainer from '@/components/MyArticleList/MyArticleListContainer';
 
 export default function UserHomePage({ params }: { params: { nickname: string } }) {
   // console.log(params.nickname);

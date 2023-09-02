@@ -1,8 +1,8 @@
-import RelatedArticlesContainer from '@/app/components/RelatedArticles/RelatedArticlesContainer';
-import SidePanelContainer from '@/app/components/SmartDrag/SidePanel/SidePanelContainer';
-import ArticleContainer from '@/app/components/Article/ArticleContainer';
-import HeartIcon from '@/app/components/Icons/HeartIcon';
-import ShareIcon from '@/app/components/Icons/ShareIcon';
+import RelatedArticlesContainer from '@/components/RelatedArticles/RelatedArticlesContainer';
+import SidePanelContainer from '@/components/SmartDrag/SidePanel/SidePanelContainer';
+import ArticleContainer from '@/components/Article/ArticleContainer';
+import HeartIcon from '@/components/Icons/HeartIcon';
+import ShareIcon from '@/components/Icons/ShareIcon';
 
 interface PropsType {
   params: { nickname: string; articleTitle: string };
@@ -27,8 +27,7 @@ export default function ArticlePage({ params }: PropsType) {
       <div className="2xl:ml-1/5 xl:ml-1/5 lg:ml-1/7 largeDesktop:w-[1078px] desktop:w-1/2 tablet:w-full mobile:w-full bg-white border border-[#EEEEEE] rounded-[20px] shadow-[0_4px_10px_0_rgba(0,0,0,0.05)] p-[40px]">
         <ArticleContainer pageParams={params} />
         <hr className="w-full text-[#DDDDDD] mt-[10px]" />
-        {/* TODO: API spec 변경 후 추가 예정 */}
-        {/* <RelatedArticlesContainer pageParams={params} /> */}
+        <RelatedArticlesContainer pageParams={params} />
       </div>
       <SidePanelContainer />
     </div>
