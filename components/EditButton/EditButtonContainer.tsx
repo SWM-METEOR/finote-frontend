@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import EditButtonView from '@/components/EditButton/EditButtonView';
 import axiosInstance from '@/utils/axios';
-import { useEffect } from 'react';
 
 interface PropsType {
   articleId: number;
@@ -36,7 +35,5 @@ export default function EditButtonContainer({ articleId, authorNickname }: Props
     router.push(`/edit/${articleId}`);
   }
 
-  return (
-    <EditButtonView editArticle={editArticle} nickname={nickname} authorNickname={authorNickname} />
-  );
+  return nickname === authorNickname && <EditButtonView editArticle={editArticle} />;
 }
