@@ -6,12 +6,13 @@ import SearchBarContainer from '@/components/SearchBar/SearchBarContainer';
 import WriteButton from '@/components/WriteButton';
 
 interface PropsType {
+  nickname: string;
   blogName: string;
   accessToken: string;
   pathname: string;
 }
 
-export default function HeaderView({ blogName, accessToken, pathname }: PropsType) {
+export default function HeaderView({ nickname, blogName, accessToken, pathname }: PropsType) {
   return (
     <div className="w-full flex justify-center shadow-[0_2px_10px_0_rgba(0,0,0,0.05)]">
       {/* 로그인 페이지에는 헤더 X */}
@@ -21,7 +22,7 @@ export default function HeaderView({ blogName, accessToken, pathname }: PropsTyp
           <Link href="/">
             <Image className="pb-1" src="/logo.png" alt="logo" width="160" height="76" />
           </Link>
-          <Link href={`/${blogName}`} className="text-[20px] font-bold ml-[40px]">
+          <Link href={`/${nickname}`} className="text-[20px] font-bold ml-[40px]">
             {blogName}
           </Link>
           <div className="grow">{/* spacer - 빈 공간을 채우기 위한 역할 */}</div>

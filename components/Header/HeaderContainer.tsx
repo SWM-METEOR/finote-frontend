@@ -9,10 +9,24 @@ import HeaderView from '@/components/Header/HeaderView';
 
 export default function HeaderContainer() {
   const pathname = usePathname();
+  const [nickname, setNickname] = useState('');
   const [blogName, setBlogName] = useState('');
   const [accessToken, setAccessToken] = useState<string>('');
 
-  async function getUserBlogInfo() {
+  async function getUserNickname() {
+    if (!accessToken) {
+      setNickname('');
+      return;
+    }
+    try {
+      const res = await axiosInstance.get('/users/nickname');
+      setNickname(res.data.data.nickname);
+    } catch (error) {
+      throw new Error('Failed to fetch user nickname');
+    }
+  }
+
+  async function getUserBlogName() {
     if (!accessToken) {
       setBlogName('');
       return;
@@ -31,8 +45,9 @@ export default function HeaderContainer() {
   }, [pathname]);
 
   useEffect(() => {
-    getUserBlogInfo();
+    getUserNickname();
+    getUserBlogName();
   }, [accessToken]);
 
-  return <HeaderView blogName={blogName} accessToken={accessToken} pathname={pathname} />;
+  return <HeaderView nickname={nickname} blogName={blogName} accessToken={accessToken} pathname={pathname} />;
 }
