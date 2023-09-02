@@ -14,7 +14,7 @@ import {
   useAISearchStore,
 } from '@/store/sidePanel';
 import EditButtonContainer from '@/components/EditButton/EditButtonContainer';
-// import DeleteButtonContainer from '@/components/DeleteButton/DeleteButtonContainer';
+import DeleteButtonContainer from '@/components/DeleteButton/DeleteButtonContainer';
 
 interface PropsType {
   id: number;
@@ -92,7 +92,7 @@ export default function ArticleView({
         <span className="text-[#00A1FF] font-bold">자바스크립트</span>
         <span className="ml-auto mr-[20px] flex gap-[16px]">
           <EditButtonContainer articleId={id} authorNickname={authorNickname} />
-          {/* <DeleteButtonContainer articleId={id} authorNickname={authorNickname} /> */}
+          <DeleteButtonContainer articleId={id} authorNickname={authorNickname} />
         </span>
       </p>
       <h1 className="text-[32px] font-bold">{title}</h1>
