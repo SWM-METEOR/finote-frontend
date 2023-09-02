@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import TrendsIcon from '@/app/components/Icons/TrendsIcon';
-import FeedIcon from '@/app/components/Icons/FeedIcon';
-import TrendsArticleListContainer from '@/app/components/TrendsArticleList/TrendsArticleListContainer';
+import TrendsIcon from '@/components/Icons/TrendsIcon';
+import FeedIcon from '@/components/Icons/FeedIcon';
+import TrendsArticleListContainer from '@/components/TrendsArticleList/TrendsArticleListContainer';
 
 export default function Home() {
   const [selectedMode, setSelectedMode] = useState<'trends' | 'feed'>('trends');

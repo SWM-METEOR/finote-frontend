@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import Button from '@/app/components/common/button';
-import GoogleLoginButton from '@/app/components/GoogleLoginButton';
+import Button from '@/components/common/button';
+import GoogleLoginButton from '@/components/GoogleLoginButton';
 import { useState } from 'react';
 
 export default function LoginPage() {
