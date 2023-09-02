@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
+import { getCookie } from 'cookies-next';
 
 import DeleteButtonView from '@/components/DeleteButton/DeleteButtonView';
 import axiosInstance from '@/utils/axios';
@@ -15,9 +16,13 @@ interface PropsType {
 export default function DeleteButtonContainer({ articleId, authorNickname }: PropsType) {
   const router = useRouter();
   const [nickname, setNickname] = useState('');
+  const accessToken = getCookie('accessToken');
 
   useEffect(() => {
     async function getUserNickname() {
+      // 비로그인 유저는 닉네임을 가져올 수 없음
+      if (!accessToken) return;
+
       try {
         const res = await axiosInstance.get('/users/nickname');
         const nickname = res.data.data.nickname;
