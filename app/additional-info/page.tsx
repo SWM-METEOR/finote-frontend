@@ -1,5 +1,5 @@
 import UploadIcon from '@/components/Icons/UploadIcon';
-import NewButton from '@/components/common/buttonWithSpinner';
+import Button from '@/components/common/Button';
 import Link from 'next/link';
 
 export default function AdditionalInfoPage({ params }: { params: { nickname: string } }) {
@@ -37,12 +37,12 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
         </div>
         {/* 버튼들 */}
         <div className="mb-[15px]">
-          <NewButton width={500} height={50} fillColor="main" textColor="white" roundRate={15}>
+          <Button width={500} height={50} fillColor="main" textColor="white" roundRate={15}>
             저장하기
-          </NewButton>
+          </Button>
         </div>
         <Link href="/" className="mb-[40px]">
-          <NewButton
+          <Button
             width={500}
             height={50}
             fillColor="lightGrey"
@@ -50,7 +50,7 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
             roundRate={15}
           >
             다음에 할게요
-          </NewButton>
+          </Button>
         </Link>
         <p className="self-center text-[14px] text-[#666666]">
           추후 마이페이지에서 변경 가능합니다.

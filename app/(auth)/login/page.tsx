@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import Button from '@/components/common/button';
+import Button from '@/components/common/Button';
 import GoogleLoginButton from '@/components/GoogleLoginButton';
 import { useState } from 'react';
 
@@ -32,9 +32,9 @@ export default function LoginPage() {
 
   return (
     // py: 120px -> 80px
-    <div className="bg-lightGrey w-full h-ful md:py-[80px]">
+    <div className="w-full h-full py-[80px]">
       {/* white box */}
-      <div className="flex flex-col gap-4 bg-white md:shadow-lg md:w-[450px] w-full h-[726px] mx-auto px-[40px]">
+      <div className="flex flex-col gap-4 bg-white md:shadow-lg w-[450px] w-full h-[726px] mx-auto px-[40px]">
         {/* 좌우 패딩 40씩 */}
         <div className="mx-auto py-12">
           <Link href="/">
@@ -72,8 +72,8 @@ export default function LoginPage() {
 
         {/* <button className="bg-grey">로그인</button> */}
         {/* TODO: 백그라운드 색, 테두리 색 props로 내려주기 */}
-        <Button>
-          <span>로그인</span>
+        <Button width={370} height={50} hasBorder={true} roundRate={10}>
+          <span className="font-normal text-[16px]">로그인</span>
         </Button>
         <p className="flex gap-4 justify-center">
           <span>FiNote가 처음이세요?</span>

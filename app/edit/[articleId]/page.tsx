@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ClipLoader from 'react-spinners/ClipLoader';
 
-import NewButton from '@/components/common/buttonWithSpinner';
+import Button from '@/components/common/Button';
 import Editor from '@/components/Editor';
 import axiosInstance from '@/utils/axios';
 
@@ -84,10 +84,9 @@ export default function EditPage({ params }: { params: { articleId: string } }) 
         />
         {/* 수정 버튼 */}
         <div className="mx-auto mb-36 mt-[50px]" onClick={() => editArticle()}>
-          <NewButton
+          <Button
             width={300}
             height={60}
-            borderColor="#00A1FF"
             fillColor="#00A1FF"
             textColor="#FFFFFF"
             roundRate={15}
@@ -105,7 +104,7 @@ export default function EditPage({ params }: { params: { articleId: string } }) 
             ) : (
               <span>수정하기</span>
             )}
-          </NewButton>
+          </Button>
         </div>
       </div>
     )

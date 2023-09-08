@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Button from '@/components/common/button';
+import Button from '@/components/common/Button';
 
 // TODO: 리소스 경로 관리
 export default function GoogleLoginButton() {
@@ -17,18 +17,22 @@ export default function GoogleLoginButton() {
   };
 
   return (
-    <Button>
-      <span>
-        <Image
-          className="w-6 h-6"
-          src="https://www.svgrepo.com/show/475656/google-color.svg"
-          loading="lazy"
-          alt="google logo"
-          width={24}
-          height={24}
-        />
-      </span>
-      <span onClick={() => redirect()}>Google로 로그인</span>
-    </Button>
+    <div onClick={() => redirect()}>
+      <Button width={370} height={50} hasBorder={true} roundRate={10}>
+        <div className="w-full flex items-center justify-center gap-[10px]">
+          <span>
+            <Image
+              className="w-6 h-6"
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              loading="lazy"
+              alt="google logo"
+              width={24}
+              height={24}
+            />
+          </span>
+          <span className="font-normal text-[16px]">Google로 로그인</span>
+        </div>
+      </Button>
+    </div>
   );
 }
