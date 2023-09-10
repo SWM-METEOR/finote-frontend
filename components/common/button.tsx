@@ -1,6 +1,9 @@
 'use client';
 
+import { type } from 'os';
+
 interface PropsType {
+  type?: 'button' | 'submit' | 'reset';
   children: React.ReactNode;
   width?: number;
   height?: number;
@@ -13,6 +16,7 @@ interface PropsType {
 }
 
 export default function Button({
+  type = 'button',
   children,
   width = 300,
   height = 60,
@@ -24,7 +28,7 @@ export default function Button({
 }: PropsType) {
   // color값을 props로 사용 불가: https://tailwindcss.com/docs/content-configuration#dynamic-class-names
   // 따라서 color값을 key로 해서 tailwind value를 바인딩해야 함
-  
+
   const backGroundColorMap: { [color: string]: string } = {
     main: 'bg-main',
     lightGrey: 'bg-lightGrey',
@@ -49,6 +53,7 @@ export default function Button({
 
   return (
     <button
+      type={type}
       className={`flex items-center ${widthMap[width]} ${heightMap[height]} ${
         backGroundColorMap[fillColor]
       } ${

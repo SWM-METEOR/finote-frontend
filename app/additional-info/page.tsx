@@ -1,61 +1,82 @@
-import UploadIcon from '@/components/Icons/UploadIcon';
-import Button from '@/components/common/Button';
+'use client';
+
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useForm, SubmitHandler } from 'react-hook-form';
+
+import axiosInstance from '@/utils/axios';
+import Button from '@/components/common/Button';
+import ImageUpload from '@/components/common/ImageUpload';
+import InputNickname from '@/components/AdditionalInfo/InputNickname';
+import InputBlogName from '@/components/AdditionalInfo/InputBlogName';
+
+interface AdditionalInfoType {
+  profileImageUrl: string;
+  nickname: string;
+  blogName: string;
+}
 
 export default function AdditionalInfoPage({ params }: { params: { nickname: string } }) {
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AdditionalInfoType>();
+
+  const onSubmit: SubmitHandler<AdditionalInfoType> = (data) => {
+    console.log(data);
+    axiosInstance
+      .post('users/additional-info', data)
+      .then((res) => {
+        router.push('/');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
-    <div className="w-full h-full">
-      <div className="w-[500px] flex flex-col justify-center mx-auto py-[80px]">
-        <h1 className="self-center font-bold text-[40px] mb-[50px]">가입이 완료되었습니다.</h1>
-        <p className="font-bold text-[20px] mb-[12px]">추가정보 입력</p>
-        <div className="w-full h-[2px] bg-black mb-[25px]"></div>
-        <div className="">
-          <p className="font-bold text-[14px] mb-[10px]">프로필 이미지</p>
-          <div className="flex items-start gap-[15px] mb-[25px]">
-            <div className="w-[120px] h-[120px] bg-grey rounded-[10px]">사진 미리보기</div>
-            <button className="text-[#00A1FF] font-bold text-[14px] flex items-center gap-[7px]">
-              <UploadIcon width={20} height={20} color="#00A1FF" />
-              <span>업로드</span>
-            </button>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="w-full h-full">
+        <div className="w-[500px] flex flex-col justify-center mx-auto py-[80px]">
+          <h1 className="self-center font-bold text-[40px] mb-[50px]">가입이 완료되었습니다.</h1>
+          <p className="font-bold text-[20px] mb-[12px]">추가정보 입력</p>
+          <div className="w-full h-[2px] bg-black mb-[25px]"></div>
+          <div className="">
+            <p className="font-bold text-[14px] mb-[10px]">프로필 이미지</p>
+            <ImageUpload register={register} />
           </div>
+          <InputNickname register={register} />
+          <InputBlogName register={register} />
+          <div className="mb-[15px]">
+            <Button
+              type={"submit"}
+              width={500}
+              height={50}
+              fillColor="main"
+              textColor="white"
+              roundRate={15}
+            >
+              저장하기
+            </Button>
+          </div>
+          <Link href="/" className="mb-[40px]">
+            <Button
+              width={500}
+              height={50}
+              fillColor="lightGrey"
+              textColor="darkGrey"
+              roundRate={15}
+            >
+              다음에 할게요
+            </Button>
+          </Link>
+          <p className="self-center text-[14px] text-[#666666]">
+            추후 마이페이지에서 변경 가능합니다.
+          </p>
         </div>
-        <div className="mb-[25px]">
-          <p className="font-bold text-[14px] mb-[10px]">닉네임</p>
-          <input
-            type="text"
-            placeholder="최대 10자, 영문, 한글, 숫자 입력 가능"
-            className="w-full h-[50px] border border-[#DDDDDD] rounded-[10px] px-[20px] focus:outline-none"
-          />
-        </div>
-        <div className="mb-[25px]">
-          <p className="font-bold text-[14px] mb-[10px]">블로그 이름</p>
-          <input
-            type="text"
-            placeholder="블로그 이름을 입력해주세요."
-            className="w-full h-[50px] border border-[#DDDDDD] rounded-[10px] px-[20px] focus:outline-none"
-          />
-        </div>
-        {/* 버튼들 */}
-        <div className="mb-[15px]">
-          <Button width={500} height={50} fillColor="main" textColor="white" roundRate={15}>
-            저장하기
-          </Button>
-        </div>
-        <Link href="/" className="mb-[40px]">
-          <Button
-            width={500}
-            height={50}
-            fillColor="lightGrey"
-            textColor="darkGrey"
-            roundRate={15}
-          >
-            다음에 할게요
-          </Button>
-        </Link>
-        <p className="self-center text-[14px] text-[#666666]">
-          추후 마이페이지에서 변경 가능합니다.
-        </p>
       </div>
-    </div>
+    </form>
   );
 }
