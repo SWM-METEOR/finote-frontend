@@ -24,6 +24,8 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
   const {
     register,
     handleSubmit,
+    watch,
+    setError,
     formState: { errors },
   } = useForm<AdditionalInfoType>();
 
@@ -56,8 +58,8 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
             <p className="font-bold text-[14px] mb-[10px]">프로필 이미지</p>
             <ImageUpload register={register} />
           </div>
-          <InputNickname register={register} errors={errors} />
-          <InputBlogName register={register} errors={errors} />
+          <InputNickname register={register} watch={watch} setError={setError} errors={errors} />
+          <InputBlogName register={register} watch={watch} setError={setError} errors={errors} />
           <div className="mb-[15px]">
             <CustomButton
               type={'submit'}

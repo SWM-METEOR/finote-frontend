@@ -1,13 +1,40 @@
-import { UseFormRegister } from 'react-hook-form';
+'use client';
+import { useEffect } from 'react';
+import { UseFormRegister, UseFormWatch, UseFormSetError, FieldErrors } from 'react-hook-form';
 
+import axiosInstance from '@/utils/axios';
 import AdditionalInfoType from '@/types/user';
 
 interface PropsType {
   register: UseFormRegister<AdditionalInfoType>;
-  errors: any;
+  watch: UseFormWatch<AdditionalInfoType>;
+  setError: UseFormSetError<AdditionalInfoType>;
+  errors: FieldErrors<AdditionalInfoType>;
 }
 
-export default function InputBlogName({ register, errors }: PropsType) {
+export default function InputBlogName({ register, watch, setError, errors }: PropsType) {
+  const blogName = watch('blogName');
+
+  useEffect(() => {
+    if (!blogName) return;
+
+    axiosInstance
+      .post('/users/validation/blog-name', { blogName })
+      .then((res) => {
+        if (res.data.data.duplicated) {
+          setError('blogName', {
+            type: 'manual',
+            message: '이 블로그 이름은 이미 사용 중입니다.',
+          });
+        } else {
+          setError('blogName', {}); // 에러 초기화
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [blogName]);
+
   return (
     <div className="mb-[25px]">
       <p className="flex gap-[4px] font-bold text-[14px] mb-[10px]">
