@@ -1,7 +1,5 @@
 'use client';
 
-import { type } from 'os';
-
 interface PropsType {
   type?: 'button' | 'submit' | 'reset';
   children: React.ReactNode;

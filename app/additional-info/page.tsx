@@ -54,7 +54,7 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
           <div className="w-full h-[2px] bg-black mb-[25px]"></div>
           <div className="">
             <p className="font-bold text-[14px] mb-[10px]">프로필 이미지</p>
-            <ImageUpload register={register} errors={errors} />
+            <ImageUpload register={register} />
           </div>
           <InputNickname register={register} errors={errors} />
           <InputBlogName register={register} errors={errors} />
