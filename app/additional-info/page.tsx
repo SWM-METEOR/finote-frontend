@@ -9,6 +9,7 @@ import Button from '@/components/common/Button';
 import ImageUpload from '@/components/common/ImageUpload';
 import InputNickname from '@/components/AdditionalInfo/InputNickname';
 import InputBlogName from '@/components/AdditionalInfo/InputBlogName';
+import { userBlogNameStore } from '@/store/user';
 
 interface AdditionalInfoType {
   profileImageUrl: string;
@@ -18,6 +19,8 @@ interface AdditionalInfoType {
 
 export default function AdditionalInfoPage({ params }: { params: { nickname: string } }) {
   const router = useRouter();
+  const { setBlogName } = userBlogNameStore();
+
   const {
     register,
     handleSubmit,
@@ -25,10 +28,16 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
   } = useForm<AdditionalInfoType>();
 
   const onSubmit: SubmitHandler<AdditionalInfoType> = (data) => {
-    console.log(data);
+    if (!data.profileImageUrl) {
+      data.profileImageUrl =
+        'https://finote-image-bucket.s3.ap-northeast-2.amazonaws.com/finote_logo.png';
+    }
+
     axiosInstance
       .post('users/additional-info', data)
       .then((res) => {
+        // 유저 정보(블로그 이름 수정)
+        setBlogName(data.blogName);
         router.push('/');
       })
       .catch((err) => {
@@ -45,13 +54,13 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
           <div className="w-full h-[2px] bg-black mb-[25px]"></div>
           <div className="">
             <p className="font-bold text-[14px] mb-[10px]">프로필 이미지</p>
-            <ImageUpload register={register} />
+            <ImageUpload register={register} errors={errors} />
           </div>
-          <InputNickname register={register} />
-          <InputBlogName register={register} />
+          <InputNickname register={register} errors={errors} />
+          <InputBlogName register={register} errors={errors} />
           <div className="mb-[15px]">
             <Button
-              type={"submit"}
+              type={'submit'}
               width={500}
               height={50}
               fillColor="main"
