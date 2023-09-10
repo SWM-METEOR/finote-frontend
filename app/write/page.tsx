@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ClipLoader from 'react-spinners/ClipLoader';
 
-import Button from '@/components/common/Button';
+import CustomButton from '@/components/common/CustomButton';
 import Editor from '@/components/Editor';
 import axiosInstance from '@/utils/axios';
 
@@ -38,7 +38,7 @@ export default function WritePage() {
     <div className="flex flex-col my-24 mx-48">
       <Editor inputTitleRef={inputTitleRef} editor={editor} setEditor={setEditor} />
       <div className="mx-auto mb-36 mt-[50px]" onClick={() => writeArticle()}>
-        <Button
+        <CustomButton
           width={300}
           height={60}
           fillColor="main"
@@ -58,7 +58,7 @@ export default function WritePage() {
           ) : (
             <span>등록하기</span>
           )}
-        </Button>
+        </CustomButton>
       </div>
     </div>
   );

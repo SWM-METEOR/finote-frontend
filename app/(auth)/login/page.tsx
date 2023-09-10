@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import Button from '@/components/common/Button';
+import CustomButton from '@/components/common/CustomButton';
 import GoogleLoginButton from '@/components/GoogleLoginButton';
 import { useState } from 'react';
 
@@ -72,9 +72,9 @@ export default function LoginPage() {
 
         {/* <button className="bg-grey">로그인</button> */}
         {/* TODO: 백그라운드 색, 테두리 색 props로 내려주기 */}
-        <Button width={370} height={50} hasBorder={true} roundRate={10}>
+        <CustomButton width={370} height={50} hasBorder={true} roundRate={10}>
           <span className="font-normal text-[16px]">로그인</span>
-        </Button>
+        </CustomButton>
         <p className="flex gap-4 justify-center">
           <span>FiNote가 처음이세요?</span>
           <Link href="/" className="text-lightBlue underline underline-offset-1">

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Button from '@/components/common/Button';
+import CustomButton from '@/components/common/CustomButton';
 
 // TODO: 리소스 경로 관리
 export default function GoogleLoginButton() {
@@ -18,7 +18,7 @@ export default function GoogleLoginButton() {
 
   return (
     <div onClick={() => redirect()}>
-      <Button width={370} height={50} hasBorder={true} roundRate={10}>
+      <CustomButton width={370} height={50} hasBorder={true} roundRate={10}>
         <div className="w-full flex items-center justify-center gap-[10px]">
           <span>
             <Image
@@ -32,7 +32,7 @@ export default function GoogleLoginButton() {
           </span>
           <span className="font-normal text-[16px]">Google로 로그인</span>
         </div>
-      </Button>
+      </CustomButton>
     </div>
   );
 }

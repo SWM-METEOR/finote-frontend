@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import axiosInstance from '@/utils/axios';
-import Button from '@/components/common/Button';
+import CustomButton from '@/components/common/CustomButton';
 import ImageUpload from '@/components/common/ImageUpload';
 import InputNickname from '@/components/AdditionalInfo/InputNickname';
 import InputBlogName from '@/components/AdditionalInfo/InputBlogName';
@@ -59,7 +59,7 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
           <InputNickname register={register} errors={errors} />
           <InputBlogName register={register} errors={errors} />
           <div className="mb-[15px]">
-            <Button
+            <CustomButton
               type={'submit'}
               width={500}
               height={50}
@@ -68,10 +68,10 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
               roundRate={15}
             >
               저장하기
-            </Button>
+            </CustomButton>
           </div>
           <Link href="/" className="mb-[40px]">
-            <Button
+            <CustomButton
               width={500}
               height={50}
               fillColor="lightGrey"
@@ -79,7 +79,7 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
               roundRate={15}
             >
               다음에 할게요
-            </Button>
+            </CustomButton>
           </Link>
           <p className="self-center text-[14px] text-[#666666]">
             추후 마이페이지에서 변경 가능합니다.

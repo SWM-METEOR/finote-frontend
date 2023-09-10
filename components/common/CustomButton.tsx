@@ -13,7 +13,7 @@ interface PropsType {
   borderColor?: string;
 }
 
-export default function Button({
+export default function CustomButton({
   type = 'button',
   children,
   width = 300,
