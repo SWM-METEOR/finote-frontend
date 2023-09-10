@@ -6,11 +6,12 @@ import { getCookie } from 'cookies-next';
 
 import axiosInstance from '@/utils/axios';
 import HeaderView from '@/components/Header/HeaderView';
+import { userBlogNameStore } from '@/store/user';
 
 export default function HeaderContainer() {
   const pathname = usePathname();
-  const [blogName, setBlogName] = useState('');
   const [accessToken, setAccessToken] = useState<string>('');
+  const { blogName, setBlogName } = userBlogNameStore();
 
   async function getUserBlogInfo() {
     if (!accessToken) {
