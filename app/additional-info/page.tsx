@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -20,11 +21,16 @@ interface AdditionalInfoType {
 export default function AdditionalInfoPage({ params }: { params: { nickname: string } }) {
   const router = useRouter();
   const { setBlogName } = userBlogNameStore();
+  const [isValidNickname, setIsValidNickname] = useState(true);
+  const [isValidBlogName, setIsValidBlogName] = useState(true);
 
   const {
     register,
     handleSubmit,
+    watch,
+    setError,
     formState: { errors },
+    // errors,
   } = useForm<AdditionalInfoType>();
 
   const onSubmit: SubmitHandler<AdditionalInfoType> = (data) => {
@@ -56,8 +62,20 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
             <p className="font-bold text-[14px] mb-[10px]">프로필 이미지</p>
             <ImageUpload register={register} />
           </div>
-          <InputNickname register={register} errors={errors} />
-          <InputBlogName register={register} errors={errors} />
+          <InputNickname
+            register={register}
+            watch={watch}
+            setError={setError}
+            errors={errors}
+            setIsValidNickname={setIsValidNickname}
+          />
+          <InputBlogName
+            register={register}
+            watch={watch}
+            setError={setError}
+            errors={errors}
+            setIsValidBlogName={setIsValidBlogName}
+          />
           <div className="mb-[15px]">
             <CustomButton
               type={'submit'}
@@ -66,6 +84,7 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
               fillColor="main"
               textColor="white"
               roundRate={15}
+              isDisabled={!isValidNickname || !isValidBlogName}
             >
               저장하기
             </CustomButton>

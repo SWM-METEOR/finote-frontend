@@ -1,13 +1,76 @@
-import { UseFormRegister } from 'react-hook-form';
+'use client';
+import { useEffect } from 'react';
+import { UseFormRegister, UseFormWatch, UseFormSetError, FieldErrors } from 'react-hook-form';
 
+import axiosInstance from '@/utils/axios';
 import AdditionalInfoType from '@/types/user';
 
 interface PropsType {
   register: UseFormRegister<AdditionalInfoType>;
-  errors: any; // object
+  watch: UseFormWatch<AdditionalInfoType>;
+  setError: UseFormSetError<AdditionalInfoType>;
+  errors: FieldErrors<AdditionalInfoType>;
+  setIsValidNickname: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function InputNickname({ register, errors }: PropsType) {
+export default function InputNickname({
+  register,
+  watch,
+  setError,
+  errors,
+  setIsValidNickname,
+}: PropsType) {
+  const nickname = watch('nickname');
+
+  let debounceTimeout: NodeJS.Timeout | null = null; // setTimeout 결과 저장용 변수
+
+  const checkNickname = () => {
+    // 이전에 예약된 함수 취소
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+
+    // 0.4초 디바운스
+    debounceTimeout = setTimeout(() => {
+      if (!nickname) return;
+
+      axiosInstance
+        .post('/users/validation/nickname', { nickname })
+        .then((res) => {
+          if (res.data.data.duplicated) {
+            setError('nickname', {
+              type: 'manual',
+              message: '이 닉네임은 이미 사용 중입니다.',
+            });
+          } else {
+            setError('nickname', {}); // 에러 초기화
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 400);
+  };
+
+  useEffect(() => {
+    checkNickname();
+
+    return () => {
+      // 이전에 예약된 함수 취소
+      if (debounceTimeout) {
+        clearTimeout(debounceTimeout);
+      }
+    };
+  }, [nickname]);
+
+  useEffect(() => {
+    if (errors.nickname?.message) {
+      setIsValidNickname(false);
+    } else {
+      setIsValidNickname(true);
+    }
+  }, [nickname, errors.nickname]);
+
   return (
     <div className="mb-[25px]">
       <p className="flex gap-[4px] font-bold text-[14px] mb-[10px]">
