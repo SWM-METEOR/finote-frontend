@@ -10,9 +10,16 @@ interface PropsType {
   watch: UseFormWatch<AdditionalInfoType>;
   setError: UseFormSetError<AdditionalInfoType>;
   errors: FieldErrors<AdditionalInfoType>;
+  setIsValidNickname: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function InputNickname({ register, watch, setError, errors }: PropsType) {
+export default function InputNickname({
+  register,
+  watch,
+  setError,
+  errors,
+  setIsValidNickname,
+}: PropsType) {
   const nickname = watch('nickname');
 
   useEffect(() => {
@@ -34,6 +41,14 @@ export default function InputNickname({ register, watch, setError, errors }: Pro
         console.log(err);
       });
   }, [nickname]);
+
+  useEffect(() => {
+    if (errors.nickname?.message) {
+      setIsValidNickname(false);
+    } else {
+      setIsValidNickname(true);
+    }
+  }, [nickname, errors.nickname]);
 
   return (
     <div className="mb-[25px]">

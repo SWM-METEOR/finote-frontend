@@ -10,9 +10,16 @@ interface PropsType {
   watch: UseFormWatch<AdditionalInfoType>;
   setError: UseFormSetError<AdditionalInfoType>;
   errors: FieldErrors<AdditionalInfoType>;
+  setIsValidBlogName: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function InputBlogName({ register, watch, setError, errors }: PropsType) {
+export default function InputBlogName({
+  register,
+  watch,
+  setError,
+  errors,
+  setIsValidBlogName,
+}: PropsType) {
   const blogName = watch('blogName');
 
   useEffect(() => {
@@ -34,6 +41,15 @@ export default function InputBlogName({ register, watch, setError, errors }: Pro
         console.log(err);
       });
   }, [blogName]);
+
+  useEffect(() => {
+    console.log(errors.blogName?.message);
+    if (errors.blogName?.message) {
+      setIsValidBlogName(false);
+    } else {
+      setIsValidBlogName(true);
+    }
+  }, [blogName, errors.blogName]);
 
   return (
     <div className="mb-[25px]">
