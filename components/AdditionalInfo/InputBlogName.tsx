@@ -22,28 +22,48 @@ export default function InputBlogName({
 }: PropsType) {
   const blogName = watch('blogName');
 
-  useEffect(() => {
-    if (!blogName) return;
+  let debounceTimeout: NodeJS.Timeout | null = null; // setTimeout 결과 저장용 변수
 
-    axiosInstance
-      .post('/users/validation/blog-name', { blogName })
-      .then((res) => {
-        if (res.data.data.duplicated) {
-          setError('blogName', {
-            type: 'manual',
-            message: '이 블로그 이름은 이미 사용 중입니다.',
-          });
-        } else {
-          setError('blogName', {}); // 에러 초기화
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const checkBlogName = () => {
+    // 이전에 예약된 함수 취소
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+
+    // 0.4초 디바운스
+    debounceTimeout = setTimeout(() => {
+      if (!blogName) return;
+
+      axiosInstance
+        .post('/users/validation/blog-name', { blogName })
+        .then((res) => {
+          if (res.data.data.duplicated) {
+            setError('blogName', {
+              type: 'manual',
+              message: '이 블로그 이름은 이미 사용 중입니다.',
+            });
+          } else {
+            setError('blogName', {}); // 에러 초기화
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 400);
+  };
+
+  useEffect(() => {
+    checkBlogName();
+
+    return () => {
+      // 이전에 예약된 함수 취소
+      if (debounceTimeout) {
+        clearTimeout(debounceTimeout);
+      }
+    };
   }, [blogName]);
 
   useEffect(() => {
-    console.log(errors.blogName?.message);
     if (errors.blogName?.message) {
       setIsValidBlogName(false);
     } else {

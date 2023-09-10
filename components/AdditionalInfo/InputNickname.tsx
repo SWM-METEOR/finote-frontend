@@ -22,24 +22,45 @@ export default function InputNickname({
 }: PropsType) {
   const nickname = watch('nickname');
 
-  useEffect(() => {
-    if (!nickname) return;
+  let debounceTimeout: NodeJS.Timeout | null = null; // setTimeout 결과 저장용 변수
 
-    axiosInstance
-      .post('/users/validation/nickname', { nickname })
-      .then((res) => {
-        if (res.data.data.duplicated) {
-          setError('nickname', {
-            type: 'manual',
-            message: '이 닉네임은 이미 사용 중입니다.',
-          });
-        } else {
-          setError('nickname', {}); // 에러 초기화
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const checkNickname = () => {
+    // 이전에 예약된 함수 취소
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+
+    // 0.4초 디바운스
+    debounceTimeout = setTimeout(() => {
+      if (!nickname) return;
+
+      axiosInstance
+        .post('/users/validation/nickname', { nickname })
+        .then((res) => {
+          if (res.data.data.duplicated) {
+            setError('nickname', {
+              type: 'manual',
+              message: '이 닉네임은 이미 사용 중입니다.',
+            });
+          } else {
+            setError('nickname', {}); // 에러 초기화
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, 400);
+  };
+
+  useEffect(() => {
+    checkNickname();
+
+    return () => {
+      // 이전에 예약된 함수 취소
+      if (debounceTimeout) {
+        clearTimeout(debounceTimeout);
+      }
+    };
   }, [nickname]);
 
   useEffect(() => {
