@@ -25,15 +25,12 @@ module.exports = {
       blue: '#364BB3',
       lightBlue: '#1EA1F7',
       grey: '#EAEAEA',
-      tab: '#FAFAFA',
-      sell: '#F3F8FE',
-      buy: '#FDF3F4',
       black: '#000000',
-      darkGrey: '#606060',
+      darkGrey: '#666666',
       'main-light': '#E1EEE8',
       white: '#ffffff',
       middleGrey: '#BABABA',
-      lightGrey: '#F2F5F7',
+      lightGrey: '#EEEEEE',
     },
     textColor: {
       main: '#00A1FF',
@@ -44,7 +41,7 @@ module.exports = {
       blue: '#364BB3',
       yellow: '#FFFF00',
       lightBlue: '#1EA1F7',
-      darkGrey: '#606060',
+      darkGrey: '#666666',
     },
     extend: {
       backgroundImage: {

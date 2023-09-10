@@ -6,12 +6,13 @@ import { getCookie } from 'cookies-next';
 
 import axiosInstance from '@/utils/axios';
 import HeaderView from '@/components/Header/HeaderView';
+import { userBlogNameStore } from '@/store/user';
 
 export default function HeaderContainer() {
   const pathname = usePathname();
-  const [nickname, setNickname] = useState('');
-  const [blogName, setBlogName] = useState('');
   const [accessToken, setAccessToken] = useState<string>('');
+  const [nickname, setNickname] = useState('');
+  const { blogName, setBlogName } = userBlogNameStore();
 
   async function getUserNickname() {
     if (!accessToken) {
@@ -49,5 +50,12 @@ export default function HeaderContainer() {
     getUserBlogName();
   }, [accessToken]);
 
-  return <HeaderView nickname={nickname} blogName={blogName} accessToken={accessToken} pathname={pathname} />;
+  return (
+    <HeaderView
+      nickname={nickname}
+      blogName={blogName}
+      accessToken={accessToken}
+      pathname={pathname}
+    />
+  );
 }
