@@ -109,10 +109,7 @@ export default function ArticleView({
         <span className="text-[14px]">{authorNickname}</span>
         <span className="text-[14px] text-[#999999] ml-[2px]">{createDate}</span>
         {/* 팔로우 */}
-        <FollowButtonContainer
-          followTargetNickname={authorNickname}
-          size={'small'}
-        />
+        <FollowButtonContainer followTargetNickname={authorNickname} size={'small'} />
       </div>
       {/* 카테고리 */}
       <div className="flex items-center gap-[5px]">
