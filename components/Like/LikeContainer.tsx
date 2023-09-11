@@ -35,7 +35,14 @@ export default function LikeContainer({ authorNickname, title }: PropsType) {
   }
 
   function setLikeCount(authorNickname: string, title: string) {
-    // TODO: API가 아직 안나와서, 추후 추가 필요
+    axiosInstance
+      .get(`/articles/total-like/${authorNickname}/${title}`)
+      .then((res) => {
+        setLikeCnt(res.data.data.totalLike);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function handleLike() {
