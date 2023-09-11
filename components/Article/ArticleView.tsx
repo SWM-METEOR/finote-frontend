@@ -15,6 +15,7 @@ import {
 } from '@/store/sidePanel';
 import EditButtonContainer from '@/components/EditButton/EditButtonContainer';
 import DeleteButtonContainer from '@/components/DeleteButton/DeleteButtonContainer';
+import FollowButtonContainer from '@/components/FollowButton/FollowButtonContainer';
 
 interface PropsType {
   id: number;
@@ -107,6 +108,8 @@ export default function ArticleView({
         </div>
         <span className="text-[14px]">{authorNickname}</span>
         <span className="text-[14px] text-[#999999] ml-[2px]">{createDate}</span>
+        {/* 팔로우 */}
+        <FollowButtonContainer followTargetNickname={authorNickname} size={'small'} />
       </div>
       {/* 카테고리 */}
       <div className="flex items-center gap-[5px]">
