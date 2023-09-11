@@ -87,8 +87,8 @@ export default function EditPage({ params }: { params: { articleId: string } }) 
           <CustomButton
             width={300}
             height={60}
-            fillColor="#00A1FF"
-            textColor="#FFFFFF"
+            fillColor="main"
+            textColor="white"
             roundRate={15}
             isDisabled={isUpdating}
           >
