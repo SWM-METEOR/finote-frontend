@@ -74,7 +74,7 @@ export default function EditPage({ params }: { params: { articleId: string } }) 
 
   return (
     initialBody && (
-      <div className="flex flex-col my-24 mx-48 gap-8">
+      <div className="flex flex-col my-24 mx-auto gap-8">
         <Editor
           inputTitleRef={inputTitleRef}
           editor={editor}

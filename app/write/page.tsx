@@ -35,7 +35,7 @@ export default function WritePage() {
   };
 
   return (
-    <div className="flex flex-col my-24 mx-48">
+    <div className="flex flex-col my-24 mx-auto">
       <Editor inputTitleRef={inputTitleRef} editor={editor} setEditor={setEditor} />
       <div className="mx-auto mb-36 mt-[50px]" onClick={() => writeArticle()}>
         <CustomButton
