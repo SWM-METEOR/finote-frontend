@@ -1,6 +1,6 @@
 'use client';
 
-import MyArticleListView from '@/components/MyArticleList/MyArticleListView';
+import MyArticleListView from '@/components/articles/MyArticleList/MyArticleListView';
 import axiosInstance from '@/utils/axios';
 import { useEffect, useState } from 'react';
 

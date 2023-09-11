@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import RelatedArticleBox from '@/components/RelatedArticles/RelatedArticleBox';
+import RelatedArticleBox from '@/components/articles/RelatedArticles/RelatedArticleBox';
 
 interface PropsType {
   relatedArticlesData: {

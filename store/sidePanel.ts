@@ -44,8 +44,11 @@ interface AISearchTypes {
   isLoadingAISearchResult: boolean;
   setIsLoadingAISearchResult: (value: boolean) => void;
 }
+
 // isWaitingForSearchResult: true,
 export const useAISearchStore = create<AISearchTypes>((set) => ({
   isLoadingAISearchResult: false,
   setIsLoadingAISearchResult: (value: boolean) => set(() => ({ isLoadingAISearchResult: value })),
 }));
+
+// TODO: smartDrag로 변경

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import TrendsArticleBox from '@/components/TrendsArticleList/TrendsArticleBox';
+import TrendsArticleBox from '@/components/articles/TrendsArticleList/TrendsArticleBox';
 
 interface PropsType {
   articleList: {

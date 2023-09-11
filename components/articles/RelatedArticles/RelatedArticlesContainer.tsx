@@ -1,4 +1,4 @@
-import RelatedArticlesView from '@/components/RelatedArticles/RelatedArticlesView';
+import RelatedArticlesView from '@/components/articles/RelatedArticles/RelatedArticlesView';
 import axiosInstance from '@/utils/axios';
 
 interface PropsType {

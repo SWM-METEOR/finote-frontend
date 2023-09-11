@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { setCookie } from 'cookies-next';
 import { useSearchParams, useRouter } from 'next/navigation';
-import AuthCallbackView from '@/components/AuthCallback/AuthCallbackView';
+import AuthCallbackView from '@/components/auth/AuthCallback/AuthCallbackView';
 import axiosInstance from '@/utils/axios';
 
 // 서버로 code를 보내는 작업을 수행

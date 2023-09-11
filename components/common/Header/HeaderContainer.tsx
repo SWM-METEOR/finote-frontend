@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { getCookie } from 'cookies-next';
 
 import axiosInstance from '@/utils/axios';
-import HeaderView from '@/components/Header/HeaderView';
+import HeaderView from '@/components/common/Header/HeaderView';
 import { userBlogNameStore } from '@/store/user';
 
 export default function HeaderContainer() {

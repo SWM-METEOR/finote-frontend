@@ -1,5 +1,5 @@
 import './globals.css';
-import HeaderContainer from '@/components/Header/HeaderContainer';
+import HeaderContainer from '@/components/common/Header/HeaderContainer';
 
 export const metadata = {
   title: 'FiNote',

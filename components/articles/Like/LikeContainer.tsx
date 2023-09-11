@@ -4,7 +4,7 @@ import { getCookie } from 'cookies-next';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import LikeView from '@/components/Like/LikeView';
+import LikeView from '@/components/articles/Like/LikeView';
 import axiosInstance from '@/utils/axios';
 
 interface PropsType {

@@ -8,8 +8,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import axiosInstance from '@/utils/axios';
 import CustomButton from '@/components/common/CustomButton';
 import ImageUpload from '@/components/common/ImageUpload';
-import InputNickname from '@/components/AdditionalInfo/InputNickname';
-import InputBlogName from '@/components/AdditionalInfo/InputBlogName';
+import InputNickname from '@/components/user/AdditionalInfo/InputNickname';
+import InputBlogName from '@/components/user/AdditionalInfo/InputBlogName';
 import { userBlogNameStore } from '@/store/user';
 
 interface AdditionalInfoType {

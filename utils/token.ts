@@ -18,6 +18,7 @@ export default async function reIssueTokenAndRequestAgain(originalRequest: Axios
       refreshToken: getCookie('refreshToken'),
     })
     .then((res) => {
+      // TODO: 구조분해할당
       const newAccessToken = res.data.data.accessToken;
       const newRefreshToken = res.data.data.refreshToken;
 

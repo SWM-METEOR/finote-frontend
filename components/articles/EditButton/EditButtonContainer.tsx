@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { getCookie } from 'cookies-next';
 
-import EditButtonView from '@/components/EditButton/EditButtonView';
+import EditButtonView from '@/components/articles/EditButton/EditButtonView';
 import axiosInstance from '@/utils/axios';
 
 interface PropsType {
@@ -15,9 +15,10 @@ interface PropsType {
 export default function EditButtonContainer({ articleId, authorNickname }: PropsType) {
   const router = useRouter();
   const [nickname, setNickname] = useState('');
-  const accessToken = getCookie('accessToken');
 
   useEffect(() => {
+    const accessToken = getCookie('accessToken');
+
     async function getUserNickname() {
       // 비로그인 유저는 닉네임을 가져올 수 없음
       if (!accessToken) return;

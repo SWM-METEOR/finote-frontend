@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import SearchBarContainer from '@/components/SearchBar/SearchBarContainer';
+import SearchBarContainer from '@/components/common/SearchBar/SearchBarContainer';
 import WriteButton from '@/components/WriteButton';
 
 interface PropsType {

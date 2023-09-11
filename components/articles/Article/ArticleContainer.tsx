@@ -1,4 +1,4 @@
-import ArticleView from '@/components/Article/ArticleView';
+import ArticleView from '@/components/articles/Article/ArticleView';
 import axiosInstance from '@/utils/axios';
 
 interface PropsType {
@@ -17,7 +17,7 @@ async function getArticle(nickname: string, articleTitle: string) {
 
 export default async function ArticleContainer({ pageParams }: PropsType) {
   const articleRes = await getArticle(pageParams.nickname, pageParams.articleTitle);
-  const articleData = articleRes.data;
+  const articleData = articleRes.data; // TODO: 타입 추가
 
   return (
     <ArticleView

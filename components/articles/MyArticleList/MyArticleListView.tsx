@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import MyArticleBox from '@/components/MyArticleList/MyArticleBox';
+import MyArticleBox from '@/components/articles/MyArticleList/MyArticleBox';
 // import ClipLoader from 'react-spinners/ClipLoader';
 
 interface PropsType {

@@ -1,6 +1,6 @@
 'use client';
 
-import TrendsArticleListView from '@/components/TrendsArticleList/TrendsArticleListView';
+import TrendsArticleListView from '@/components/articles/TrendsArticleList/TrendsArticleListView';
 import axiosInstance from '@/utils/axios';
 import { useEffect, useState } from 'react';
 

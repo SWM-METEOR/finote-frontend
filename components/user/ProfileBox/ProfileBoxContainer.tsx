@@ -1,4 +1,4 @@
-import ProfileBoxView from '@/components/ProfileBox/ProfileBoxView';
+import ProfileBoxView from '@/components/user/ProfileBox/ProfileBoxView';
 
 export default function ProfileBoxContainer() {
   // 데이터 패칭

@@ -13,9 +13,9 @@ import {
   useSelectedTextStore,
   useAISearchStore,
 } from '@/store/sidePanel';
-import EditButtonContainer from '@/components/EditButton/EditButtonContainer';
-import DeleteButtonContainer from '@/components/DeleteButton/DeleteButtonContainer';
-import FollowButtonContainer from '@/components/FollowButton/FollowButtonContainer';
+import EditButtonContainer from '@/components/articles/EditButton/EditButtonContainer';
+import DeleteButtonContainer from '@/components/articles/DeleteButton/DeleteButtonContainer';
+import FollowButtonContainer from '@/components/user/AdditionalInfo/FollowButton/FollowButtonContainer';
 
 interface PropsType {
   id: number;
