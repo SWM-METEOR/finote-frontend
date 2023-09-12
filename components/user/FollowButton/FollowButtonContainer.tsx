@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { getCookie } from 'cookies-next';
 import { ToastContainer, toast } from 'react-toastify';
 
-import FollowButtonView from '@/components/user/AdditionalInfo/FollowButton/FollowButtonView';
+import FollowButtonView from '@/components/user/FollowButton/FollowButtonView';
 import axiosInstance from '@/utils/axios';
 
 interface PropsType {
