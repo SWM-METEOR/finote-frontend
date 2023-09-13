@@ -11,6 +11,7 @@ import Editor from '@/components/Editor';
 import axiosInstance from '@/utils/axios';
 import ArticleType from '@/types/Article';
 import useToast from '@/hooks/toast';
+import ImageUpload from '@/components/common/ImageUpload';
 
 export default function WritePage() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function WritePage() {
   const [editor, setEditor] = useState<any>(null);
   const [isPosting, setIsPosting] = useState(false);
 
-  const { register, handleSubmit } = useForm<ArticleType>();
+  const { register, handleSubmit, setValue } = useForm<ArticleType>();
   const [showErrorToast] = useToast();
 
   // 글 작성
@@ -28,7 +29,6 @@ export default function WritePage() {
 
     if (!data.title || !data.body) {
       showErrorToast('필수 항목을 모두 입력해주세요!');
-
       return;
     }
     setIsPosting(true);
@@ -44,6 +44,7 @@ export default function WritePage() {
         router.push(`/articles/${res.data.data.nickname}/${res.data.data.title}`);
       })
       .catch((err) => {
+        // TODO: 협의 후 에러처리 분기 필요
         Swal.fire('글 등록 실패', '동일한 글 제목이 존재합니다. 제목을 변경해주세요.', 'error');
         setIsPosting(false);
         console.log(err);
@@ -53,7 +54,7 @@ export default function WritePage() {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col my-24 mx-auto">
+        <div className="flex flex-col w-[1280px] my-24 mx-auto">
           <Editor
             register={register}
             inputTitleRef={inputTitleRef}
@@ -61,6 +62,10 @@ export default function WritePage() {
             setEditor={setEditor}
           />
           {/* 이미지 업로드 */}
+          <div className="mt-[40px]">
+            <h2 className="font-bold text-[18px] mb-[20px]">썸네일 설정</h2>
+            <ImageUpload<ArticleType> setValue={setValue} type="thumbnail" />
+          </div>
           <div className="mx-auto mb-36 mt-[50px]">
             <CustomButton
               type="submit"
