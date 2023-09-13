@@ -38,13 +38,13 @@ export default function EditPage({ params }: { params: { articleId: string } }) 
 
     const getArticle = async () => {
       await axiosInstance.get(`/articles/${params.articleId}`).then((res) => {
-        const { title, body, authorNickname } = res.data.data;
+        const { title, body, authorNickname, thumbnail } = res.data.data;
         console.log(res.data.data);
         // TODO: API 수정 후 thumbnail값 추가
         setInitialTitle(title);
         setInitialBody(body);
         setAuthorNickname(authorNickname);
-        // TODO: setThumbnail()
+        setThumbnail(thumbnail);
       });
     };
 
@@ -72,7 +72,7 @@ export default function EditPage({ params }: { params: { articleId: string } }) 
     setIsUpdating(true);
 
     if (!data.thumbnail) {
-      data.thumbnail = '';
+      data.thumbnail = thumbnail;
     }
 
     axiosInstance
@@ -80,7 +80,6 @@ export default function EditPage({ params }: { params: { articleId: string } }) 
       .then((res) => {
         const { nickname, title } = res.data.data;
 
-        // TODO: 여기서 넘어갈 때, 글 수정된게 곧바로 반영이 안되는 버그 존재
         router.push(`/articles/${nickname}/${title}`, { shallow: true });
       })
       .catch((err) => {
@@ -106,7 +105,11 @@ export default function EditPage({ params }: { params: { articleId: string } }) 
           {/* 이미지 업로드 */}
           <div className="mt-[40px]">
             <h2 className="font-bold text-[18px] mb-[20px]">썸네일 설정</h2>
-            <ImageUpload<ArticleType> setValue={setValue} type="thumbnail" />
+            <ImageUpload<ArticleType>
+              setValue={setValue}
+              type="thumbnail"
+              defaultValue={thumbnail}
+            />
           </div>
           {/* 수정 버튼 */}
           <div className="mx-auto mb-36 mt-[50px]">
