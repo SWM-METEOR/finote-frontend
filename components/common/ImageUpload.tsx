@@ -72,14 +72,8 @@ export default function ImageUpload<T extends FieldValues>({
   return (
     <div className="flex items-start gap-[15px] mb-[25px]">
       {imageURL ? (
-        <div className="w-[120px] h-[120px] bg-grey rounded-[10px] overflow-hidden flex-shrink-0">
-          <Image
-            width={120}
-            height={120}
-            src={imageURL}
-            alt="Selected Preview"
-            className="object-cover rounded-[10px]"
-          />
+        <div className="relative w-[120px] h-[120px] rounded-[10px] overflow-hidden flex-shrink-0">
+          <Image fill className="object-cover" src={imageURL} alt="logo" sizes="100%" />
         </div>
       ) : (
         <div className="w-[120px] h-[120px] bg-grey rounded-[10px]"></div>
