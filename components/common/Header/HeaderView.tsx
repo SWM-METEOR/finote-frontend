@@ -13,10 +13,13 @@ interface PropsType {
 }
 
 export default function HeaderView({ nickname, blogName, accessToken, pathname }: PropsType) {
+  const nonHeaderPages = ['/login', '/write', '/edit'];
+  const showHeader = !nonHeaderPages.some((page) => pathname.includes(page));
+
   return (
     <div className="w-full flex justify-center shadow-[0_2px_10px_0_rgba(0,0,0,0.05)]">
       {/* 로그인 페이지에는 헤더 X */}
-      {pathname !== '/login' && pathname !== '/write' && (
+      {showHeader && (
         // header height: 76px
         <header className="h-[76px] flex justify-between bg-white w-[1280px] main-md:w-[840px] main-sm:w-[400px] py-[20px] items-center">
           <Link href="/">
