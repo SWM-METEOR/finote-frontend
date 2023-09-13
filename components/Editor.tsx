@@ -1,8 +1,12 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import { UseFormRegister } from 'react-hook-form';
+
+import ArticleType from '@/types/Article';
 
 interface PropsType {
+  register: UseFormRegister<ArticleType>;
   inputTitleRef: React.RefObject<HTMLInputElement>;
   editor: any;
   setEditor: React.Dispatch<React.SetStateAction<any>>;
@@ -11,6 +15,7 @@ interface PropsType {
 }
 
 export default function EditorComponent({
+  register,
   inputTitleRef,
   editor,
   setEditor,
@@ -57,10 +62,11 @@ export default function EditorComponent({
       <input
         className={`w-full h-[80px] text-[28px] input rounded-none px-[40px] border-[#EEEEEE] border-t-2 border-x-2 rounded-t-[20px] focus focus:outline-none active:outline-none`}
         type="text"
-        name="title"
-        id=""
+        id="article-title"
         placeholder="제목 입력"
-        ref={inputTitleRef}
+        {...register('title', {
+          maxLength: { value: 100, message: '최대 100자까지 입력 가능합니다.' },
+        })}
         defaultValue={initialTitle}
       />
       <div ref={editElement}></div>

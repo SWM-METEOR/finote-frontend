@@ -8,8 +8,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import axiosInstance from '@/utils/axios';
 import CustomButton from '@/components/common/CustomButton';
 import ImageUpload from '@/components/common/ImageUpload';
-import InputNickname from '@/components/AdditionalInfo/InputNickname';
-import InputBlogName from '@/components/AdditionalInfo/InputBlogName';
+import InputNickname from '@/components/user/AdditionalInfo/InputNickname';
+import InputBlogName from '@/components/user/AdditionalInfo/InputBlogName';
 import { userBlogNameStore } from '@/store/user';
 
 interface AdditionalInfoType {
@@ -29,6 +29,7 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
     handleSubmit,
     watch,
     setError,
+    setValue,
     formState: { errors },
     // errors,
   } = useForm<AdditionalInfoType>();
@@ -60,7 +61,7 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
           <div className="w-full h-[2px] bg-black mb-[25px]"></div>
           <div className="">
             <p className="font-bold text-[14px] mb-[10px]">프로필 이미지</p>
-            <ImageUpload register={register} />
+            <ImageUpload<AdditionalInfoType> setValue={setValue} type="profileImageUrl" />
           </div>
           <InputNickname
             register={register}

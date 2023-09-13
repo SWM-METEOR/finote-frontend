@@ -2,19 +2,28 @@
 
 import { useRef, useState } from 'react';
 import Image from 'next/image';
-import { UseFormRegister } from 'react-hook-form';
+import { UseFormRegister, FieldValues, FieldPath, Path } from 'react-hook-form';
 
 import axiosInstance from '@/utils/axios';
 import UploadIcon from '@/components/Icons/UploadIcon';
-import AdditionalInfoType from '@/types/user';
 
-interface PropsType {
-  register: UseFormRegister<AdditionalInfoType>;
+interface PropsType<T extends FieldValues> {
+  setValue: (name: Path<T>, value: string) => void;
+  type: Path<T>;
+  defaultValue?: string;
 }
 
-export default function ImageUpload({ register }: PropsType) {
+export default function ImageUpload<T extends FieldValues>({
+  setValue,
+  type,
+  defaultValue = '',
+}: PropsType<T>) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [imageURL, setImageURL] = useState<string>(''); // 이미지 미리보기 URL 상태
+  const [imageURL, setImageURL] = useState<string>(defaultValue); // 이미지 미리보기 URL 상태
+  // const apiPath = {
+  //   profileImageUrl: '/users/profile-image',
+  //   thumbnail: '/your-thumbnail-path',
+  // };
 
   const triggerFileSelect = () => {
     fileInputRef.current?.click();
@@ -54,24 +63,17 @@ export default function ImageUpload({ register }: PropsType) {
     if (!file) return;
 
     const preSignedURL = await getPreSignedURL(file.name);
-    console.log(preSignedURL);
     const imageURL = await uploadImageAndGetURL(preSignedURL, file);
 
-    register('profileImageUrl', { value: imageURL }); // form
+    setValue(type, imageURL);
     setImageURL(imageURL);
   };
 
   return (
     <div className="flex items-start gap-[15px] mb-[25px]">
       {imageURL ? (
-        <div className="w-[120px] h-[120px] bg-grey rounded-[10px] overflow-hidden flex-shrink-0">
-          <Image
-            width={120}
-            height={120}
-            src={imageURL}
-            alt="Selected Preview"
-            className="object-cover rounded-[10px]"
-          />
+        <div className="relative w-[120px] h-[120px] rounded-[10px] overflow-hidden flex-shrink-0">
+          <Image fill className="object-cover" src={imageURL} alt="logo" sizes="100%" />
         </div>
       ) : (
         <div className="w-[120px] h-[120px] bg-grey rounded-[10px]"></div>

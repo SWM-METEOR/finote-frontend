@@ -1,9 +1,9 @@
-import RelatedArticlesContainer from '@/components/RelatedArticles/RelatedArticlesContainer';
+import RelatedArticlesContainer from '@/components/articles/RelatedArticles/RelatedArticlesContainer';
 import SidePanelContainer from '@/components/SmartDrag/SidePanel/SidePanelContainer';
-import ArticleContainer from '@/components/Article/ArticleContainer';
+import ArticleContainer from '@/components/articles/Article/ArticleContainer';
 
 import ShareIcon from '@/components/Icons/ShareIcon';
-import LikeContainer from '@/components/Like/LikeContainer';
+import LikeContainer from '@/components/articles/Like/LikeContainer';
 interface PropsType {
   params: { nickname: string; articleTitle: string };
 }

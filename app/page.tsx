@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import TrendsIcon from '@/components/Icons/TrendsIcon';
 import FeedIcon from '@/components/Icons/FeedIcon';
-import TrendsArticleListContainer from '@/components/TrendsArticleList/TrendsArticleListContainer';
+import TrendsArticleListContainer from '@/components/articles/TrendsArticleList/TrendsArticleListContainer';
 
 export default function Home() {
   const [selectedMode, setSelectedMode] = useState<'trends' | 'feed'>('trends');

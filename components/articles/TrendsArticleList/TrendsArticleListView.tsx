@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import IntroContainer from '@/components/SmartDrag/Intro/IntroView';
-import DragRelatedArticleBox from '@/components/articles/ArticlePreview/DragRelatedArticleBox';
+import TrendsArticleBox from '@/components/articles/ArticlePreview/TrendsArticleBox';
+
 import ArticlePreviewType from '@/types/Article';
 
 interface PropsType {
-  selectedText: string;
   articleList: ArticlePreviewType[];
   loadMoreItems: () => Promise<void>;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function DragRelatedArticlesView({
-  selectedText,
+export default function TrendsArticleListView({
   articleList,
   loadMoreItems,
   page,
@@ -56,23 +54,13 @@ export default function DragRelatedArticlesView({
   }, []);
 
   return (
-    <div className="w-full h-full gap-4">
-      {selectedText === '' ? (
-        <IntroContainer />
-      ) : (
-        <div className="flex flex-col w-full h-full">
-          <div className="flex-none w-full chat chat-end mb-[12px]">
-            <div className="chat-bubble bg-[#313a47] whitespace-pre-line text-white">
-              {selectedText}
-            </div>
-          </div>
-          <div className="w-full h-[calc(100vh-356px)] flex-grow flex flex-col gap-[15px] overflow-auto">
-            {articleList.map((article) => (
-              <DragRelatedArticleBox key={article.id} {...article} />
-            ))}
-          </div>
-        </div>
-      )}
+    <div className="w-full h-full mt-[40px]">
+      <div className="grid grid-cols-3 main-md:grid-cols-2 main-sm:grid-cols-1 gap-[40px]">
+        {articleList.map((article) => (
+          <TrendsArticleBox key={article.id} {...article} />
+        ))}
+      </div>
+      <div ref={observerRef}></div>
     </div>
   );
 }
