@@ -3,20 +3,12 @@ import axiosInstance from '@/utils/axios';
 
 import DragRelatedArticlesView from '@/components/SmartDrag/DragRelatedArticles/DragRelatedArticlesView';
 import { useSelectedTextStore } from '@/store/sidePanel';
+import ArticlePreviewType from '@/types/Article';
 
 interface ArticleDataType {
   page: number;
   size: number;
-  articleList: {
-    id: number;
-    title: string;
-    body: string;
-    totalLike: number;
-    reply: number;
-    authorNickname: string;
-    date: string;
-    thumbnail: string;
-  }[];
+  articleList: ArticlePreviewType[];
 }
 
 export default function DragRelatedArticlesContainer() {

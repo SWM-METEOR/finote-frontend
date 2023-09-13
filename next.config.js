@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['encrypted-tbn0.gstatic.com'],
+    domains: ['finote-image-bucket.s3.ap-northeast-2.amazonaws.com', 'encrypted-tbn0.gstatic.com'],
   },
   async rewrites() {
     return [

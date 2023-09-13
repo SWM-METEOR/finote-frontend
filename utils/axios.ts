@@ -9,6 +9,11 @@ const axiosInstance = axios.create({
 // 요청 인터셉터
 axiosInstance.interceptors.request.use(
   (config) => {
+    // PUT(S3에 이미지 업로드) 시 헤더에 토큰을 넣으면 400 Bad Request 에러 발생
+    if (config.method?.toLowerCase() === 'put') {
+      return config;
+    }
+
     const accessToken = getCookie('accessToken');
     if (accessToken === undefined) {
       return config;

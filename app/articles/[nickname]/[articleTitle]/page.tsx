@@ -1,21 +1,19 @@
-import RelatedArticlesContainer from '@/components/RelatedArticles/RelatedArticlesContainer';
+import RelatedArticlesContainer from '@/components/articles/RelatedArticles/RelatedArticlesContainer';
 import SidePanelContainer from '@/components/SmartDrag/SidePanel/SidePanelContainer';
-import ArticleContainer from '@/components/Article/ArticleContainer';
-import HeartIcon from '@/components/Icons/HeartIcon';
-import ShareIcon from '@/components/Icons/ShareIcon';
+import ArticleContainer from '@/components/articles/Article/ArticleContainer';
 
+import ShareIcon from '@/components/Icons/ShareIcon';
+import LikeContainer from '@/components/articles/Like/LikeContainer';
 interface PropsType {
   params: { nickname: string; articleTitle: string };
 }
 
 export default function ArticlePage({ params }: PropsType) {
-  console.log(params);
   return (
     <div className="relative flex flex-nowrap flex-row largeDesktop:justify-center h-full">
-      {/* 좌측 좋아요 이동 바 */}
+      {/* 좌측 좋아요/공유 이동 바 */}
       <div className="fixed top-[130px] largeDesktop:left-[calc(50%-638px)] 2xl:left-[calc(14%)] xl:left-[calc(12%)] lg:left-[calc(7%)] shrink-0 flex flex-col items-center w-[70px] h-[136px] bg-white mr-[30px] rounded-[15px] shadow-[0_0_10px_0_rgba(0,0,0,0.05)] pt-[16px] pb-[16px] border border-[#EEEEEE]">
-        <HeartIcon width={24} height={24} strokeColor={'#999999'} />
-        <span className="text-[#999999] mt-[2px]">0</span>
+        <LikeContainer authorNickname={params.nickname} title={params.articleTitle} />
         <hr className="w-full text-[#EEEEEE] mt-[12.5px]" />
         <div className="mt-auto">
           <ShareIcon />
