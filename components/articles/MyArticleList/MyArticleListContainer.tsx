@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import MyArticleListView from '@/components/articles/MyArticleList/MyArticleListView';
 import axiosInstance from '@/utils/axios';
-import { useEffect, useState } from 'react';
+import ArticlePreviewType from '@/types/Article';
 
 interface PropsType {
   nickname: string;
@@ -11,16 +13,7 @@ interface PropsType {
 interface ArticleDataType {
   page: number;
   size: number;
-  articleList: {
-    id: number;
-    title: string;
-    body: string;
-    totalLike: number;
-    reply: number;
-    authorNickname: string;
-    date: string;
-    thumbnail: string;
-  }[];
+  articleList: ArticlePreviewType[];
 }
 
 export default function MyArticleListContainer({ nickname }: PropsType) {

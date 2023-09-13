@@ -1,23 +1,16 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import TrendsArticleListView from '@/components/articles/TrendsArticleList/TrendsArticleListView';
 import axiosInstance from '@/utils/axios';
-import { useEffect, useState } from 'react';
+import ArticlePreviewType from '@/types/Article';
 
 // TODO: 인피니티 스크롤 관련 로직 모듈화 필요
 interface ArticleDataType {
   page: number;
   size: number;
-  articleList: {
-    id: number;
-    title: string;
-    body: string;
-    totalLike: number;
-    reply: number;
-    authorNickname: string;
-    date: string;
-    thumbnail: string;
-  }[];
+  articleList: ArticlePreviewType[];
 }
 
 export default function TrendsArticleListContainer() {

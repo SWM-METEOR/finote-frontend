@@ -4,3 +4,15 @@ export default interface ArticleType {
   body: string;
   thumbnail: string;
 }
+
+export default interface ArticlePreviewType {
+  id: number;
+  title: string;
+  body: string;
+  totalLike: number;
+  reply: number;
+  authorNickname: string;
+  date: string;
+  thumbnail: string;
+  profileImageUrl: string;
+}

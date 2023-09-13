@@ -1,19 +1,12 @@
 import Image from 'next/image';
-import RelatedArticleBox from '@/components/articles/RelatedArticles/RelatedArticleBox';
+
+import RelatedArticleBox from '@/components/articles/ArticlePreview/RelatedArticleBox';
+import ArticlePreviewType from '@/types/Article';
 
 interface PropsType {
   relatedArticlesData: {
     keyword: string;
-    articleList: {
-      id: number;
-      title: string;
-      body: string;
-      totalLike: number;
-      reply: number;
-      authorNickname: string;
-      date: string;
-      thumbnail: string;
-    }[];
+    articleList: ArticlePreviewType[];
   }[];
 }
 

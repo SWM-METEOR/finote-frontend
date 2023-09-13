@@ -1,18 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import TrendsArticleBox from '@/components/articles/TrendsArticleList/TrendsArticleBox';
+import TrendsArticleBox from '@/components/articles/ArticlePreview/TrendsArticleBox';
+
+import ArticlePreviewType from '@/types/Article';
 
 interface PropsType {
-  articleList: {
-    id: number;
-    title: string;
-    body: string;
-    totalLike: number;
-    reply: number;
-    authorNickname: string;
-    date: string;
-    thumbnail: string;
-  }[];
+  articleList: ArticlePreviewType[];
   loadMoreItems: () => Promise<void>;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;

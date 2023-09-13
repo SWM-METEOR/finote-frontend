@@ -1,19 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import MyArticleBox from '@/components/articles/MyArticleList/MyArticleBox';
+import MyArticleBox from '@/components/articles/ArticlePreview/MyArticleBox';
+import ArticlePreviewType from '@/types/Article';
+
 // import ClipLoader from 'react-spinners/ClipLoader';
 
 interface PropsType {
-  articleList: {
-    id: number;
-    title: string;
-    body: string;
-    totalLike: number;
-    reply: number;
-    authorNickname: string;
-    date: string;
-    thumbnail: string;
-  }[];
+  articleList: ArticlePreviewType[];
   loadMoreItems: () => Promise<void>;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
