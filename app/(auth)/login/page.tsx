@@ -34,7 +34,7 @@ export default function LoginPage() {
     // py: 120px -> 80px
     <div className="w-full h-full py-[80px]">
       {/* white box */}
-      <div className="flex flex-col gap-4 bg-white md:shadow-lg w-[450px] w-full h-[726px] mx-auto px-[40px]">
+      <div className="flex flex-col gap-4 bg-white md:shadow-lg w-[450px] h-[726px] mx-auto px-[40px]">
         {/* 좌우 패딩 40씩 */}
         <div className="mx-auto py-12">
           <Link href="/">
