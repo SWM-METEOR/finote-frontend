@@ -1,18 +1,7 @@
 import Image from 'next/image';
 import HeartIcon from '@/components/Icons/HeartIcon';
 import CommentIcon from '@/components/Icons/CommentIcon';
-
-// TODO: 공통 타입으로
-interface PropsType {
-  id: number;
-  title: string;
-  body: string;
-  totalLike: number;
-  reply: number;
-  authorNickname: string;
-  date: string;
-  thumbnail: string;
-}
+import ArticlePreviewType from '@/types/Article';
 
 export default function DragRelatedArticleBox({
   title,
@@ -22,23 +11,15 @@ export default function DragRelatedArticleBox({
   authorNickname,
   date,
   thumbnail,
-}: PropsType) {
-  console.log('thumbnail', thumbnail);
+  profileImageUrl,
+}: ArticlePreviewType) {
   return (
     <div
       className={`flex flex-col justify-between w-[318px] h-[115px] border border-[#DDDDDD] rounded-[15px] p-[10px]`}
     >
       <div className="flex gap-[10px]">
         <div className="relative w-[60px] h-[60px] rounded-[10px] overflow-hidden flex-shrink-0">
-          {/* TODO: 백엔드에서 thumbnail값 문자열 처리 후 코드 수정 예정 */}
-          {/* <Image fill className="object-cover" src={thumbnail} alt="logo" sizes="100%" /> */}
-          <Image
-            fill
-            className="object-cover"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2qL4TnNIt-zmP-lncsFEHdAbP3Hwn1z29vQ&usqp=CAU"
-            alt="logo"
-            sizes="100%"
-          />
+          <Image fill className="object-cover" src={thumbnail} alt="썸네일" sizes="100%" />
         </div>
         <div className="flex flex-col gap-[3px]">
           <p className={`text-[14px] font-bold line-clamp-1`}>{title}</p>
@@ -47,12 +28,7 @@ export default function DragRelatedArticleBox({
       </div>
       <div className={`flex items-center text-[12px]`}>
         <div className="w-[20px] h-[20px] rounded-[5px] overflow-hidden flex-shrink-0">
-          <Image
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2qL4TnNIt-zmP-lncsFEHdAbP3Hwn1z29vQ&usqp=CAU"
-            alt="logo"
-            width="20"
-            height="20"
-          />
+          <Image src={profileImageUrl} alt={authorNickname} width="20" height="20" />
         </div>
         <span className={`ml-[5px] mr-[24px]`}>{authorNickname}</span>
         <HeartIcon />
