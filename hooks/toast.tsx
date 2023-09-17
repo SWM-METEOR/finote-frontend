@@ -18,5 +18,17 @@ export default function useToast() {
     });
   };
 
-  return [showErrorToast];
+  const showSuccessToast = (message: string) => {
+    toast.success(`${message}`, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: 'colored',
+    });
+  };
+
+  return [showErrorToast, showSuccessToast];
 }
