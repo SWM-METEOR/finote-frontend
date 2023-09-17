@@ -80,7 +80,7 @@ export default function InputBlogName({
       <input
         {...register('blogName', {
           required: '블로그 제목을 입력해주세요.',
-          maxLength: { value: 10, message: '최대 20자까지 입력 가능합니다.' },
+          maxLength: { value: 20, message: '최대 20자까지 입력 가능합니다.' },
           pattern: {
             value: /^[ㄱ-ㅎ가-힣a-zA-Z0-9*\s]+$/,
             message: '영문, 한글, 숫자만 입력 가능합니다.',
