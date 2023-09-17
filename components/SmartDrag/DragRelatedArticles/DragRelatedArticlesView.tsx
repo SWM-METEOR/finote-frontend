@@ -6,7 +6,7 @@ import ArticlePreviewType from '@/types/Article';
 
 interface PropsType {
   selectedText: string;
-  articleList: ArticlePreviewType[];
+  articleList: ArticlePreviewType[] | undefined;
   loadMoreItems: () => Promise<void>;
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
@@ -56,7 +56,7 @@ export default function DragRelatedArticlesView({
   }, []);
 
   return (
-    <div className="w-full h-full gap-4">
+    <div className="w-full h-full flex flex-col gap-4">
       {selectedText === '' ? (
         <IntroContainer />
       ) : (
@@ -67,7 +67,7 @@ export default function DragRelatedArticlesView({
             </div>
           </div>
           <div className="w-full h-[calc(100vh-356px)] flex-grow flex flex-col gap-[15px] overflow-auto">
-            {articleList.map((article) => (
+            {articleList?.map((article) => (
               <DragRelatedArticleBox key={article.id} {...article} />
             ))}
           </div>

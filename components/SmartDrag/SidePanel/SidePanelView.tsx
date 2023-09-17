@@ -4,14 +4,15 @@ import Image from 'next/image';
 
 import TabContainer from '@/components/SmartDrag/Tab/TabContainer';
 import AISearchContainer from '@/components/SmartDrag/AISearch/AISearchContainer';
-import { SIDEPANEL_OPTION_LIST } from '@/constants/sidePanel';
 import IntroContainer from '@/components/SmartDrag/Intro/IntroContainer';
 import DragRelatedArticlesContainer from '@/components/SmartDrag/DragRelatedArticles/DragRelatedArticlesContainer';
+import { SmartDragType } from '@/types/smartDrag';
+import { TooltipMode } from '@/types/smartDrag';
 
 interface PropsType {
   isOpenSidePanel: boolean;
   setIsOpenSidePanel: (isOpenSidePanel: boolean) => void;
-  selectedMode: string;
+  selectedMode: TooltipMode;
 }
 
 export default function SidePanelView({
@@ -36,15 +37,9 @@ export default function SidePanelView({
             <p className="text-[16px] font-bold my-[25px] mx-auto">스마트 드래그</p>
             <TabContainer />
             {selectedMode === 'default' && <IntroContainer />}
-            {selectedMode === SIDEPANEL_OPTION_LIST[0] && <AISearchContainer />}
-            {selectedMode === SIDEPANEL_OPTION_LIST[1] && (
-              <div>
-                <DragRelatedArticlesContainer />
-              </div>
-            )}
-            {selectedMode === SIDEPANEL_OPTION_LIST[2] && (
-              <div>질문 생성 및 관련 질문 모아보기</div>
-            )}
+            {selectedMode === SmartDragType[0] && <AISearchContainer />}
+            {selectedMode === SmartDragType[1] && <DragRelatedArticlesContainer />}
+            {selectedMode === SmartDragType[2] && <IntroContainer />}
           </div>
         </div>
         {/* 열고닫는 토글 버튼 */}
