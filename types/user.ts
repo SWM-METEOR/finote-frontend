@@ -3,3 +3,10 @@ export default interface AdditionalInfoType {
   nickname: string;
   blogName: string;
 }
+
+export default interface SignUpType {
+  email: string;
+  code: string;
+  password: string;
+  confirmPassword: string;
+}
