@@ -11,12 +11,7 @@ import ImageUpload from '@/components/common/ImageUpload';
 import InputNickname from '@/components/user/AdditionalInfo/InputNickname';
 import InputBlogName from '@/components/user/AdditionalInfo/InputBlogName';
 import { userBlogNameStore } from '@/store/user';
-
-interface AdditionalInfoType {
-  profileImageUrl: string;
-  nickname: string;
-  blogName: string;
-}
+import AdditionalInfoType from '@/types/user';
 
 export default function AdditionalInfoPage({ params }: { params: { nickname: string } }) {
   const router = useRouter();
