@@ -11,6 +11,7 @@ interface PropsType {
   roundRate?: number;
   hasBorder?: boolean;
   borderColor?: string;
+  textSize?: number;
 }
 
 export default function CustomButton({
@@ -23,6 +24,7 @@ export default function CustomButton({
   isDisabled = false,
   roundRate = 0,
   hasBorder = false,
+  textSize = 18,
 }: PropsType) {
   // color값을 props로 사용 불가: https://tailwindcss.com/docs/content-configuration#dynamic-class-names
   // 따라서 color값을 key로 해서 tailwind value를 바인딩해야 함
@@ -31,6 +33,7 @@ export default function CustomButton({
     main: 'bg-main',
     lightGrey: 'bg-lightGrey',
     red: 'bg-red',
+    darkGrey: 'bg-darkGrey',
   };
 
   const textColorMap: { [color: string]: string } = {
@@ -39,6 +42,7 @@ export default function CustomButton({
   };
 
   const widthMap: { [width: number]: string } = {
+    100: 'w-[100px]',
     300: 'w-[300px]',
     370: 'w-[370px]',
     500: 'w-[500px]',
@@ -56,7 +60,7 @@ export default function CustomButton({
         backGroundColorMap[fillColor]
       } ${
         textColorMap[textColor]
-      } justify-center px-5 gap-2 rounded-[${roundRate}px] font-bold text-[18px] ${
+      } justify-center px-5 gap-2 rounded-[${roundRate}px] font-bold text-[${textSize}px] ${
         hasBorder ? `border border-grey` : ``
       } hover:border-slate-400 hover:shadow transition duration-150`}
       disabled={isDisabled}
