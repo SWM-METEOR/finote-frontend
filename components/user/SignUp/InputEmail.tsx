@@ -16,12 +16,7 @@ interface PropsType {
   errors: FieldErrors<SignUpType>;
 }
 
-export default function InputEmail({
-  register,
-  watch,
-  setError,
-  errors,
-}: PropsType) {
+export default function InputEmail({ register, watch, setError, errors }: PropsType) {
   const [isFetchingAuthCode, setIsFetchingAuthCode] = useState(false); // 인증번호 요청 중인지 여부
   const [isVerifyingAuthCode, setIsVerifyingAuthCode] = useState(false); // 인증번호 검증 중인지 여부
   const [isSuccessVerifyAuthCode, setIsSuccessVerifyAuthCode] = useState(false); // 인증번호 검증 성공 여부
@@ -120,7 +115,7 @@ export default function InputEmail({
         }
       }
     }, 1000);
-    
+
     return () => clearInterval(countdown);
   }, [minutes, seconds]);
 
