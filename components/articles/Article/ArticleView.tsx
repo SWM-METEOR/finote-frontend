@@ -1,11 +1,14 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+
 import GreaterThanIcon from '@/components/Icons/GreaterThanIcon';
-import { SIDEPANEL_OPTION_LIST } from '@/constants/sidePanel';
+import { SIDEPANEL_TAB_NAME } from '@/constants/sidePanel';
+import useSmartDrag from '@/hooks/useSmartDrag';
+import { isTooltipMode } from '@/types/smartDrag';
 import {
   useTooltipStore,
   useSidePanelStore,
@@ -16,6 +19,7 @@ import {
 import EditButtonContainer from '@/components/articles/EditButton/EditButtonContainer';
 import DeleteButtonContainer from '@/components/articles/DeleteButton/DeleteButtonContainer';
 import FollowButtonContainer from '@/components/user/FollowButton/FollowButtonContainer';
+import { SmartDragType } from '@/types/smartDrag';
 
 interface PropsType {
   id: number;
@@ -32,6 +36,8 @@ export default function ArticleView({
   createDate,
   contents,
 }: PropsType) {
+  const [isAISearchMode] = useSmartDrag();
+
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   const dragStartX = useRef<number>(0);
@@ -44,15 +50,27 @@ export default function ArticleView({
   const { setIsLoadingAISearchResult } = useAISearchStore();
   const { setDragText } = useDragTextStore();
 
+  const buttonStyles = [
+    'ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey rounded-l-md',
+    'ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey',
+    'ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey rounded-r-md',
+  ];
+
   // 툴팁에서 모드 선택
-  const handleTooltipClick = (selectedText: string) => {
+  const handleTooltipClick = (index: number) => {
     setSelectedText(dragText); // 사이드 패널에 드래그 텍스트 업데이트
-    setSelectedMode(selectedText); // 선택된 모드 변경
+
+    const mode = SmartDragType[index];
+    if (isTooltipMode(mode)) {
+      // 선택된 모드 변경
+      setSelectedMode(mode);
+    }
+
     setIsOpenSidePanel(true); // 사이드 패널 열기
     setShowTooltip(false); // 툴팁 닫기
 
     // 로딩 스피너 띄우고, 결과 받아오기
-    if (selectedText === SIDEPANEL_OPTION_LIST[0] && dragText !== '') {
+    if (isAISearchMode(index) && dragText !== '') {
       setIsLoadingAISearchResult(true);
     }
   };
@@ -84,6 +102,11 @@ export default function ArticleView({
     tooltipRef.current.setAttribute('style', `top: ${offsetY}px; left: ${offsetX}px`);
     setShowTooltip(true);
   };
+
+  useEffect(() => {
+    setSelectedText('');
+    setSelectedMode('default');
+  }, []);
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-full">
@@ -133,25 +156,15 @@ export default function ArticleView({
               (showTooltip ? ' block' : ' hidden')
             }
           >
-            {/* TODO: 이벤트 위임 방식으로 변경 */}
-            <button
-              onClick={() => handleTooltipClick(SIDEPANEL_OPTION_LIST[0])}
-              className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey rounded-l-md"
-            >
-              {SIDEPANEL_OPTION_LIST[0]}
-            </button>
-            <button
-              onClick={() => handleTooltipClick(SIDEPANEL_OPTION_LIST[1])}
-              className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey"
-            >
-              {SIDEPANEL_OPTION_LIST[1]}
-            </button>
-            <button
-              onClick={() => handleTooltipClick(SIDEPANEL_OPTION_LIST[2])}
-              className="ease-in-out duration-150 py-1 pl-3 pr-3 hover:bg-grey rounded-r-md"
-            >
-              {SIDEPANEL_OPTION_LIST[2]}
-            </button>
+            {SIDEPANEL_TAB_NAME.map((option, index) => (
+              <button
+                key={index}
+                onClick={() => handleTooltipClick(index)}
+                className={buttonStyles[index]}
+              >
+                {option}
+              </button>
+            ))}
           </div>
           <div
             className="w-full"

@@ -4,6 +4,7 @@ import axiosInstance from '@/utils/axios';
 import DragRelatedArticlesView from '@/components/SmartDrag/DragRelatedArticles/DragRelatedArticlesView';
 import { useSelectedTextStore } from '@/store/sidePanel';
 import ArticlePreviewType from '@/types/Article';
+import IntroContainer from '@/components/SmartDrag/Intro/IntroView';
 
 interface ArticleDataType {
   page: number;
@@ -50,17 +51,20 @@ export default function DragRelatedArticlesContainer() {
     }
   }
 
-  // initial fetch
   useEffect(() => {
-    loadMoreDragRelatedArticles();
-  }, []);
+    if (!selectedText) return;
 
-  if (!DragRelatedArticlesData) return null;
+    setHasMoreItems(true);
+    setDragRelatedArticlesData(null);
+    loadMoreDragRelatedArticles();
+  }, [selectedText]);
+
+  if (!DragRelatedArticlesData && selectedText === '') return <IntroContainer />;
 
   return (
     <DragRelatedArticlesView
       selectedText={selectedText}
-      articleList={DragRelatedArticlesData.articleList}
+      articleList={DragRelatedArticlesData?.articleList}
       loadMoreItems={loadMoreDragRelatedArticles}
       page={page}
       setPage={setPage}

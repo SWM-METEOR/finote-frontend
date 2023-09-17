@@ -1,3 +1,4 @@
+import { TooltipMode } from '@/types/smartDrag';
 import create from 'zustand';
 
 interface SidePanelTypes {
@@ -11,13 +12,13 @@ export const useSidePanelStore = create<SidePanelTypes>((set) => ({
 }));
 
 interface TooltipTypes {
-  selectedMode: string;
-  setSelectedMode: (value: string) => void;
+  selectedMode: TooltipMode;
+  setSelectedMode: (value: TooltipMode) => void;
 }
 
 export const useTooltipStore = create<TooltipTypes>((set) => ({
   selectedMode: 'default',
-  setSelectedMode: (value: string) => set((state) => ({ selectedMode: value })),
+  setSelectedMode: (value: TooltipMode) => set((state) => ({ selectedMode: value })),
 }));
 
 interface DragaTextTypes {
