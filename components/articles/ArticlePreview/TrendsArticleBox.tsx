@@ -20,7 +20,8 @@ export default function TrendsArticleBox({
   return (
     <div className="w-[400px] h-[210px] bg-white rounded-[20px] p-[25px] pb-[20px] border border-[#EEEEEE] shadow-[0_0_10px_0_rgba(0,0,0,0.05)]">
       <div className="flex justify-between gap-[30px]">
-        <div className="flex flex-col justify-between">
+        {/* 좌측영역 */}
+        <div className="w-[230px] flex flex-col justify-between">
           <div className="flex flex-col justify-between gap-[10px]">
             <p className="text-[15px] font-bold line-clamp-1">{title}</p>
             <div className="text-[#666666] text-[12px] line-clamp-4 leading-[20px]">{body}</div>
@@ -34,6 +35,7 @@ export default function TrendsArticleBox({
             <span className="text-[13px] text-[#999999]">{date}</span>
           </div>
         </div>
+        {/* 우측영역 */}
         <div className="flex flex-col gap-[13px] items-end">
           <Link href={`/articles/${authorNickname}/${title}`} className="flex items-center">
             <span className="text-[12px] text-[#666666]">더 보러가기</span>
