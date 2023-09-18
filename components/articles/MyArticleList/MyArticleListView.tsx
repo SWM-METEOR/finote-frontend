@@ -6,6 +6,7 @@ import ArticlePreviewType from '@/types/Article';
 // import ClipLoader from 'react-spinners/ClipLoader';
 
 interface PropsType {
+  nickname: string;
   articleList: ArticlePreviewType[];
   loadMoreItems: () => Promise<void>;
   page: number;
@@ -13,6 +14,7 @@ interface PropsType {
 }
 
 export default function MyArticleListView({
+  nickname,
   articleList,
   loadMoreItems,
   page,
@@ -60,7 +62,7 @@ export default function MyArticleListView({
       <hr className="mt-[15px] w-full text-black mb-[30px]" />
       <div className="grid grid-cols-2 gap-[20px]">
         {articleList.map((article) => (
-          <MyArticleBox key={article.id} {...article} />
+          <MyArticleBox key={article.id} {...article} nickname={nickname} />
         ))}
       </div>
       <div ref={observerRef}></div>
