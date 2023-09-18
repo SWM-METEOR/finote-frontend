@@ -22,24 +22,28 @@ export default function SidePanelView({
 }: PropsType) {
   return (
     // 사이드패널, 토글 버튼은 PC사이즈 에서만  보임
-    <div className={`fixed right-[0px] bg-white `}>
+    // 76px: header size
+    // 50px: padding size
+    <div className={`fixed right-[0px] bg-white h-[calc(100vh-76px-50px)]`}>
       <div className={`largeDesktop:block desktop:block hidden flex flex-row h-full`}>
         {/* TODO: 헤더에도 shrink-0 적용 필요 */}
         <div
           className={
-            `w-[360px] h-[900px] top-0 shrink-0 h-screen` +
+            `w-[360px] h-[calc(100vh-76px-50px)] top-0 shrink-0 h-screen` +
             (isOpenSidePanel
               ? ` block w-80 px-[20px] border border-[#EEEEEE] rounded-[20px] shadow-[0_4px_10px_0_rgba(0,0,0,0.05)]`
               : ` hidden w-0`)
           }
         >
-          <div className="flex flex-col">
+          <div className="flex flex-col h-[calc(100vh-76px-50px)]">
             <p className="text-[16px] font-bold my-[25px] mx-auto">스마트 드래그</p>
             <TabContainer />
-            {selectedMode === 'default' && <IntroContainer />}
-            {selectedMode === SmartDragType[0] && <AISearchContainer />}
-            {selectedMode === SmartDragType[1] && <DragRelatedArticlesContainer />}
-            {selectedMode === SmartDragType[2] && <IntroContainer />}
+            <div className="overflow-auto mb-[20px]">
+              {selectedMode === 'default' && <IntroContainer />}
+              {selectedMode === SmartDragType[0] && <AISearchContainer />}
+              {selectedMode === SmartDragType[1] && <DragRelatedArticlesContainer />}
+              {selectedMode === SmartDragType[2] && <IntroContainer />}
+            </div>
           </div>
         </div>
         {/* 열고닫는 토글 버튼 */}
