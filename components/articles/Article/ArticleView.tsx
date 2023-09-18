@@ -36,6 +36,7 @@ export default function ArticleView({
   createDate,
   contents,
 }: PropsType) {
+  const [isDoubleClick, setIsDoubleClick] = useState(false);
   const [isAISearchMode] = useSmartDrag();
 
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -75,23 +76,7 @@ export default function ArticleView({
     }
   };
 
-  const handleDragStart = (e: React.MouseEvent<Element, MouseEvent>) => {
-    dragStartX.current = e.clientX;
-    dragStartY.current = e.clientY;
-  };
-
-  const handleDragEnd = (e: React.MouseEvent<Element, MouseEvent>) => {
-    // 클릭 or 드래그 구간이 4px 이하인 경우, 유의미한 드래그가 아니므로 툴팁 X
-    // TODO: 이걸 본문 뿐만 아니라, 바깥 영역 전체에 대해 감지해야됨, 전역 상태 코드로 변경 필요
-    if (dragStartX.current == e.clientX || dragStartX.current >= e.clientX - 4) {
-      setShowTooltip(false);
-      return;
-    }
-
-    // 드래그된 텍스트 저장
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    setDragText(window.getSelection()!.toString());
-
+  const setTooltipPosition = (e: React.MouseEvent<Element, MouseEvent>) => {
     const eventTarget = e.currentTarget as HTMLDivElement;
     const rect = eventTarget.getBoundingClientRect();
     const offsetY = dragStartY.current - rect.top - 55;
@@ -100,6 +85,38 @@ export default function ArticleView({
     // 툴팁에 상대적 위치 설정
     if (!tooltipRef.current) return;
     tooltipRef.current.setAttribute('style', `top: ${offsetY}px; left: ${offsetX}px`);
+  };
+
+  const handleDragStart = (e: React.MouseEvent<Element, MouseEvent>) => {
+    dragStartX.current = e.clientX;
+    dragStartY.current = e.clientY;
+  };
+
+  const handleDragEnd = (e: React.MouseEvent<Element, MouseEvent>) => {
+    // 더블클릭이 아닌 한번 클릭 시, 유의미한 드래그가 아니므로 툴팁 X
+    if (!isDoubleClick && dragStartX.current == e.clientX && dragStartY.current == e.clientY) {
+      setShowTooltip(false);
+      return;
+    }
+
+    if (isDoubleClick) {
+      setIsDoubleClick(false); // 더블 클릭 상태 초기화
+      return;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    setDragText(window.getSelection()!.toString()); // 드래그된 텍스트 저장
+    setTooltipPosition(e);
+    setShowTooltip(true);
+  };
+
+  // 더블클릭 시에도 툴팁 띄움
+  const handleDoubleClick = (e: React.MouseEvent<Element, MouseEvent>) => {
+    setIsDoubleClick(true);
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    setDragText(window.getSelection()!.toString()); // 드래그된 텍스트 저장
+    setTooltipPosition(e);
     setShowTooltip(true);
   };
 
@@ -168,6 +185,7 @@ export default function ArticleView({
           </div>
           <div
             className="w-full"
+            onDoubleClick={handleDoubleClick}
             onMouseUp={(e) => handleDragEnd(e)}
             onMouseDown={(e) => handleDragStart(e)}
           >

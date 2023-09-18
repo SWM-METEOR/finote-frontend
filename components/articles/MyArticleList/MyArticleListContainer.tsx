@@ -60,6 +60,7 @@ export default function MyArticleListContainer({ nickname }: PropsType) {
   // nickname값 전달을 위해 익명함수 안에서 호출(클로저)
   return (
     <MyArticleListView
+      nickname={nickname}
       articleList={articleData.articleList}
       loadMoreItems={() => loadMoreUsersArticles(nickname)}
       page={page}

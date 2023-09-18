@@ -12,7 +12,7 @@ export default function ArticlePage({ params }: PropsType) {
   return (
     <div className="relative flex flex-nowrap flex-row largeDesktop:justify-center h-full">
       {/* 좌측 좋아요/공유 이동 바 */}
-      <div className="fixed top-[130px] largeDesktop:left-[calc(50%-638px)] 2xl:left-[calc(14%)] xl:left-[calc(12%)] lg:left-[calc(7%)] shrink-0 flex flex-col items-center w-[70px] h-[136px] bg-white mr-[30px] rounded-[15px] shadow-[0_0_10px_0_rgba(0,0,0,0.05)] pt-[16px] pb-[16px] border border-[#EEEEEE]">
+      <div className="main-sm:hidden block fixed top-[130px] largeDesktop:left-[calc(50%-638px)] 2xl:left-[calc(14%)] xl:left-[calc(12%)] lg:left-[calc(7%)] shrink-0 flex flex-col items-center w-[70px] h-[136px] bg-white mr-[30px] rounded-[15px] shadow-[0_0_10px_0_rgba(0,0,0,0.05)] pt-[16px] pb-[16px] border border-[#EEEEEE]">
         <LikeContainer authorNickname={params.nickname} title={params.articleTitle} />
         <hr className="w-full text-[#EEEEEE] mt-[12.5px]" />
         <div className="mt-auto">
