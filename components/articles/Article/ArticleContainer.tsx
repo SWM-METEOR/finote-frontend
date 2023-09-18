@@ -16,16 +16,16 @@ async function getArticle(nickname: string, articleTitle: string) {
 }
 
 export default async function ArticleContainer({ pageParams }: PropsType) {
-  const articleRes = await getArticle(pageParams.nickname, pageParams.articleTitle);
+  const articleRes = await getArticle(pageParams?.nickname, pageParams?.articleTitle);
   const articleData = articleRes.data; // TODO: 타입 추가
 
   return (
     <ArticleView
-      id={articleData.id}
-      title={articleData.title}
-      authorNickname={articleData.authorNickname}
-      createDate={articleData.createDate}
-      contents={articleData.body}
+      id={articleData?.id}
+      title={articleData?.title}
+      authorNickname={articleData?.authorNickname}
+      createDate={articleData?.createDate}
+      contents={articleData?.body}
     ></ArticleView>
   );
 }
