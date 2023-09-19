@@ -25,6 +25,7 @@ interface PropsType {
   id: number;
   title: string;
   authorNickname: string;
+  profileImageUrl: string;
   createDate: string;
   contents: string;
 }
@@ -33,6 +34,7 @@ export default function ArticleView({
   id,
   title,
   authorNickname,
+  profileImageUrl,
   createDate,
   contents,
 }: PropsType) {
@@ -139,12 +141,7 @@ export default function ArticleView({
       <h1 className="text-[32px] font-bold">{title}</h1>
       <div className="flex items-center gap-[8px]">
         <div className="w-[30px] h-[30px] rounded-[10px] overflow-hidden flex-shrink-0">
-          <Image
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2qL4TnNIt-zmP-lncsFEHdAbP3Hwn1z29vQ&usqp=CAU"
-            alt="logo"
-            width="30"
-            height="30"
-          />
+          <Image src={profileImageUrl} alt={authorNickname} width="30" height="30" />
         </div>
         <span className="text-[14px]">{authorNickname}</span>
         <span className="text-[14px] text-[#999999] ml-[2px]">{createDate}</span>
