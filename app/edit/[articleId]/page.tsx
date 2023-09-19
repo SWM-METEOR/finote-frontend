@@ -83,10 +83,13 @@ export default function EditPage({ params }: { params: { articleId: string } }) 
         router.push(`/articles/${nickname}/${title}`, { shallow: true });
       })
       .catch((err) => {
-        // TODO: 협의 후 에러처리 분기 필요
-        Swal.fire('글 등록 실패', '동일한 글 제목이 존재합니다. 제목을 변경해주세요.', 'error');
         setIsUpdating(false);
-        console.log(err);
+
+        if (err.code === 'ERR_BAD_REQUEST') {
+          Swal.fire('글 수정 실패', '동일한 글 제목이 존재합니다. 제목을 변경해주세요.', 'error');
+          return;
+        }
+        Swal.fire('글 수정 실패', '글 수정에 실패했습니다. 잠시 후 다시 시도해주세요.', 'error');
       });
   };
 

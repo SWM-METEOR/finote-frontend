@@ -26,6 +26,7 @@ export default async function ArticleContainer({ pageParams }: PropsType) {
       authorNickname={articleData?.authorNickname}
       createDate={articleData?.createDate}
       contents={articleData?.body}
+      profileImageUrl={articleData?.profileImageUrl}
     ></ArticleView>
   );
 }
