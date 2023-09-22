@@ -2,6 +2,7 @@ import './globals.css';
 import HeaderContainer from '@/components/common/Header/HeaderContainer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import StyledComponentsRegistry from '@/lib/AntdRegistry';
 
 export const metadata = {
   title: 'FiNote',
@@ -19,9 +20,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <HeaderContainer />
-        <ToastContainer />
-        <div className="w-full h-[calc(100vh-76px)]">{children}</div>
+        <StyledComponentsRegistry>
+          <HeaderContainer />
+          <ToastContainer />
+          <div className="w-full h-[calc(100vh-76px)]">{children}</div>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
