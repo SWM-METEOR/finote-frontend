@@ -1,11 +1,14 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { MenuProps } from 'antd';
+import { Button, Dropdown, Space } from 'antd';
 
 import SearchBarContainer from '@/components/common/SearchBar/SearchBarContainer';
 import WriteButton from '@/components/WriteButton';
 import WriteIcon from '@/components/Icons/WriteIcon';
 import LoginIcon from '@/components/Icons/LoginIcon';
+import MoreShowIcon from '@/components/Icons/MoreShowIcon';
 
 interface PropsType {
   nickname: string;
@@ -17,6 +20,33 @@ interface PropsType {
 export default function HeaderView({ nickname, blogName, accessToken, pathname }: PropsType) {
   const nonHeaderPages = ['/login', '/write', '/edit'];
   const showHeader = !nonHeaderPages.some((page) => pathname.includes(page));
+
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <Link href={`/${nickname}`} className="text-[14px] font-medium px-[16px] py-[15px]">
+          내 블로그 홈
+        </Link>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <Link href={`/settings`} className="text-[14px] font-medium px-[16px] py-[15px]">
+          내 블로그 관리
+        </Link>
+      ),
+    },
+    {
+      key: '3',
+      label: (
+        <Link href="/logout" className="text-[14px] font-medium px-[16px] py-[15px]">
+          로그아웃
+        </Link>
+      ),
+    },
+  ];
 
   return (
     <div className="w-full flex justify-center shadow-[0_2px_10px_0_rgba(0,0,0,0.05)]">
@@ -55,9 +85,20 @@ export default function HeaderView({ nickname, blogName, accessToken, pathname }
                 </button>
               </Link>
             ) : (
-              <Link href="/logout">
-                <span className="px-4 main-md:px-0 main-sm:px-0">로그아웃</span>
-              </Link>
+              <Dropdown
+                menu={{ items }}
+                dropdownRender={(menu) => <div style={{ marginTop: '4px' }}>{menu}</div>}
+                placement="bottomRight"
+              >
+                <div className="flex items-center gap-[4px]">
+                  <div className="relative w-[30px] h-[30px] rounded-[10px] overflow-hidden flex-shrink-0 bg-main">
+                    {/* TODO: API 추가되고 나서 이미지 연동 필요 */}
+                    <Image fill className="object-cover" src={''} alt={nickname} sizes="100%" />
+                  </div>
+                  <span className="text-[14px] font-medium ml-[4px]">{nickname}</span>
+                  <MoreShowIcon width={14} height={14} color="#AAAAAA" />
+                </div>
+              </Dropdown>
             )}
           </header>
           {/* 모바일 사이즈에서 나오는 하단 헤더 */}
