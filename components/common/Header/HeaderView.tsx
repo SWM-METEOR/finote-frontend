@@ -13,11 +13,18 @@ import MoreShowIcon from '@/components/Icons/MoreShowIcon';
 interface PropsType {
   nickname: string;
   blogName: string;
+  profileImageUrl: string;
   accessToken: string;
   pathname: string;
 }
 
-export default function HeaderView({ nickname, blogName, accessToken, pathname }: PropsType) {
+export default function HeaderView({
+  nickname,
+  blogName,
+  profileImageUrl,
+  accessToken,
+  pathname,
+}: PropsType) {
   const nonHeaderPages = ['/login', '/write', '/edit'];
   const showHeader = !nonHeaderPages.some((page) => pathname.includes(page));
 
@@ -92,8 +99,13 @@ export default function HeaderView({ nickname, blogName, accessToken, pathname }
               >
                 <div className="flex items-center gap-[4px]">
                   <div className="relative w-[30px] h-[30px] rounded-[10px] overflow-hidden flex-shrink-0 bg-main">
-                    {/* TODO: API 추가되고 나서 이미지 연동 필요 */}
-                    <Image fill className="object-cover" src={''} alt={nickname} sizes="100%" />
+                    <Image
+                      fill
+                      className="object-cover"
+                      src={profileImageUrl}
+                      alt={nickname}
+                      sizes="100%"
+                    />
                   </div>
                   <span className="text-[14px] font-medium ml-[4px]">{nickname}</span>
                   <MoreShowIcon width={14} height={14} color="#AAAAAA" />
