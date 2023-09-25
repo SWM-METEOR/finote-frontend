@@ -12,6 +12,7 @@ export default function HeaderContainer() {
   const pathname = usePathname();
   const [accessToken, setAccessToken] = useState<string>('');
   const [nickname, setNickname] = useState('');
+  const [profileImageUrl, setProfileImageUrl] = useState('');
   const { blogName, setBlogName } = userBlogNameStore();
 
   async function getUserNickname() {
@@ -41,6 +42,19 @@ export default function HeaderContainer() {
     }
   }
 
+  async function getUserProfileImage() {
+    if (!accessToken) {
+      return;
+    }
+
+    try {
+      const res = await axiosInstance.get('/users/profile-image-url');
+      setProfileImageUrl(res.data.data.profileImageUrl);
+    } catch (error) {
+      throw new Error('Failed to fetch user profile image');
+    }
+  }
+
   useEffect(() => {
     setAccessToken(getCookie('accessToken') as string);
   }, [pathname]);
@@ -48,12 +62,14 @@ export default function HeaderContainer() {
   useEffect(() => {
     getUserNickname();
     getUserBlogName();
+    getUserProfileImage();
   }, [accessToken]);
 
   return (
     <HeaderView
       nickname={nickname}
       blogName={blogName}
+      profileImageUrl={profileImageUrl}
       accessToken={accessToken}
       pathname={pathname}
     />
