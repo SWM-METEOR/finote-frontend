@@ -56,6 +56,7 @@ export default function CommentEditor({ pageParams, type }: PropsType) {
     {
       onSuccess: () => {
         textAreaRef.current!.value = '';
+        setCharCount(0);
         queryClient.invalidateQueries(['comments', type, pageParams]);
       },
       onError: (err: AxiosError<ErrorResponse>) => {
