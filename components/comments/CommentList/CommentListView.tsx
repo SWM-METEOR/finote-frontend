@@ -1,22 +1,41 @@
 'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { CommentListType } from '@/types/comment';
 
 interface PropsType<T> {
+  userNickname: string;
   commentList: T | null;
+  updateComment: (params: { commentId: number; updatedContent: string }) => void;
+  deleteComment: (commentId: number) => void;
 }
 
 export default function CommentListView({
+  userNickname,
   commentList,
+  updateComment,
+  deleteComment,
 }: PropsType<CommentListType<'reply' | 'answer'>>) {
+  const queryClient = useQueryClient();
+  
   if (!commentList) return null;
 
   const commentListItems =
     'replyList' in commentList ? commentList.replyList : commentList.answerList;
 
   if (commentListItems.length === 0) return null;
+
+  const handleDeleteComment = async (commentId: number) => {
+    try {
+      await deleteComment(commentId);
+    } catch (error) {
+      console.error('Error deleting the comment:', error);
+    }
+  };
 
   return (
     <div>
@@ -42,8 +61,17 @@ export default function CommentListView({
                 {comment.nickname}
               </Link>
               <span className="text-[13px] text-[#999999]">{comment.createdDate}</span>
-              {/* <button className="text-[#999999] font-semibold text-[14px] ml-auto">수정</button>
-              <button className="text-[#999999] font-semibold text-[14px]">삭제</button> */}
+              {userNickname === comment.nickname && (
+                <button className="text-[#999999] font-semibold text-[14px] ml-auto">수정</button>
+              )}
+              {userNickname === comment.nickname && (
+                <button
+                  className="text-[#999999] font-semibold text-[14px]"
+                  onClick={() => handleDeleteComment(comment.id)}
+                >
+                  삭제
+                </button>
+              )}
             </div>
             <p className="pl-[40px] pt-[11px]">{comment.content}</p>
           </div>

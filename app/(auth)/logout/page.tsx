@@ -19,6 +19,7 @@ export default function LogoutPage() {
     .then(() => {
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
+      queryClient.setQueryData(['nickname'], '');
       queryClient.setQueryData(['blogName'], '');
 
       router.push('/');
