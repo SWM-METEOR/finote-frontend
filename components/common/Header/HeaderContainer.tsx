@@ -2,74 +2,61 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 
 import axiosInstance from '@/utils/axios';
 import HeaderView from '@/components/common/Header/HeaderView';
-import { userBlogNameStore } from '@/store/user';
 
 export default function HeaderContainer() {
   const pathname = usePathname();
   const [accessToken, setAccessToken] = useState<string>('');
-  const [nickname, setNickname] = useState('');
-  const [profileImageUrl, setProfileImageUrl] = useState('');
-  const { blogName, setBlogName } = userBlogNameStore();
 
-  async function getUserNickname() {
-    if (!accessToken) {
-      setNickname('');
-      return;
-    }
-    try {
+  const nicknameQuery = useQuery(
+    ['nickname'],
+    async () => {
       const res = await axiosInstance.get('/users/nickname');
-      setNickname(res.data.data.nickname);
-    } catch (error) {
-      throw new Error('Failed to fetch user nickname');
+      return res.data.data.nickname;
+    },
+    {
+      staleTime: Infinity,
+      enabled: !!accessToken,
     }
-  }
+  );
 
-  async function getUserBlogName() {
-    if (!accessToken) {
-      setBlogName('');
-      return;
-    }
-
-    try {
+  const blogNameQuery = useQuery<string>(
+    ['blogName'],
+    async () => {
       const res = await axiosInstance.get('/users/blog-info');
-      setBlogName(res.data.data.blogName);
-    } catch (error) {
-      throw new Error('Failed to fetch user blog info');
+      return res.data.data.blogName;
+    },
+    {
+      staleTime: Infinity,
+      enabled: !!accessToken,
     }
-  }
+  );
 
-  async function getUserProfileImage() {
-    if (!accessToken) {
-      return;
-    }
-
-    try {
+  const profileImageQuery = useQuery(
+    ['profileImage'],
+    async () => {
       const res = await axiosInstance.get('/users/profile-image-url');
-      setProfileImageUrl(res.data.data.profileImageUrl);
-    } catch (error) {
-      throw new Error('Failed to fetch user profile image');
+      return res.data.data.profileImageUrl;
+    },
+    {
+      staleTime: Infinity,
+      enabled: !!accessToken,
     }
-  }
+  );
 
   useEffect(() => {
     setAccessToken(getCookie('accessToken') as string);
   }, [pathname]);
 
-  useEffect(() => {
-    getUserNickname();
-    getUserBlogName();
-    getUserProfileImage();
-  }, [accessToken]);
-
   return (
     <HeaderView
-      nickname={nickname}
-      blogName={blogName}
-      profileImageUrl={profileImageUrl}
+      nickname={nicknameQuery.data || ''}
+      blogName={blogNameQuery.data || ''}
+      profileImageUrl={profileImageQuery.data || ''}
       accessToken={accessToken}
       pathname={pathname}
     />
