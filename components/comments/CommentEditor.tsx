@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { AxiosError } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -26,6 +26,21 @@ export default function CommentEditor({ pageParams, type }: PropsType) {
   const queryClient = useQueryClient();
 
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const [charCount, setCharCount] = useState(0); // 글자 수
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const textValue = e.target.value;
+
+    // 입력값을 500자로 제한
+    if (textValue.length > 500) {
+      e.target.value = textValue.slice(0, 500);
+      setCharCount(500);
+      return;
+    }
+
+    setCharCount(textValue.length);
+  };
 
   const writeCommentMutation = useMutation(
     (textValue: string) => {
@@ -66,19 +81,23 @@ export default function CommentEditor({ pageParams, type }: PropsType) {
   };
 
   return (
-    <div className="relative w-full">
+    <div className="flex flex-col w-full rounded-[10px] border border-[#DDDDDD] bg-white">
       {/* TODO: 500자 수 제한 */}
       <textarea
         ref={textAreaRef}
+        onChange={handleTextChange}
         placeholder={placeHolder[type]}
-        className="w-full border border-[#DDDDDD] min-h-[100px] h-[126px] rounded-[10px] p-[20px] focus:outline-none active:outline-none"
+        className="w-full rounded-[10px] min-h-[100px] h-[70px] p-[20px] focus:outline-none active:outline-none"
       ></textarea>
-      <button
-        className="absolute bottom-5 right-5 bg-[#00A1FF] h-[36px] w-[80px] rounded-[5px] text-white font-semibold text-[15px]"
-        onClick={writeComment}
-      >
-        등록
-      </button>
+      <div className="w-full h-[36px] flex items-center px-[10px] my-[10px]">
+        <div className="text-[#999999] text-sm mt-auto">{charCount} / 500자</div>
+        <button
+          className="ml-auto bottom-5 right-5 bg-[#00A1FF] h-[36px] w-[80px] rounded-[5px] text-white font-semibold text-[15px]"
+          onClick={writeComment}
+        >
+          등록
+        </button>
+      </div>
     </div>
   );
 }
