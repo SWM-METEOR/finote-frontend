@@ -6,10 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import axiosInstance from '@/utils/axios';
 import useToast from '@/hooks/toast';
-
-interface ErrorResponse {
-  status: number;
-}
+import { ServerErrorResponse } from '@/types/error';
 
 interface PropsType {
   pageParams: { nickname: string; articleTitle: string };
@@ -59,7 +56,7 @@ export default function CommentEditor({ pageParams, type }: PropsType) {
         setCharCount(0);
         queryClient.invalidateQueries(['comments', type, pageParams]);
       },
-      onError: (err: AxiosError<ErrorResponse>) => {
+      onError: (err: AxiosError<ServerErrorResponse>) => {
         if (!err.response) {
           return;
         }
