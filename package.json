@@ -2,6 +2,9 @@
   "name": "finote",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18.18.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,6 +17,7 @@
     "@ant-design/cssinjs": "^1.17.0",
     "@tailwindcss/typography": "^0.5.9",
     "@tanstack/react-query": "^4.33.0",
+    "@tanstack/react-query-devtools": "^4.35.3",
     "@toast-ui/editor": "^3.2.2",
     "@types/highcharts": "^7.0.0",
     "@use-gesture/react": "^10.2.27",
