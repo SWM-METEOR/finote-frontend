@@ -3,7 +3,7 @@ import axiosInstance from '@/utils/axios';
 
 import DragRelatedArticlesView from '@/components/SmartDrag/DragRelatedArticles/DragRelatedArticlesView';
 import { useSelectedTextStore } from '@/store/sidePanel';
-import ArticlePreviewType from '@/types/Article';
+import { ArticlePreviewType } from '@/types/Article';
 import IntroContainer from '@/components/SmartDrag/Intro/IntroView';
 
 interface ArticleDataType {

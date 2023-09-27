@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 
-import ArticleType from '@/types/Article';
+import { ArticleType } from '@/types/Article';
 
 interface PropsType {
   register: UseFormRegister<ArticleType>;

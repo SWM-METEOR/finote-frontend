@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import TrendsArticleBox from '@/components/articles/ArticlePreview/TrendsArticleBox';
 
-import ArticlePreviewType from '@/types/Article';
+import { ArticlePreviewType } from '@/types/Article';
 
 interface PropsType {
   articleList: ArticlePreviewType[];

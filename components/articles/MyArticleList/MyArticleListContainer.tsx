@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import MyArticleListView from '@/components/articles/MyArticleList/MyArticleListView';
 import axiosInstance from '@/utils/axios';
-import ArticlePreviewType from '@/types/Article';
+import { ArticlePreviewType } from '@/types/Article';
 
 interface PropsType {
   nickname: string;

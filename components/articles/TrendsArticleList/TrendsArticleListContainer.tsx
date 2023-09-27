@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import TrendsArticleListView from '@/components/articles/TrendsArticleList/TrendsArticleListView';
 import axiosInstance from '@/utils/axios';
-import ArticlePreviewType from '@/types/Article';
+import { ArticlePreviewType } from '@/types/Article';
 
 // TODO: 인피니티 스크롤 관련 로직 모듈화 필요
 interface ArticleDataType {
