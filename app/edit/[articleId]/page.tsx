@@ -10,7 +10,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import CustomButton from '@/components/common/CustomButton';
 import Editor from '@/components/Editor';
 import axiosInstance from '@/utils/axios';
-import ArticleType from '@/types/Article';
+import { ArticleType } from '@/types/Article';
 import useToast from '@/hooks/toast';
 import ImageUpload from '@/components/common/ImageUpload';
 

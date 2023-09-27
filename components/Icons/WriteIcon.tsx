@@ -15,7 +15,7 @@ export default function WriteIcon({ width = 16, height = 17, color = 'white' }: 
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_2_1049)">
+      <g clipPath="url(#clip0_2_1049)">
         <path
           d="M0.633301 15.0668L2.00763 10.6313L5.14686 13.7706L0.633301 15.0668Z"
           stroke={color}
