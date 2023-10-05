@@ -2,10 +2,14 @@
 
 import { getCookie, deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
+
 import axiosInstance from '@/utils/axios';
 
 export default function LogoutPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
+
   const accessToken = getCookie('accessToken');
   const refreshToken = getCookie('refreshToken');
 
@@ -15,6 +19,9 @@ export default function LogoutPage() {
     .then(() => {
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
+      queryClient.setQueryData(['nickname'], '');
+      queryClient.setQueryData(['blogName'], '');
+
       router.push('/');
     })
     .catch((error) => {

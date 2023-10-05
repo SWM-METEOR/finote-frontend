@@ -9,16 +9,17 @@ import useToast from '@/hooks/toast';
 import { ServerErrorResponse } from '@/types/error';
 
 interface PropsType {
-  pageParams: { nickname: string; articleTitle: string };
   type: 'reply' | 'answer';
+  commentId: number;
+  setIsUpdateMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const placeHolder = {
-  reply: '댓글을 입력하세요!',
-  answer: '답변을 입력하세요!',
+  reply: '댓글을 수정하세요!',
+  answer: '답변을 수정하세요!',
 };
 
-export default function CommentEditor({ pageParams, type }: PropsType) {
+export default function UpdateCommentEditor({ type, commentId, setIsUpdateMode }: PropsType) {
   const [showErrorToast] = useToast();
   const queryClient = useQueryClient();
 
@@ -39,10 +40,10 @@ export default function CommentEditor({ pageParams, type }: PropsType) {
     setCharCount(textValue.length);
   };
 
-  const writeCommentMutation = useMutation(
+  const updateCommentMutation = useMutation(
     (textValue: string) => {
       const requestUrl = {
-        reply: `/articles/replies/write/${pageParams.nickname}/${pageParams.articleTitle}`,
+        reply: `/articles/replies/edit/${commentId}`,
         answer: '/answers',
       };
 
@@ -52,35 +53,29 @@ export default function CommentEditor({ pageParams, type }: PropsType) {
     },
     {
       onSuccess: () => {
-        textAreaRef.current!.value = '';
-        setCharCount(0);
-        queryClient.invalidateQueries(['comments', type, pageParams]);
+        queryClient.invalidateQueries(['comments']);
+        // 페이지 새로고침
+        setIsUpdateMode(false);
       },
       onError: (err: AxiosError<ServerErrorResponse>) => {
         if (!err.response) {
           return;
         }
-
-        const errorStatus = err.response.data.status;
-        if (errorStatus === 401) {
-          showErrorToast('로그인 후 이용가능합니다.');
-        }
       },
     }
   );
 
-  const writeComment = () => {
+  const updateComment = () => {
     const textValue = textAreaRef.current?.value;
 
     if (!textValue) {
       return;
     }
-    writeCommentMutation.mutate(textValue);
+    updateCommentMutation.mutate(textValue);
   };
 
   return (
-    <div className="flex flex-col w-full rounded-[10px] border border-[#DDDDDD] bg-white">
-      {/* TODO: 500자 수 제한 */}
+    <div className="flex flex-col w-full rounded-[10px] border border-[#DDDDDD] bg-white mt-[10px]">
       <textarea
         ref={textAreaRef}
         onChange={handleTextChange}
@@ -91,9 +86,9 @@ export default function CommentEditor({ pageParams, type }: PropsType) {
         <div className="text-[#999999] text-sm mt-auto">{charCount} / 500자</div>
         <button
           className="ml-auto bottom-5 right-5 bg-[#00A1FF] h-[36px] w-[80px] rounded-[5px] text-white font-semibold text-[15px]"
-          onClick={writeComment}
+          onClick={updateComment}
         >
-          등록
+          수정
         </button>
       </div>
     </div>
