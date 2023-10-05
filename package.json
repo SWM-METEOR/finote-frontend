@@ -2,6 +2,9 @@
   "name": "finote",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18.18.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,6 +17,7 @@
     "@ant-design/cssinjs": "^1.17.0",
     "@tailwindcss/typography": "^0.5.9",
     "@tanstack/react-query": "^4.33.0",
+    "@tanstack/react-query-devtools": "^4.35.3",
     "@toast-ui/editor": "^3.2.2",
     "@types/highcharts": "^7.0.0",
     "@use-gesture/react": "^10.2.27",
@@ -37,6 +41,7 @@
     "zustand": "^4.3.9"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^13.5.3",
     "@tanstack/eslint-plugin-query": "^4.32.5",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
@@ -45,6 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
     "autoprefixer": "10.4.14",
+    "cross-env": "^7.0.3",
     "daisyui": "^3.5.0",
     "eslint": "^8.45.0",
     "eslint-config-next": "13.4.12",

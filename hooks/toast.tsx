@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function useToast() {
   const showErrorToast = (message: string) => {
-    console.log(message);
     toast.error(`${message}`, {
       position: 'top-right',
       autoClose: 5000,

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import RelatedArticleBox from '@/components/articles/ArticlePreview/RelatedArticleBox';
-import ArticlePreviewType from '@/types/Article';
+import { ArticlePreviewType } from '@/types/Article';
 
 interface PropsType {
   relatedArticlesData: {

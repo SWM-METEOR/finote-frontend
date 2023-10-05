@@ -4,6 +4,9 @@ import ArticleContainer from '@/components/articles/Article/ArticleContainer';
 
 import ShareIcon from '@/components/Icons/ShareIcon';
 import LikeContainer from '@/components/articles/Like/LikeContainer';
+import CommentEditor from '@/components/comments/CommentEditor';
+import CommentListContainer from '@/components/comments/CommentList/CommentListContainer';
+
 interface PropsType {
   params: { nickname: string; articleTitle: string };
 }
@@ -22,10 +25,14 @@ export default function ArticlePage({ params }: PropsType) {
       {/* 본문 영역 */}
       {/* 좌측 마진값 조정 breakpoint - 2xl, xl, lg */}
       {/* 본문 영역 크기 breakpoint - largeDesktop, desktop */}
-      <div className="2xl:ml-1/5 xl:ml-1/5 lg:ml-1/7 largeDesktop:w-[1078px] desktop:w-1/2 tablet:w-full mobile:w-full bg-white border border-[#EEEEEE] rounded-[20px] shadow-[0_4px_10px_0_rgba(0,0,0,0.05)] p-[40px]">
-        <ArticleContainer pageParams={params} />
-        <hr className="w-full text-[#DDDDDD] mt-[10px]" />
-        <RelatedArticlesContainer pageParams={params} />
+      <div className="flex flex-col gap-[40px] 2xl:ml-1/5 xl:ml-1/5 lg:ml-1/7 largeDesktop:w-[1078px] desktop:w-1/2 tablet:w-full mobile:w-full">
+        <div className="bg-white border border-[#EEEEEE] rounded-[20px] shadow-[0_4px_10px_0_rgba(0,0,0,0.05)] p-[40px]">
+          <ArticleContainer pageParams={params} />
+          <hr className="w-full text-[#DDDDDD] mt-[10px]" />
+          <RelatedArticlesContainer pageParams={params} />
+        </div>
+        <CommentEditor pageParams={params} type="reply" />
+        <CommentListContainer pageParams={params} type="reply" />
       </div>
       <SidePanelContainer />
     </div>

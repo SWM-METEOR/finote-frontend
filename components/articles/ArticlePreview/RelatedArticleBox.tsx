@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import HeartIcon from '@/components/Icons/HeartIcon';
 import CommentIcon from '@/components/Icons/CommentIcon';
-import ArticlePreviewType from '@/types/Article';
+import { ArticlePreviewType } from '@/types/Article';
 
 export default function RelatedArticleBox({
   title,

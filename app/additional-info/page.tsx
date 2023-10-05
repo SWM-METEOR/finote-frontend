@@ -4,18 +4,19 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useQueryClient } from '@tanstack/react-query';
 
 import axiosInstance from '@/utils/axios';
 import CustomButton from '@/components/common/CustomButton';
 import ImageUpload from '@/components/common/ImageUpload';
 import InputNickname from '@/components/user/AdditionalInfo/InputNickname';
 import InputBlogName from '@/components/user/AdditionalInfo/InputBlogName';
-import { userBlogNameStore } from '@/store/user';
 import AdditionalInfoType from '@/types/user';
 
 export default function AdditionalInfoPage({ params }: { params: { nickname: string } }) {
   const router = useRouter();
-  const { setBlogName } = userBlogNameStore();
+  const queryClient = useQueryClient();
+
   const [isValidNickname, setIsValidNickname] = useState(true);
   const [isValidBlogName, setIsValidBlogName] = useState(true);
 
@@ -39,7 +40,7 @@ export default function AdditionalInfoPage({ params }: { params: { nickname: str
       .post('users/additional-info', data)
       .then((res) => {
         // 유저 정보(블로그 이름 수정)
-        setBlogName(data.blogName);
+        queryClient.invalidateQueries(['blogName']);
         router.push('/');
       })
       .catch((err) => {

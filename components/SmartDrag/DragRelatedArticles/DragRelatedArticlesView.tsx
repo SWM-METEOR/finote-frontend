@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import IntroContainer from '@/components/SmartDrag/Intro/IntroView';
 import DragRelatedArticleBox from '@/components/articles/ArticlePreview/DragRelatedArticleBox';
-import ArticlePreviewType from '@/types/Article';
+import { ArticlePreviewType } from '@/types/Article';
 
 interface PropsType {
   selectedText: string;
