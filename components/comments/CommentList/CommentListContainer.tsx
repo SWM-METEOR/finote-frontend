@@ -129,6 +129,7 @@ export default function CommentListContainer({ pageParams, type }: PropsType) {
 
   return (
     <CommentListView
+      type={type}
       userNickname={nicknameQuery.data || ''}
       commentList={commentList}
       updateComment={mutationUpdateComment.mutate}

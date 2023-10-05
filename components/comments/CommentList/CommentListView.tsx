@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useQueryClient } from '@tanstack/react-query';
 
+import UpdateCommentEditor from '@/components/comments/UpdateCommentEditor';
 import { CommentListType } from '@/types/comment';
 
 interface PropsType<T> {
+  type: 'reply' | 'answer';
   userNickname: string;
   commentList: T | null;
   updateComment: (params: { commentId: number; updatedContent: string }) => void;
@@ -15,19 +16,28 @@ interface PropsType<T> {
 }
 
 export default function CommentListView({
+  type,
   userNickname,
   commentList,
-  updateComment,
   deleteComment,
 }: PropsType<CommentListType<'reply' | 'answer'>>) {
-  const queryClient = useQueryClient();
-  
+  const [isUpdateMode, setIsUpdateMode] = useState(false);
+  const [updatedCommentId, setUpdatedCommentId] = useState<number | null>(null);
+
   if (!commentList) return null;
 
   const commentListItems =
     'replyList' in commentList ? commentList.replyList : commentList.answerList;
 
   if (commentListItems.length === 0) return null;
+
+  const handleUpdateComment = (commentId: number) => {
+    if (!isUpdateMode) {
+      setIsUpdateMode(true);
+      setUpdatedCommentId(commentId);
+      return;
+    }
+  };
 
   const handleDeleteComment = async (commentId: number) => {
     try {
@@ -46,7 +56,7 @@ export default function CommentListView({
       <hr className="w-full text-[#DDDDDD] mt-[20px]" />
       {commentListItems.map((comment, index) => (
         <>
-          <div key={index} className="py-[20px]">
+          <div key={index} className="py-[20px] w-full">
             <div className="flex gap-[10px] items-center">
               <div className="relative w-[30px] h-[30px] rounded-[8px] overflow-hidden flex-shrink-0">
                 <Image
@@ -62,7 +72,12 @@ export default function CommentListView({
               </Link>
               <span className="text-[13px] text-[#999999]">{comment.createdDate}</span>
               {userNickname === comment.nickname && (
-                <button className="text-[#999999] font-semibold text-[14px] ml-auto">수정</button>
+                <button
+                  className="text-[#999999] font-semibold text-[14px] ml-auto"
+                  onClick={() => handleUpdateComment(comment.id)}
+                >
+                  수정
+                </button>
               )}
               {userNickname === comment.nickname && (
                 <button
@@ -73,7 +88,15 @@ export default function CommentListView({
                 </button>
               )}
             </div>
-            <p className="pl-[40px] pt-[11px]">{comment.content}</p>
+            {isUpdateMode && updatedCommentId === comment.id ? (
+              <UpdateCommentEditor
+                type={type}
+                commentId={comment.id}
+                setIsUpdateMode={setIsUpdateMode}
+              />
+            ) : (
+              <div className="break-words pl-[40px] pt-[11px] w-full">{comment.content}</div>
+            )}
           </div>
           <hr className="w-full text-[#DDDDDD]" />
         </>
