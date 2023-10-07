@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -55,8 +55,8 @@ export default function CommentListView({
       </p>
       <hr className="w-full text-[#DDDDDD] mt-[20px]" />
       {commentListItems.map((comment, index) => (
-        <>
-          <div key={index} className="py-[20px] w-full">
+        <React.Fragment key={index}>
+          <div className="py-[20px] w-full">
             <div className="flex gap-[10px] items-center">
               <div className="relative w-[30px] h-[30px] rounded-[8px] overflow-hidden flex-shrink-0">
                 <Image
@@ -99,7 +99,7 @@ export default function CommentListView({
             )}
           </div>
           <hr className="w-full text-[#DDDDDD]" />
-        </>
+        </React.Fragment>
       ))}
     </div>
   );
