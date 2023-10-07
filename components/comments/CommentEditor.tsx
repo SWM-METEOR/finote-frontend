@@ -62,6 +62,7 @@ export default function CommentEditor({ pageParams, type }: PropsType) {
         }
 
         const errorStatus = err.response.data.status;
+        // 비로그인 유저
         if (errorStatus === 401) {
           showErrorToast('로그인 후 이용가능합니다.');
         }
