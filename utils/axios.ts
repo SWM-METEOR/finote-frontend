@@ -35,6 +35,7 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
     const errorMsg = error.response.data.code;
     const errorStatus = error.response.status;
+    const accessToken = getCookie('accessToken');
 
     // NO_ACCESS_TOKEN -> reissue X
     // 액세스 토큰 만료시
@@ -44,6 +45,11 @@ axiosInstance.interceptors.response.use(
       errorMsg.includes('INVALID_ACCESS_TOKEN')
     ) {
       originalRequest._retry = true;
+      // 비로그인 유저: 토큰 갱신 없이 에러를 반환
+      if (!accessToken) {
+        return Promise.reject(error);
+      }
+
       // 토큰 갱신 및 API 재요청
       return reIssueTokenAndRequestAgain(originalRequest);
     } else if (errorStatus == 401 && errorMsg.includes('INVALID_REFRESH_TOKEN')) {
