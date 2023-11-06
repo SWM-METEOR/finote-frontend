@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { getCookie, deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
@@ -13,20 +14,21 @@ export default function LogoutPage() {
   const accessToken = getCookie('accessToken');
   const refreshToken = getCookie('refreshToken');
 
-  // 로그아웃 API 호출
-  axiosInstance
-    .post('/users/logout', { accessToken: accessToken, refreshToken: refreshToken })
-    .then(() => {
-      deleteCookie('accessToken');
-      deleteCookie('refreshToken');
-      queryClient.setQueryData(['nickname'], '');
-      queryClient.setQueryData(['blogName'], '');
-
-      router.push('/');
-    })
-    .catch((error) => {
-      console.error('로그아웃 실패:', error);
-    });
+  useEffect(() => {
+    // 로그아웃 API 호출
+    axiosInstance
+      .post('/users/logout', { accessToken, refreshToken })
+      .then(() => {
+        deleteCookie('accessToken');
+        deleteCookie('refreshToken');
+        queryClient.setQueryData(['nickname'], '');
+        queryClient.setQueryData(['blogName'], '');
+        router.push('/');
+      })
+      .catch((error) => {
+        console.error('로그아웃 실패:', error);
+      });
+  }, [accessToken, refreshToken, queryClient, router]);
 
   return <div></div>;
 }

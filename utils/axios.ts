@@ -58,7 +58,10 @@ axiosInstance.interceptors.response.use(
       deleteCookie('refreshToken');
 
       // 로그인 페이지로 이동
-      window.location.href = '/login';
+      if (typeof window !== 'undefined') {
+        window.location.href = '/login';
+      }
+
       return Promise.reject(error);
     }
 

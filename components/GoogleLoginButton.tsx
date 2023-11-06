@@ -13,7 +13,9 @@ export default function GoogleLoginButton() {
     const accessType = 'offline';
 
     // 구글에서 Code값 발급 후, redirectUri로 리다이렉션
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&access_type=${accessType}`;
+    if (typeof window !== 'undefined') {
+      window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}&access_type=${accessType}`;
+    }
   };
 
   return (
