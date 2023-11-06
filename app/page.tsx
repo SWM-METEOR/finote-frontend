@@ -5,7 +5,7 @@ import TrendsIcon from '@/components/Icons/TrendsIcon';
 import FeedIcon from '@/components/Icons/FeedIcon';
 import QnAIcon from '@/components/Icons/QnAIcon';
 import TrendsArticleListContainer from '@/components/articles/TrendsArticleList/TrendsArticleListContainer';
-import QnAListContainer from '@/components/qna/qnaListContainer';
+import QnAListContainer from '@/components/qna/QnAListContainer';
 
 export default function Home() {
   const [selectedMode, setSelectedMode] = useState<'trends' | 'feed' | 'qna'>('trends');
