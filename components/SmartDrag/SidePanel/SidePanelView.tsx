@@ -6,6 +6,8 @@ import TabContainer from '@/components/SmartDrag/Tab/TabContainer';
 import AISearchContainer from '@/components/SmartDrag/AISearch/AISearchContainer';
 import IntroContainer from '@/components/SmartDrag/Intro/IntroContainer';
 import DragRelatedArticlesContainer from '@/components/SmartDrag/DragRelatedArticles/DragRelatedArticlesContainer';
+import QnAContainer from '@/components/SmartDrag/QnA/QnAContainer';
+
 import { SmartDragType } from '@/types/smartDrag';
 import { TooltipMode } from '@/types/smartDrag';
 
@@ -29,7 +31,7 @@ export default function SidePanelView({
         {/* TODO: 헤더에도 shrink-0 적용 필요 */}
         <div
           className={
-            `w-[360px] h-[calc(100vh-76px-50px)] top-0 shrink-0 h-screen` +
+            `w-[362px] h-[calc(100vh-76px-50px)] top-0 shrink-0 h-screen` +
             (isOpenSidePanel
               ? ` block w-80 px-[20px] border border-[#EEEEEE] rounded-[20px] shadow-[0_4px_10px_0_rgba(0,0,0,0.05)]`
               : ` hidden w-0`)
@@ -38,11 +40,11 @@ export default function SidePanelView({
           <div className="flex flex-col h-[calc(100vh-76px-50px)]">
             <p className="text-[16px] font-bold my-[25px] mx-auto">스마트 드래그</p>
             <TabContainer />
-            <div className="overflow-auto mb-[20px]">
+            <div className="overflow-auto mb-[20px] w-full ">
               {selectedMode === 'default' && <IntroContainer />}
               {selectedMode === SmartDragType[0] && <AISearchContainer />}
               {selectedMode === SmartDragType[1] && <DragRelatedArticlesContainer />}
-              {selectedMode === SmartDragType[2] && <IntroContainer />}
+              {selectedMode === SmartDragType[2] && <QnAContainer />}
             </div>
           </div>
         </div>
