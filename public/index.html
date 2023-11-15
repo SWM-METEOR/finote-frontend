@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="description" content="블로그 글을 통한 학습의 새로운 경험" />
+    <meta
+      name="keywords"
+      content="FiNote, 핀노트, 블로그학습, 블로그공부, 블로그AI검색, 스마트드래그"
+    />
+
+    <meta property="og:title" content="FiNote" />
+    <meta property="og:description" content="블로그 글을 통한 학습의 새로운 경험" />
+    <meta property="og:image" content="/img/thumbnail.png" />
+
+    <title>FiNote</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/fav/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/fav/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/fav/favicon-16x16.png" />
+    <link rel="manifest" href="/fav/site.webmanifest" />
+    <link rel="mask-icon" href="/fav/safari-pinned-tab.svg" color="#2d89ef" />
+    <meta name="msapplication-TileColor" content="#2d89ef" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css"
+    />
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-wrapper">
+        <img onclick="goHome()" class="logo" src="img/logo.png" alt="FiNote Logo" />
+        <nav>
+          <ul>
+            <li>
+              <a href="https://finote.co.kr/trends" target="_blank">블로그</a>
+            </li>
+            <li>
+              <a href="https://finote.co.kr/trends" target="_blank">Q&A</a>
+            </li>
+            <li>
+              <a href="https://finote.co.kr/trends" target="_blank">시작하기</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section id="main">
+      <div class="section-wrapper" data-aos="fade-up">
+        <img src="img/logo.png" alt="FiNote Logo" />
+        <h1>블로그 글을 통한<br /><span>학습의 새로운 경험</span></h1>
+        <a href="https://finote.co.kr/trends" target="_blank">
+          <div>
+            <img src="img/emoji_right.png" alt="Emoji Right" />
+            <p>지금 바로 시작하세요</p>
+          </div>
+        </a>
+        <div class="lottie-container">
+          <lottie-player
+            src="./animation.json"
+            background="transparent"
+            speed="1"
+            loop
+            autoplay
+          ></lottie-player>
+        </div>
+      </div>
+    </section>
+
+    <section id="drag">
+      <div class="section-wrapper">
+        <div class="desc" data-aos="fade-right">
+          <h3 class="section-tag">SMART DRAG</h3>
+          <h2 class="section-title">스마트 드래그</h2>
+          <p>모르는 내용을 드래그해서 바로 질문하세요! <br />빠른 궁금증 해소를 도와드립니다</p>
+          <a href="https://finote.co.kr/trends" target="_blank">체험하며 알아보기 →</a>
+        </div>
+        <div>
+          <img class="study" src="img/sutdy.png" alt="Study" data-aos="fade-up" />
+          <img class="drag" src="img/drag.png" alt="Smart Drag" data-aos="fade-left" />
+        </div>
+      </div>
+    </section>
+
+    <section id="qna">
+      <div class="section-wrapper">
+        <div class="hidden-mo">
+          <img class="insight" src="img/insight.png" alt="insight" data-aos="fade-up" />
+          <img class="qna" src="img/qna.png" alt="Q&A Community" data-aos="fade-right" />
+        </div>
+        <div class="desc" data-aos="fade-left">
+          <h3 class="section-tag">Q&A COMMUNITY</h3>
+          <h2 class="section-title">Inline Q&A 커뮤니티</h2>
+          <p>글 안에서 바로 질문하고 답변을 확인하세요! <br />질의응답 창구가 다양해져요</p>
+          <a href="https://finote.co.kr/trends" target="_blank">체험하며 알아보기 →</a>
+        </div>
+        <div class="hidden-pc">
+          <img class="insight" src="img/insight.png" alt="insight" />
+          <img class="qna" src="img/qna.png" alt="Q&A Community" />
+        </div>
+      </div>
+    </section>
+
+    <section id="feed">
+      <div class="section-wrapper">
+        <div class="desc" data-aos="fade-right">
+          <h3 class="section-tag">FEED</h3>
+          <h2 class="section-title">피드</h2>
+          <p>
+            팔로우하는 유저의 새로운 소식을 받아보세요! <br />최신 트렌드를 빠르게 따라갈 수 있어요
+          </p>
+          <a href="https://finote.co.kr/trends" target="_blank">체험하며 알아보기 →</a>
+        </div>
+        <div>
+          <img class="trend" src="img/trend.png" alt="Trend" data-aos="fade-up" />
+          <img class="feed" src="img/feed.png" alt="Feed" data-aos="fade-left" />
+        </div>
+      </div>
+    </section>
+
+    <section id="summary">
+      <div class="section-wrapper">
+        <div class="value">
+          <div data-aos="fade-down">
+            <img src="img/sutdy.png" alt="Study" />
+            <p>학습은<br /><span>쉽게</span></p>
+          </div>
+          <div data-aos="fade-down">
+            <img src="img/insight.png" alt="insight" />
+            <p>질문은<br /><span>빠르게</span></p>
+          </div>
+          <div data-aos="fade-down">
+            <img src="img/trend.png" alt="Trend" />
+            <p>트렌드를<br /><span>한눈에</span></p>
+          </div>
+        </div>
+        <img src="img/arrow.png" alt="Arrow" data-aos="fade-down" />
+        <img src="img/logo.png" alt="FiNote Logo" data-aos="zoom-in" />
+      </div>
+    </section>
+
+    <section id="start">
+      <div class="section-wrapper">
+        <div>
+          <div data-aos="fade-up">
+            <h3 class="section-tag">LET'S START</h3>
+            <h2 class="section-title">학습의 새로움을 <br />지금 바로 경험하세요!</h2>
+            <a href="https://finote.co.kr/trends" target="_blank">무료로 시작하기</a>
+          </div>
+          <img src="img/student.png" alt="Student" data-aos="fade-left" />
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-wrapper">
+        <img onclick="goHome()" src="img/logo_wl.png" alt="Logo White" />
+        <p>
+          서울특별시 강남구 테헤란로 311(역삼동) 아남타워빌딩 7층(06151) | 이용 문의:
+          99jiyusu@gmail.com <br />COPYRIGHT 2023. METEOR Team Co. ALL RIGHTS RESERVED.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
