@@ -31,7 +31,7 @@ export default function AuthCallbackContainer() {
         }
 
         // 메인 페이지로 리다이렉트
-        router.push('/');
+        router.push('/trends');
       })
       .catch((err) => {
         console.error('Error sending code to backend', err);

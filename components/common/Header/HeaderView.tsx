@@ -62,7 +62,7 @@ export default function HeaderView({
         <div className="flex flex-col">
           {/* header height: 76px */}
           <header className="h-[76px] flex gap-[20px] justify-between bg-white w-[1280px] main-md:w-[840px] main-sm:w-[400px] mx-auto pr-[12px] py-[20px] items-center">
-            <Link href="/">
+            <Link href="/trends">
               <Image className="pb-1" src="/logo.png" alt="logo" width="160" height="76" />
             </Link>
             <div className="main-md:hidden main-sm:hidden flex">
