@@ -5,7 +5,6 @@ import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-import GreaterThanIcon from '@/components/Icons/GreaterThanIcon';
 import { SIDEPANEL_TAB_NAME } from '@/constants/sidePanel';
 import useSmartDrag from '@/hooks/useSmartDrag';
 import { isTooltipMode } from '@/types/smartDrag';
@@ -129,16 +128,13 @@ export default function ArticleView({
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-full">
-      <p className="flex text-[16px] gap-1 items-center">
-        <span>프론트엔드</span>
-        <GreaterThanIcon />
-        <span className="text-[#00A1FF] font-bold">자바스크립트</span>
+      <div className="flex text-[16px] gap-1 items-center">
+        <h1 className="text-[32px] font-bold">{title}</h1>
         <span className="ml-auto mr-[20px] flex gap-[16px]">
           <EditButtonContainer articleId={id} authorNickname={authorNickname} />
           <DeleteButtonContainer articleId={id} authorNickname={authorNickname} />
         </span>
-      </p>
-      <h1 className="text-[32px] font-bold">{title}</h1>
+      </div>
       <div className="flex items-center gap-[8px]">
         <div className="w-[30px] h-[30px] rounded-[10px] overflow-hidden flex-shrink-0">
           <Image src={profileImageUrl} alt={authorNickname} width="30" height="30" />
@@ -147,18 +143,6 @@ export default function ArticleView({
         <span className="text-[14px] text-[#999999] ml-[2px]">{createDate}</span>
         {/* 팔로우 */}
         <FollowButtonContainer followTargetNickname={authorNickname} size={'small'} />
-      </div>
-      {/* 카테고리 */}
-      <div className="flex items-center gap-[5px]">
-        <button className="flex items-center min-w-[50px] h-[30px] py-[8px] px-[10px] rounded-[8px] border border-[#DDDDDD] text-[12px] text-[#666666]">
-          <span># OAuth</span>
-        </button>
-        <button className="flex items-center min-w-[50px] h-[30px] py-[8px] px-[10px] rounded-[8px] border border-[#DDDDDD] text-[12px] text-[#666666]">
-          <span># Spring</span>
-        </button>
-        <button className="flex items-center min-w-[50px] h-[30px] py-[8px] px-[10px] rounded-[8px] border border-[#DDDDDD] text-[12px] text-[#666666]">
-          <span># JAVA</span>
-        </button>
       </div>
       <div className="w-full max-w-4xl self-center py-10 text-lg">
         <div className="relative">

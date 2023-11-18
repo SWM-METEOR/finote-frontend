@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import GreaterThanIcon from '@/components/Icons/GreaterThanIcon';
+
 import HeartIcon from '@/components/Icons/HeartIcon';
 import CommentIcon from '@/components/Icons/CommentIcon';
 import { ArticlePreviewType } from '@/types/Article';
@@ -24,11 +24,6 @@ export default function MyArticleBox({
             <Image fill className="object-cover" src={thumbnail} alt="logo" sizes="100%" />
           </div>
           <div className="flex flex-col gap-[10px]">
-            <p className="flex text-[13px] gap-1 items-center">
-              <span>CS</span>
-              <GreaterThanIcon />
-              <span className="text-[#666666] font-bold">네트워크</span>
-            </p>
             <p className="text-[15px] font-bold line-clamp-1">{title}</p>
             <div className="text-[#666666] text-[12px] line-clamp-2">{body}</div>
             <p className="flex items-center mt-[8px] text-[13px]">
