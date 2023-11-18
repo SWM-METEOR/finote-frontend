@@ -21,11 +21,10 @@ const nextConfig = {
 
 module.exports = withBundleAnalyzer(nextConfig);
 
-
 // Injected content via Sentry wizard below
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { withSentryConfig } = require("@sentry/nextjs");
+const { withSentryConfig } = require('@sentry/nextjs');
 
 module.exports = withSentryConfig(
   module.exports,
@@ -35,8 +34,8 @@ module.exports = withSentryConfig(
 
     // Suppresses source map uploading logs during build
     silent: true,
-    org: "sw-maestro",
-    project: "finote",
+    org: 'sw-maestro',
+    project: 'finote',
   },
   {
     // For all available options, see:
@@ -49,7 +48,7 @@ module.exports = withSentryConfig(
     transpileClientSDK: true,
 
     // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
-    tunnelRoute: "/monitoring",
+    tunnelRoute: '/monitoring',
 
     // Hides source maps from generated client bundles
     hideSourceMaps: true,
