@@ -4,6 +4,7 @@ export interface QuestionType {
   authorNickname: string;
   profileImageUrl: string;
   createdDate: string;
+  contents: string;
   totalAnswer: number;
 }
 export interface QuestionListType {
