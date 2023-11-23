@@ -23,7 +23,7 @@ export default function LogoutPage() {
         deleteCookie('refreshToken');
         queryClient.setQueryData(['nickname'], '');
         queryClient.setQueryData(['blogName'], '');
-        router.push('/');
+        router.push('/trends');
       })
       .catch((error) => {
         console.error('로그아웃 실패:', error);
