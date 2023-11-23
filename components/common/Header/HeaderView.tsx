@@ -32,7 +32,7 @@ export default function HeaderView({
     {
       key: '1',
       label: (
-        <Link href={`/${nickname}`} className="text-[14px] font-medium px-[16px] py-[15px]">
+        <Link href={`/user/${nickname}`} className="text-[14px] font-medium px-[16px] py-[15px]">
           내 블로그 홈
         </Link>
       ),
@@ -62,11 +62,11 @@ export default function HeaderView({
         <div className="flex flex-col">
           {/* header height: 76px */}
           <header className="h-[76px] flex gap-[20px] justify-between bg-white w-[1280px] main-md:w-[840px] main-sm:w-[400px] mx-auto pr-[12px] py-[20px] items-center">
-            <Link href="/">
+            <Link href="/trends">
               <Image className="pb-1" src="/logo.png" alt="logo" width="160" height="76" />
             </Link>
             <div className="main-md:hidden main-sm:hidden flex">
-              <Link href={`/${nickname}`} className="text-[20px] font-bold ml-[40px]">
+              <Link href={`/user/${nickname}`} className="text-[20px] font-bold ml-[40px]">
                 {blogName}
               </Link>
             </div>
@@ -116,7 +116,7 @@ export default function HeaderView({
           {/* 모바일 사이즈에서 나오는 하단 헤더 */}
           <div className="main-sm:flex hidden justify-between items-center gap-[40px] px-[15px] bg-[#00A1FF] w-[calc(100vw)] h-[60px]">
             <span className="px-[15px]">
-              <Link href={`/${nickname}`} className="text-white text-[16px] font-bold">
+              <Link href={`/user/${nickname}`} className="text-white text-[16px] font-bold">
                 {blogName}
               </Link>
             </span>

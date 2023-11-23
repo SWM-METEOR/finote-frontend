@@ -7,10 +7,12 @@ interface PropsType {
 
 async function getRelatedArticles(nickname: string, articleTitle: string) {
   try {
+    nickname = decodeURIComponent(nickname);
+    articleTitle = decodeURIComponent(articleTitle);
     const res = await axiosInstance.get(`/articles/related/${nickname}/${articleTitle}`);
     return res.data;
   } catch (error) {
-    throw new Error('Failed to fetch article data');
+    throw new Error('Failed to fetch related article data');
   }
 }
 

@@ -6,6 +6,7 @@ import TrendsIcon from '@/components/Icons/TrendsIcon';
 import FeedIcon from '@/components/Icons/FeedIcon';
 import QnAIcon from '@/components/Icons/QnAIcon';
 import TrendsArticleListContainer from '@/components/articles/TrendsArticleList/TrendsArticleListContainer';
+import FeedListContainer from '@/components/feed/FeedListContainer';
 import QnAListContainer from '@/components/qna/QnAListContainer';
 
 export default function TrendsPage() {
@@ -71,7 +72,7 @@ export default function TrendsPage() {
       </div>
       <div className="mb-[126px] w-full h-full">
         {selectedMode === 'trends' ? <TrendsArticleListContainer /> : <></>}
-        {selectedMode === 'feed' ? <></> : <></>}
+        {selectedMode === 'feed' ? <FeedListContainer></FeedListContainer> : <></>}
         {selectedMode === 'qna' ? <QnAListContainer /> : <></>}
       </div>
     </div>
