@@ -23,15 +23,15 @@ export default function MyArticleBox({
           <div className="relative w-[140px] h-[140px] rounded-[20px] overflow-hidden flex-shrink-0">
             <Image fill className="object-cover" src={thumbnail} alt="logo" sizes="100%" />
           </div>
-          <div className="flex flex-col gap-[10px]">
+          <div className="flex flex-col gap-[10px] w-full">
             <p className="text-[15px] font-bold line-clamp-1">{title}</p>
             <div className="text-[#666666] text-[12px] line-clamp-2">{body}</div>
-            <p className="flex items-center mt-[8px] text-[13px]">
+            <p className="flex items-center mt-auto text-[13px]">
               <HeartIcon />
               <span className={`text-[#666666] ml-[2px] mr-[10px]`}>{totalLike}</span>
               <CommentIcon />
               <span className={`text-[#666666] ml-[2px]`}>{reply}</span>
-              <span className={`text-[#999999] text-[12px] ml-auto`}>{date}</span>
+              <div className={`text-[#999999] text-[12px] ml-auto`}>{date}</div>
             </p>
           </div>
         </div>
