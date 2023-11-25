@@ -30,14 +30,11 @@ export default function UserHomePage({ params }: { params: { nickname: string } 
   return (
     <div className="w-[1280px] mx-auto">
       <div className="flex gap-[40px]">
-        <ProfileBoxContainer />
-        <TechMapContainer />
-      </div>
-      <div className="flex">
-        <div className="flex flex-col w-[200px] mr-[81px] flex-shrink-0">
+        <div className="flex flex-col w-[200px] mr-[81px] flex-shrink-0 gap-[12px]">
+          <ProfileBoxContainer />
           {/* 좋아요한 글 필터링 버튼 */}
           <button
-            className="flex-shrink-0 flex gap-[8px] items-center justify-center h-[62px] bg-white rounded-[8px] shadow-[0_0_10px_0_rgba(0,0,0,0.05)] mb-[40px] text-[16px] font-bold"
+            className="flex-shrink-0 flex gap-[8px] w-[240px] items-center justify-center h-[62px] bg-white rounded-[8px] shadow-[0_0_10px_0_rgba(0,0,0,0.05)] mb-[40px] text-[16px] font-bold"
             onClick={() => setIsClickedLike(true)}
           >
             <Image className="" src="/filled-heart.svg" alt="heart" width="16" height="14" />
@@ -52,16 +49,20 @@ export default function UserHomePage({ params }: { params: { nickname: string } 
                 className="h-[40px] my-[10px] text-[#333333] text-[16px] font-bold"
                 onClick={() => setIsClickedLike(false)}
               >
-                전체(26)
+                전체보기
               </button>
             </div>
           </div>
         </div>
-        {isClickedLike ? (
-          <LikeArticleListContainer />
-        ) : (
-          <MyArticleListContainer nickname={nickname} />
-        )}
+        <div className="flex">
+          {isClickedLike ? (
+            <LikeArticleListContainer />
+          ) : (
+            <MyArticleListContainer nickname={nickname} />
+          )}
+        </div>
+
+        {/* <TechMapContainer /> */}
       </div>
     </div>
   );
