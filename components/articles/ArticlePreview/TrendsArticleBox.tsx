@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import GreaterThanIcon from '@/components/Icons/GreaterThanIcon';
+
 import HeartIcon from '@/components/Icons/HeartIcon';
 import CommentIcon from '@/components/Icons/CommentIcon';
 import { ArticlePreviewType } from '@/types/Article';
@@ -18,8 +18,8 @@ export default function TrendsArticleBox({
   profileImageUrl,
 }: ArticlePreviewType) {
   return (
-    <div className="w-[400px] h-[210px] bg-white rounded-[20px] p-[25px] pb-[20px] border border-[#EEEEEE] shadow-[0_0_10px_0_rgba(0,0,0,0.05)]">
-      <div className="flex justify-between gap-[30px]">
+    <Link href={`/articles/${authorNickname}/${title}`} className="w-[400px] h-[210px] bg-white rounded-[20px] p-[25px] pb-[20px] border border-[#EEEEEE] shadow-[0_0_10px_0_rgba(0,0,0,0.05)]">
+      <div className="flex justify-between gap-[30px] h-full">
         {/* 좌측영역 */}
         <div className="w-[230px] flex flex-col justify-between">
           <div className="flex flex-col justify-between gap-[10px]">
@@ -36,14 +36,8 @@ export default function TrendsArticleBox({
           </div>
         </div>
         {/* 우측영역 */}
-        <div className="flex flex-col gap-[13px] items-end">
-          <Link href={`/articles/${authorNickname}/${title}`} className="flex items-center">
-            <span className="text-[12px] text-[#666666]">더 보러가기</span>
-            <span>
-              <GreaterThanIcon width={12} height={12} color="#666666" />
-            </span>
-          </Link>
-          <div className="relative w-[90px] h-[90px] rounded-[15px] overflow-hidden flex-shrink-0">
+        <div className="flex flex-col gap-[13px] items-end justify-between">
+          <div className="relative w-[90px] h-[90px] rounded-[15px] overflow-hidden flex-shrink-0 mt-[12px]">
             <Image fill className="object-cover" src={thumbnail} alt="logo" sizes="100%" />
           </div>
           <p className="flex items-center pt-[7px] text-[13px]">
@@ -54,6 +48,6 @@ export default function TrendsArticleBox({
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
