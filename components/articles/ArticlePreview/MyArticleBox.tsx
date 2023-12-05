@@ -31,7 +31,7 @@ export default function MyArticleBox({
               <span className={`text-[#666666] ml-[2px] mr-[10px]`}>{totalLike}</span>
               <CommentIcon />
               <span className={`text-[#666666] ml-[2px]`}>{reply}</span>
-              <div className={`text-[#999999] text-[12px] ml-auto`}>{date}</div>
+              <span className={`text-[#999999] text-[12px] ml-auto`}>{date}</span>
             </p>
           </div>
         </div>
