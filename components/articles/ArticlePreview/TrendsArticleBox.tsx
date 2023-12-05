@@ -18,7 +18,11 @@ export default function TrendsArticleBox({
   profileImageUrl,
 }: ArticlePreviewType) {
   return (
-    <Link href={`/articles/${authorNickname}/${title}`} className="w-[400px] h-[210px] bg-white rounded-[20px] p-[25px] pb-[20px] border border-[#EEEEEE] shadow-[0_0_10px_0_rgba(0,0,0,0.05)]">
+    <Link
+      href={`/articles/${authorNickname}/${title}`}
+      className="w-[400px] h-[210px] bg-white rounded-[20px] p-[25px] pb-[20px] border border-[#EEEEEE] shadow-[0_0_10px_0_rgba(0,0,0,0.05)]"
+      prefetch={false}
+    >
       <div className="flex justify-between gap-[30px] h-full">
         {/* 좌측영역 */}
         <div className="w-[230px] flex flex-col justify-between">
@@ -29,7 +33,15 @@ export default function TrendsArticleBox({
           <div className="flex gap-[8px] items-center mt-[11px]">
             {/* 작성자 프로필 사진 */}
             <div className="relative w-[30px] h-[30px] rounded-[10px] overflow-hidden flex-shrink-0">
-              <Image fill className="object-cover" src={profileImageUrl} alt="logo" sizes="100%" />
+              {profileImageUrl && (
+                <Image
+                  fill
+                  className="object-cover"
+                  src={profileImageUrl}
+                  alt="logo"
+                  sizes="100%"
+                />
+              )}
             </div>
             <span className="text-[14px] font-medium text-[#333333]">{authorNickname}</span>
             <span className="text-[13px] text-[#999999]">{date}</span>
@@ -38,7 +50,9 @@ export default function TrendsArticleBox({
         {/* 우측영역 */}
         <div className="flex flex-col gap-[13px] items-end justify-between">
           <div className="relative w-[90px] h-[90px] rounded-[15px] overflow-hidden flex-shrink-0 mt-[12px]">
-            <Image fill className="object-cover" src={thumbnail} alt="logo" sizes="100%" />
+            {thumbnail && (
+              <Image fill className="object-cover" src={thumbnail} alt="logo" sizes="100%" />
+            )}
           </div>
           <p className="flex items-center pt-[7px] text-[13px]">
             <HeartIcon />
