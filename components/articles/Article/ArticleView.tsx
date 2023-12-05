@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect } from 'react';
 import { useState, useRef } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -136,10 +137,15 @@ export default function ArticleView({
         </span>
       </div>
       <div className="flex items-center gap-[8px]">
-        <div className="w-[30px] h-[30px] rounded-[10px] overflow-hidden flex-shrink-0">
+        <Link
+          href={`/user/${authorNickname}`}
+          className="w-[30px] h-[30px] rounded-[10px] overflow-hidden flex-shrink-0"
+        >
           <Image src={profileImageUrl} alt={authorNickname} width="30" height="30" />
-        </div>
-        <span className="text-[14px]">{authorNickname}</span>
+        </Link>
+        <Link href={`/user/${authorNickname}`} className="text-[14px]">
+          {authorNickname}
+        </Link>
         <span className="text-[14px] text-[#999999] ml-[2px]">{createDate}</span>
         {/* 팔로우 */}
         <FollowButtonContainer followTargetNickname={authorNickname} size={'small'} />
