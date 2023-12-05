@@ -63,7 +63,14 @@ export default function HeaderView({
           {/* header height: 76px */}
           <header className="h-[76px] flex gap-[20px] justify-between bg-white w-[1280px] main-md:w-[840px] main-sm:w-[400px] mx-auto pr-[12px] py-[20px] items-center">
             <Link href="/trends">
-              <Image className="pb-1" src="/logo.png" alt="logo" width="160" height="76" />
+              <Image
+                className="pb-1"
+                src="/logo.png"
+                alt="logo"
+                width="160"
+                height="76"
+                priority={true}
+              />
             </Link>
             <div className="main-md:hidden main-sm:hidden flex">
               <Link href={`/user/${nickname}`} className="text-[20px] font-bold ml-[40px]">
@@ -99,13 +106,17 @@ export default function HeaderView({
               >
                 <div className="flex items-center gap-[4px]">
                   <div className="relative w-[30px] h-[30px] rounded-[10px] overflow-hidden flex-shrink-0 bg-main">
-                    <Image
-                      fill
-                      className="object-cover"
-                      src={profileImageUrl}
-                      alt={nickname}
-                      sizes="100%"
-                    />
+                    {profileImageUrl ? (
+                      <Image
+                        fill
+                        className="object-cover"
+                        src={profileImageUrl}
+                        alt={nickname}
+                        sizes="100%"
+                      />
+                    ) : (
+                      <div></div>
+                    )}
                   </div>
                   <span className="text-[14px] font-medium ml-[4px]">{nickname}</span>
                   <MoreShowIcon width={14} height={14} color="#AAAAAA" />

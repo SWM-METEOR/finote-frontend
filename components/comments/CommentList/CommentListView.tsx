@@ -67,7 +67,7 @@ export default function CommentListView({
                   sizes="100%"
                 />
               </div>
-              <Link href={`/${comment.nickname}`} className="text-[15px] font-bold">
+              <Link href={`/user/${comment.nickname}`} className="text-[15px] font-bold">
                 {comment.nickname}
               </Link>
               <span className="text-[13px] text-[#999999]">{comment.createdDate}</span>

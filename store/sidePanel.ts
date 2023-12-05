@@ -1,5 +1,5 @@
 import { TooltipMode } from '@/types/smartDrag';
-import create from 'zustand';
+import { create } from 'zustand';
 
 interface SidePanelTypes {
   isOpenSidePanel: boolean;
