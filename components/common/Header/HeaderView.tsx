@@ -63,7 +63,14 @@ export default function HeaderView({
           {/* header height: 76px */}
           <header className="h-[76px] flex gap-[20px] justify-between bg-white w-[1280px] main-md:w-[840px] main-sm:w-[400px] mx-auto pr-[12px] py-[20px] items-center">
             <Link href="/trends">
-              <Image className="pb-1" src="/logo.png" alt="logo" width="160" height="76" />
+              <Image
+                className="pb-1"
+                src="/logo.png"
+                alt="logo"
+                width="160"
+                height="76"
+                priority={true}
+              />
             </Link>
             <div className="main-md:hidden main-sm:hidden flex">
               <Link href={`/user/${nickname}`} className="text-[20px] font-bold ml-[40px]">
